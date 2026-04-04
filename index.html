@@ -8,47 +8,14 @@
     <style>
         .match-section { display: none; padding: 10px; }
         .match-section.active { display: block; }
-        
-        /* Premium Card Design */
-        .match-card {
-            background: #161b22;
-            border: 1px solid #30363d;
-            border-radius: 15px;
-            padding: 15px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
+        .match-card { background: #161b22; border: 1px solid #30363d; border-radius: 15px; padding: 15px; margin-bottom: 20px; text-align: center; }
         .status-line { color: #ffcc00; font-size: 11px; font-weight: bold; margin-bottom: 15px; text-transform: uppercase; }
+        .teams-row { display: flex; align-items: center; justify-content: space-between; margin: 15px 0; }
+        .team img { width: 55px; height: 55px; border-radius: 50%; background: #fff; padding: 5px; border: 2px solid #ffcc00; }
+        .team-name { display: block; font-weight: bold; margin-top: 8px; font-size: 14px; color: #fff; }
+        .btn-live { background: #ffcc00; color: #000; text-decoration: none; display: block; padding: 12px; border-radius: 10px; font-weight: bold; font-size: 14px; }
         .live-dot { height: 8px; width: 8px; background: #ff4444; border-radius: 50%; display: inline-block; margin-right: 5px; animation: blink 1s infinite; }
         @keyframes blink { 0% {opacity: 1;} 50% {opacity: 0.3;} 100% {opacity: 1;} }
-
-        .teams-row { display: flex; align-items: center; justify-content: space-between; margin: 15px 0; }
-        .team { width: 35%; }
-        .team img { width: 55px; height: 55px; border-radius: 50%; background: #fff; padding: 5px; border: 2px solid #ffcc00; }
-        .team-name { display: block; font-weight: bold; margin-top: 8px; font-size: 14px; }
-        .vs-text { font-size: 12px; color: #8b949e; font-weight: bold; }
-
-        .venue-info { font-size: 11px; color: #8b949e; margin-bottom: 15px; }
-        .btn-live { 
-            background: #ffcc00; 
-            color: #000; 
-            text-decoration: none; 
-            display: block; 
-            padding: 12px; 
-            border-radius: 10px; 
-            font-weight: bold; 
-            font-size: 14px;
-        }
-        .date-header { 
-            background: rgba(255, 204, 0, 0.1); 
-            color: #ffcc00; 
-            padding: 5px; 
-            font-size: 12px; 
-            text-align: center; 
-            margin-bottom: 15px; 
-            border-radius: 5px;
-            border: 1px dashed #ffcc00;
-        }
     </style>
 </head>
 <body>
@@ -58,7 +25,7 @@
     </header>
 
     <div class="tabs">
-        <div class="tab-btn active" onclick="showTab('live-sec', this)">LIVE MATCHES</div>
+        <div class="tab-btn active" onclick="showTab('live-sec', this)">LIVE</div>
         <div class="tab-btn" onclick="showTab('upcoming-sec', this)">UPCOMING</div>
         <div class="tab-btn" onclick="showTab('results-sec', this)">RESULTS</div>
     </div>
@@ -70,13 +37,23 @@
     </div>
 
     <script>
-        // Full 15 Matches Data
+        // Full 15 Matches - No Fake Winners
         const matches = [
-            { id: 1, t1: "CSK", t1img: "https://i.postimg.cc/L5v8v8v8/csk.png", t2: "RCB", t2img: "https://i.postimg.cc/mD3mX6XW/rcb.png", date: "2026-03-22T19:30:00", venue: "MA Chidambaram, Chennai", win: "CSK WON" },
-            { id: 2, t1: "MI", t1img: "https://i.postimg.cc/0jdbYm8n/mi.png", t2: "GT", t2img: "https://i.postimg.cc/KjL8M9S0/gt.png", date: "2026-03-23T15:30:00", venue: "Narendra Modi, Ahmedabad", win: "GT WON" },
-            { id: 8, t1: "DC", t1img: "https://i.postimg.cc/mD3mX6XW/dc.png", t2: "MI", t2img: "https://i.postimg.cc/0jdbYm8n/mi.png", date: "2026-04-04T15:30:00", venue: "Arun Jaitley, Delhi", win: "PENDING" },
-            { id: 15, t1: "GT", t1img: "https://i.postimg.cc/KjL8M9S0/gt.png", t2: "RR", t2img: "https://i.postimg.cc/KjL8M9S0/rr.png", date: "2026-04-05T19:30:00", venue: "Ahmedabad", win: "PENDING" }
-            // Note: Baki matches bhi isi format me add kar sakte hain
+            { id: 1, t1: "CSK", t1img: "https://i.postimg.cc/L5v8v8v8/csk.png", t2: "RCB", t2img: "https://i.postimg.cc/mD3mX6XW/rcb.png", date: "2026-03-22T19:30:00", venue: "Chennai", win: "Match Completed" },
+            { id: 2, t1: "MI", t1img: "https://i.postimg.cc/0jdbYm8n/mi.png", t2: "GT", t2img: "https://i.postimg.cc/KjL8M9S0/gt.png", date: "2026-03-23T15:30:00", venue: "Ahmedabad", win: "Match Completed" },
+            { id: 3, t1: "DC", t1img: "https://i.postimg.cc/mD3mX6XW/dc.png", t2: "LSG", t2img: "https://i.postimg.cc/mD3mX6XW/lsg.png", date: "2026-03-23T19:30:00", venue: "Delhi", win: "Match Completed" },
+            { id: 4, t1: "RR", t1img: "https://i.postimg.cc/mD3mX6XW/rr.png", t2: "KKR", t2img: "https://i.postimg.cc/mD3mX6XW/kkr.png", date: "2026-03-24T19:30:00", venue: "Jaipur", win: "Match Completed" },
+            { id: 5, t1: "PBKS", t1img: "https://i.postimg.cc/mD3mX6XW/pbks.png", t2: "SRH", t2img: "https://i.postimg.cc/mD3mX6XW/srh.png", date: "2026-03-25T19:30:00", venue: "Mohali", win: "Match Completed" },
+            { id: 6, t1: "RCB", t1img: "https://i.postimg.cc/mD3mX6XW/rcb.png", t2: "PBKS", t2img: "https://i.postimg.cc/mD3mX6XW/pbks.png", date: "2026-03-26T19:30:00", venue: "Bengaluru", win: "Match Completed" },
+            { id: 7, t1: "CSK", t1img: "https://i.postimg.cc/L5v8v8v8/csk.png", t2: "GT", t2img: "https://i.postimg.cc/KjL8M9S0/gt.png", date: "2026-03-27T19:30:00", venue: "Chennai", win: "Match Completed" },
+            { id: 8, t1: "SRH", t1img: "https://i.postimg.cc/mD3mX6XW/srh.png", t2: "MI", t2img: "https://i.postimg.cc/0jdbYm8n/mi.png", date: "2026-03-28T19:30:00", venue: "Hyderabad", win: "Match Completed" },
+            { id: 9, t1: "RR", t1img: "https://i.postimg.cc/mD3mX6XW/rr.png", t2: "DC", t2img: "https://i.postimg.cc/mD3mX6XW/dc.png", date: "2026-03-29T15:30:00", venue: "Jaipur", win: "Match Completed" },
+            { id: 10, t1: "RCB", t1img: "https://i.postimg.cc/mD3mX6XW/rcb.png", t2: "KKR", t2img: "https://i.postimg.cc/mD3mX6XW/kkr.png", date: "2026-03-30T19:30:00", venue: "Bengaluru", win: "Match Completed" },
+            { id: 11, t1: "LSG", t1img: "https://i.postimg.cc/mD3mX6XW/lsg.png", t2: "PBKS", t2img: "https://i.postimg.cc/mD3mX6XW/pbks.png", date: "2026-03-31T19:30:00", venue: "Lucknow", win: "Match Completed" },
+            { id: 12, t1: "MI", t1img: "https://i.postimg.cc/0jdbYm8n/mi.png", t2: "RR", t2img: "https://i.postimg.cc/mD3mX6XW/rr.png", date: "2026-04-01T19:30:00", venue: "Mumbai", win: "Match Completed" },
+            { id: 13, t1: "RCB", t1img: "https://i.postimg.cc/mD3mX6XW/rcb.png", t2: "LSG", t2img: "https://i.postimg.cc/mD3mX6XW/lsg.png", date: "2026-04-02T19:30:00", venue: "Bengaluru", win: "Match Completed" },
+            { id: 14, t1: "DC", t1img: "https://i.postimg.cc/mD3mX6XW/dc.png", t2: "KKR", t2img: "https://i.postimg.cc/mD3mX6XW/kkr.png", date: "2026-04-03T19:30:00", venue: "Delhi", win: "Wait for Result" },
+            { id: 15, t1: "GT", t1img: "https://i.postimg.cc/KjL8M9S0/gt.png", t2: "PBKS", t2img: "https://i.postimg.cc/mD3mX6XW/pbks.png", date: "2026-04-04T19:30:00", venue: "Ahmedabad", win: "Upcoming" }
         ];
 
         function render() {
@@ -93,26 +70,27 @@
 
                 let card = `
                     <div class="match-card">
-                        <div class="status-line">${(now >= start && now <= end) ? '<span class="live-dot"></span> LIVE' : 'UPCOMING - ' + start.toDateString()}</div>
+                        <div class="status-line">${(now >= start && now <= end) ? '<span class="live-dot"></span> LIVE NOW' : start.toDateString()}</div>
                         <div class="teams-row">
                             <div class="team"><img src="${m.t1img}"><span class="team-name">${m.t1}</span></div>
-                            <div class="vs-text">VS</div>
+                            <div class="vs-text" style="color:#8b949e">VS</div>
                             <div class="team"><img src="${m.t2img}"><span class="team-name">${m.t2}</span></div>
                         </div>
-                        <div class="venue-info">${m.venue}</div>
+                        <div class="venue-info" style="font-size:11px; color:#8b949e; margin-bottom:10px;">📍 ${m.venue}</div>
                 `;
 
                 if (now >= start && now <= end) {
                     card += `<a href="#" class="btn-live">View Live Score</a></div>`;
                     liveS.innerHTML += card;
                 } else if (now < start) {
-                    card += `<a href="#" class="btn-live" style="background:#30363d; color:#fff;">Wait for Match</a></div>`;
+                    card += `<div style="color:#ffcc00; font-size:12px;">Starts at ${start.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div></div>`;
                     upS.innerHTML += card;
                 } else {
-                    card += `<div class="status-line" style="font-size:14px;">${m.win}</div></div>`;
+                    card += `<div class="status-line" style="font-size:13px; border-top:1px solid #30363d; padding-top:10px;">${m.win}</div></div>`;
                     resS.innerHTML += card;
                 }
             });
+            if(!liveS.innerHTML) liveS.innerHTML = "<p style='text-align:center; color:#8b949e;'>No match live right now.</p>";
         }
 
         function showTab(id, btn) {
@@ -123,6 +101,7 @@
         }
 
         render();
+        setInterval(render, 60000);
     </script>
 </body>
 </html>

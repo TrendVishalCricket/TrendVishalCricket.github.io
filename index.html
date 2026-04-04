@@ -4,36 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TRENDVISHAL CRICKET</title>
-    <link rel="stylesheet" href="style.css">
     <style>
         body { background: #0d1117; margin: 0; font-family: sans-serif; color: white; }
         header { display: flex; align-items: center; justify-content: space-between; padding: 10px 15px; background: #161b22; border-bottom: 2px solid #ffcc00; }
         .tabs { display: flex; background: #0d1117; border-bottom: 1px solid #30363d; position: sticky; top: 0; z-index: 100; }
-        .tab-btn { flex: 1; padding: 15px; text-align: center; color: #8b949e; font-weight: bold; font-size: 14px; cursor: pointer; }
+        .tab-btn { flex: 1; padding: 15px; text-align: center; color: #8b949e; font-weight: bold; font-size: 14px; cursor: pointer; border-bottom: 3px solid transparent; }
         .tab-btn.active { color: #ffcc00; border-bottom: 3px solid #ffcc00; background: rgba(255, 204, 0, 0.05); }
 
-        .match-card { background: #161b22; border-radius: 15px; padding: 20px; margin: 15px; border-left: 5px solid #ffcc00; border-top: 1px solid #30363d; }
+        .match-card { background: #161b22; border-radius: 12px; padding: 20px; margin: 15px; border-left: 4px solid #ffcc00; border-top: 1px solid #30363d; }
         .date-header { color: #ffcc00; font-weight: bold; font-size: 13px; margin-bottom: 15px; display: block; }
         
         .teams-row { display: flex; align-items: center; justify-content: space-between; margin: 15px 0; }
         .team { text-align: center; width: 40%; }
-        /* Image Size 85px as per your request */
         .team img { width: 85px; height: 85px; border-radius: 50%; background: #fff; padding: 5px; border: 3px solid #ffcc00; object-fit: contain; }
-        .team-name { display: block; color: #fff; font-weight: bold; margin-top: 10px; font-size: 18px; }
+        .team-name { display: block; color: #fff; font-weight: bold; margin-top: 10px; font-size: 17px; }
         
-        .vs-box { color: #8b949e; font-weight: 800; font-size: 16px; background: #30363d; padding: 5px 10px; border-radius: 50%; }
-        .venue { text-align: center; color: #8b949e; font-size: 12px; margin-top: 10px; }
+        .vs-box { color: #8b949e; font-weight: bold; font-size: 14px; background: #30363d; padding: 5px 10px; border-radius: 50%; }
         .time-status { text-align: center; color: #ffcc00; font-weight: bold; font-size: 18px; margin-top: 12px; }
         
-        .btn-live { background: #ffcc00; color: #000; text-decoration: none; display: block; width: 100%; text-align: center; padding: 15px; border-radius: 10px; font-weight: bold; margin-top: 15px; font-size: 16px; }
-        .live-dot { height: 10px; width: 10px; background: #ff4444; border-radius: 50%; display: inline-block; margin-right: 8px; animation: blink 1s infinite; }
+        .btn-live { background: #ffcc00; color: #000; text-decoration: none; display: block; width: 100%; text-align: center; padding: 15px; border-radius: 10px; font-weight: bold; margin-top: 15px; font-size: 15px; }
+        .win-text { color: #00ff00; font-weight: bold; font-size: 14px; text-transform: uppercase; margin-top: 10px; display: block; text-align: center; border-top: 1px solid #333; padding-top: 10px; }
+        .live-dot { height: 10px; width: 10px; background: #ff4444; border-radius: 50%; display: inline-block; margin-right: 5px; animation: blink 1s infinite; }
         @keyframes blink { 0% {opacity: 1;} 50% {opacity: 0.3;} 100% {opacity: 1;} }
     </style>
 </head>
 <body>
     <header>
-        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/84/Indian_Premier_League_Official_Logo.svg/1200px-Indian_Premier_League_Official_Logo.svg.png" style="width:45px;">
-        <h1 style="color:#ffcc00; font-size:20px; margin:0; font-weight:900;">TRENDVISHAL CRICKET</h1>
+        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/84/Indian_Premier_League_Official_Logo.svg/1200px-Indian_Premier_League_Official_Logo.svg.png" style="width:40px;">
+        <h1 style="color:#ffcc00; font-size:18px; margin:0; font-weight:900;">TRENDVISHAL CRICKET</h1>
         <img src="https://i.ibb.co/wrDX1wf/Trend-Vishal.jpg" style="width:45px; height:45px; border-radius:50%; border:2px solid #ffcc00; object-fit:cover;">
     </header>
 
@@ -48,28 +46,22 @@
     <div id="results-sec" class="match-section" style="display:none;"></div>
 
     <script>
-        // --- IPL 2026 REAL SCHEDULE (No Fake Results) ---
         const matches = [
-            // इसे पुराने 'const matches' की जगह बदल दें
-const matches = [
-    // --- RESULTS (ये मैच 4 अप्रैल से पहले हो चुके हैं) ---
-    { t1: "CSK", t1img: "https://upload.wikimedia.org/wikipedia/en/thumb/2/2b/Chennai_Super_Kings_Logo.svg/200px-Chennai_Super_Kings_Logo.svg.png", t2: "RCB", t2img: "https://upload.wikimedia.org/wikipedia/en/thumb/2/24/Royal_Challengers_Bangalore_Logo.svg/200px-Royal_Challengers_Bangalore_Logo.svg.png", date: "2026-03-28T19:30:00", venue: "Chennai", win: "CSK WON BY 6 WICKETS" },
-    { t1: "PBKS", t1img: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d4/Punjab_Kings_Logo.svg/200px-Punjab_Kings_Logo.svg.png", t2: "DC", t2img: "https://upload.wikimedia.org/wikipedia/en/thumb/f/f5/Delhi_Capitals_Logo.svg/200px-Delhi_Capitals_Logo.svg.png", date: "2026-03-29T15:30:00", venue: "Mohali", win: "PBKS WON BY 4 WICKETS" },
-    { t1: "GT", t1img: "https://upload.wikimedia.org/wikipedia/en/thumb/0/09/Gujarat_Titans_Logo.svg/200px-Gujarat_Titans_Logo.svg.png", t2: "MI", t2img: "https://upload.wikimedia.org/wikipedia/en/thumb/c/cd/Mumbai_Indians_Logo.svg/200px-Mumbai_Indians_Logo.svg.png", date: "2026-03-30T19:30:00", venue: "Ahmedabad", win: "GT WON BY 6 RUNS" },
-    { t1: "RCB", t1img: "https://upload.wikimedia.org/wikipedia/en/thumb/2/24/Royal_Challengers_Bangalore_Logo.svg/200px-Royal_Challengers_Bangalore_Logo.svg.png", t2: "PBKS", t2img: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d4/Punjab_Kings_Logo.svg/200px-Punjab_Kings_Logo.svg.png", date: "2026-03-31T19:30:00", venue: "Bengaluru", win: "RCB WON BY 4 WICKETS" },
-    { t1: "CSK", t1img: "https://upload.wikimedia.org/wikipedia/en/thumb/2/2b/Chennai_Super_Kings_Logo.svg/200px-Chennai_Super_Kings_Logo.svg.png", t2: "GT", t2img: "https://upload.wikimedia.org/wikipedia/en/thumb/0/09/Gujarat_Titans_Logo.svg/200px-Gujarat_Titans_Logo.svg.png", date: "2026-04-01T19:30:00", venue: "Chennai", win: "CSK WON BY 63 RUNS" },
-    { t1: "SRH", t1img: "https://upload.wikimedia.org/wikipedia/en/thumb/8/81/Sunrisers_Hyderabad.svg/200px-Sunrisers_Hyderabad.svg.png", t2: "MI", t2img: "https://upload.wikimedia.org/wikipedia/en/thumb/c/cd/Mumbai_Indians_Logo.svg/200px-Mumbai_Indians_Logo.svg.png", date: "2026-04-02T19:30:00", venue: "Hyderabad", win: "SRH WON BY 31 RUNS" },
-    { t1: "RR", t1img: "https://upload.wikimedia.org/wikipedia/en/thumb/6/60/Rajasthan_Royals_Logo.svg/200px-Rajasthan_Royals_Logo.svg.png", t2: "DC", t2img: "https://upload.wikimedia.org/wikipedia/en/thumb/f/f5/Delhi_Capitals_Logo.svg/200px-Delhi_Capitals_Logo.svg.png", date: "2026-04-03T19:30:00", venue: "Jaipur", win: "RR WON BY 12 RUNS" },
-
-    // --- LIVE & UPCOMING (4 अप्रैल से आगे के मैच) ---
-    { t1: "DC", t1img: "https://upload.wikimedia.org/wikipedia/en/thumb/f/f5/Delhi_Capitals_Logo.svg/200px-Delhi_Capitals_Logo.svg.png", t2: "MI", t2img: "https://upload.wikimedia.org/wikipedia/en/thumb/c/cd/Mumbai_Indians_Logo.svg/200px-Mumbai_Indians_Logo.svg.png", date: "2026-04-04T15:30:00", venue: "Delhi" },
-    { t1: "GT", t1img: "https://upload.wikimedia.org/wikipedia/en/thumb/0/09/Gujarat_Titans_Logo.svg/200px-Gujarat_Titans_Logo.svg.png", t2: "RR", t2img: "https://upload.wikimedia.org/wikipedia/en/thumb/6/60/Rajasthan_Royals_Logo.svg/200px-Rajasthan_Royals_Logo.svg.png", date: "2026-04-04T19:30:00", venue: "Ahmedabad" },
-    { t1: "SRH", t1img: "https://upload.wikimedia.org/wikipedia/en/thumb/8/81/Sunrisers_Hyderabad.svg/200px-Sunrisers_Hyderabad.svg.png", t2: "LSG", t2img: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d4/Lucknow_Super_Giants_IPL_Logo.svg/200px-Lucknow_Super_Giants_IPL_Logo.svg.png", date: "2026-04-05T15:30:00", venue: "Hyderabad" },
-    { t1: "MI", t1img: "https://upload.wikimedia.org/wikipedia/en/thumb/c/cd/Mumbai_Indians_Logo.svg/200px-Mumbai_Indians_Logo.svg.png", t2: "RR", t2img: "https://upload.wikimedia.org/wikipedia/en/thumb/6/60/Rajasthan_Royals_Logo.svg/200px-Rajasthan_Royals_Logo.svg.png", date: "2026-04-05T19:30:00", venue: "Mumbai" },
-    { t1: "KKR", t1img: "https://upload.wikimedia.org/wikipedia/en/thumb/4/4c/Kolkata_Knight_Riders_Logo.svg/200px-Kolkata_Knight_Riders_Logo.svg.png", t2: "RCB", t2img: "https://upload.wikimedia.org/wikipedia/en/thumb/2/24/Royal_Challengers_Bangalore_Logo.svg/200px-Royal_Challengers_Bangalore_Logo.svg.png", date: "2026-04-06T19:30:00", venue: "Kolkata" },
-    { t1: "PBKS", t1img: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d4/Punjab_Kings_Logo.svg/200px-Punjab_Kings_Logo.svg.png", t2: "SRH", t2img: "https://upload.wikimedia.org/wikipedia/en/thumb/8/81/Sunrisers_Hyderabad.svg/200px-Sunrisers_Hyderabad.svg.png", date: "2026-04-07T19:30:00", venue: "Mohali" }
-];
-        
+            // Results Section (Real Data 28 Mar - 3 Apr)
+            { t1: "CSK", t1img: "https://upload.wikimedia.org/wikipedia/en/thumb/2/2b/Chennai_Super_Kings_Logo.svg/200px-Chennai_Super_Kings_Logo.svg.png", t2: "RCB", t2img: "https://upload.wikimedia.org/wikipedia/en/thumb/2/24/Royal_Challengers_Bangalore_Logo.svg/200px-Royal_Challengers_Bangalore_Logo.svg.png", date: "2026-03-28T19:30:00", win: "CSK WON BY 6 WICKETS" },
+            { t1: "PBKS", t1img: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d4/Punjab_Kings_Logo.svg/200px-Punjab_Kings_Logo.svg.png", t2: "DC", t2img: "https://upload.wikimedia.org/wikipedia/en/thumb/f/f5/Delhi_Capitals_Logo.svg/200px-Delhi_Capitals_Logo.svg.png", date: "2026-03-29T15:30:00", win: "PBKS WON BY 4 WICKETS" },
+            { t1: "GT", t1img: "https://upload.wikimedia.org/wikipedia/en/thumb/0/09/Gujarat_Titans_Logo.svg/200px-Gujarat_Titans_Logo.svg.png", t2: "MI", t2img: "https://upload.wikimedia.org/wikipedia/en/thumb/c/cd/Mumbai_Indians_Logo.svg/200px-Mumbai_Indians_Logo.svg.png", date: "2026-03-30T19:30:00", win: "GT WON BY 6 RUNS" },
+            { t1: "RCB", t1img: "https://upload.wikimedia.org/wikipedia/en/thumb/2/24/Royal_Challengers_Bangalore_Logo.svg/200px-Royal_Challengers_Bangalore_Logo.svg.png", t2: "PBKS", t2img: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d4/Punjab_Kings_Logo.svg/200px-Punjab_Kings_Logo.svg.png", date: "2026-03-31T19:30:00", win: "RCB WON BY 4 WICKETS" },
+            { t1: "CSK", t1img: "https://upload.wikimedia.org/wikipedia/en/thumb/2/2b/Chennai_Super_Kings_Logo.svg/200px-Chennai_Super_Kings_Logo.svg.png", t2: "GT", t2img: "https://upload.wikimedia.org/wikipedia/en/thumb/0/09/Gujarat_Titans_Logo.svg/200px-Gujarat_Titans_Logo.svg.png", date: "2026-04-01T19:30:00", win: "CSK WON BY 63 RUNS" },
+            { t1: "SRH", t1img: "https://upload.wikimedia.org/wikipedia/en/thumb/8/81/Sunrisers_Hyderabad.svg/200px-Sunrisers_Hyderabad.svg.png", t2: "MI", t2img: "https://upload.wikimedia.org/wikipedia/en/thumb/c/cd/Mumbai_Indians_Logo.svg/200px-Mumbai_Indians_Logo.svg.png", date: "2026-04-02T19:30:00", win: "SRH WON BY 31 RUNS" },
+            { t1: "RR", t1img: "https://upload.wikimedia.org/wikipedia/en/thumb/6/60/Rajasthan_Royals_Logo.svg/200px-Rajasthan_Royals_Logo.svg.png", t2: "DC", t2img: "https://upload.wikimedia.org/wikipedia/en/thumb/f/f5/Delhi_Capitals_Logo.svg/200px-Delhi_Capitals_Logo.svg.png", date: "2026-04-03T19:30:00", win: "RR WON BY 12 RUNS" },
+            
+            // Today & Upcoming
+            { t1: "DC", t1img: "https://upload.wikimedia.org/wikipedia/en/thumb/f/f5/Delhi_Capitals_Logo.svg/200px-Delhi_Capitals_Logo.svg.png", t2: "MI", t2img: "https://upload.wikimedia.org/wikipedia/en/thumb/c/cd/Mumbai_Indians_Logo.svg/200px-Mumbai_Indians_Logo.svg.png", date: "2026-04-04T15:30:00" },
+            { t1: "GT", t1img: "https://upload.wikimedia.org/wikipedia/en/thumb/0/09/Gujarat_Titans_Logo.svg/200px-Gujarat_Titans_Logo.svg.png", t2: "RR", t2img: "https://upload.wikimedia.org/wikipedia/en/thumb/6/60/Rajasthan_Royals_Logo.svg/200px-Rajasthan_Royals_Logo.svg.png", date: "2026-04-04T19:30:00" },
+            { t1: "SRH", t1img: "https://upload.wikimedia.org/wikipedia/en/thumb/8/81/Sunrisers_Hyderabad.svg/200px-Sunrisers_Hyderabad.svg.png", t2: "LSG", t2img: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d4/Lucknow_Super_Giants_IPL_Logo.svg/200px-Lucknow_Super_Giants_IPL_Logo.svg.png", date: "2026-04-05T15:30:00" },
+            { t1: "MI", t1img: "https://upload.wikimedia.org/wikipedia/en/thumb/c/cd/Mumbai_Indians_Logo.svg/200px-Mumbai_Indians_Logo.svg.png", t2: "RR", t2img: "https://upload.wikimedia.org/wikipedia/en/thumb/6/60/Rajasthan_Royals_Logo.svg/200px-Rajasthan_Royals_Logo.svg.png", date: "2026-04-05T19:30:00" }
+        ];
 
         function run() {
             const now = new Date();
@@ -79,34 +71,26 @@ const matches = [
             lBox.innerHTML = ""; uBox.innerHTML = ""; rBox.innerHTML = "";
 
             matches.forEach(m => {
-                const start = new Date(m.date);
-                const end = new Date(start.getTime() + (4 * 3600000));
-                const liveTrigger = new Date(start.getTime() - (7 * 3600000)); // 7 Hours Before
+                const s = new Date(m.date);
+                const e = new Date(s.getTime() + (4 * 3600000));
+                const sHrs = new Date(s.getTime() - (7 * 3600000));
+                
+                let h = `<div class="match-card"><span class="date-header">${s.toDateString()}</span>
+                    <div class="teams-row"><div class="team"><img src="${m.t1img}"><span class="team-name">${m.t1}</span></div>
+                    <div class="vs-box">VS</div><div class="team"><img src="${m.t2img}"><span class="team-name">${m.t2}</span></div></div>`;
 
-                let card = `
-                    <div class="match-card">
-                        <span class="date-header">${start.toDateString()}</span>
-                        <div class="teams-row">
-                            <div class="team"><img src="${m.t1img}"><span class="team-name">${m.t1}</span></div>
-                            <div class="vs-box">VS</div>
-                            <div class="team"><img src="${m.t2img}"><span class="team-name">${m.t2}</span></div>
-                        </div>
-                        <div class="venue">📍 ${m.venue}</div>`;
-
-                if (now >= liveTrigger && now <= end) {
-                    let label = (now >= start) ? "LIVE NOW" : "LIVE SOON (IN < 7H)";
-                    card += `<div class="time-status"><span class="live-dot"></span> ${label}</div>
-                             <a href="https://www.cricbuzz.com/cricket-match/live-scores" target="_blank" class="btn-live">View Live Score</a></div>`;
-                    lBox.innerHTML += card;
-                } else if (now < liveTrigger) {
-                    card += `<div class="time-status">Starts at ${start.getHours()}:${start.getMinutes().toString().padStart(2, '0')}</div></div>`;
-                    uBox.innerHTML += card;
+                if (now >= sHrs && now <= e) {
+                    let lbl = (now >= s) ? "LIVE NOW" : "STARTS SOON";
+                    h += `<div class="time-status"><span class="live-dot"></span> ${lbl}</div><a href="https://www.cricbuzz.com" class="btn-live">View Live Score</a></div>`;
+                    lBox.innerHTML += h;
+                } else if (now < sHrs) {
+                    h += `<div class="time-status">Starts at ${s.getHours()}:${s.getMinutes().toString().padStart(2, '0')}</div></div>`;
+                    uBox.innerHTML += h;
                 } else {
-                    card += `<div class="time-status" style="border-top:1px solid #333; padding-top:10px; font-size:14px;">MATCH COMPLETED</div></div>`;
-                    rBox.innerHTML += card;
+                    h += `<span class="win-text">${m.win || 'MATCH COMPLETED'}</span></div>`;
+                    rBox.innerHTML += h;
                 }
             });
-            if (lBox.innerHTML === "") lBox.innerHTML = "<p style='text-align:center; color:#888;'>No Live Matches</p>";
         }
 
         function showT(t, b) {
@@ -115,8 +99,7 @@ const matches = [
             document.getElementById(t + '-sec').style.display = 'block';
             b.classList.add('active');
         }
-        run();
-        setInterval(run, 60000);
+        run(); setInterval(run, 60000);
     </script>
 </body>
 </html>

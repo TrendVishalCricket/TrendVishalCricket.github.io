@@ -7,19 +7,20 @@
     <style>
         body { background-color: #0d1117; color: white; font-family: sans-serif; margin: 0; padding-bottom: 20px; }
         header { background: #1f2328; padding: 15px; text-align: center; border-bottom: 3px solid gold; position: sticky; top: 0; z-index: 100; }
-        header h1 { margin: 0; color: gold; font-size: 22px; text-transform: uppercase; letter-spacing: 1px; }
+        header h1 { margin: 0; color: gold; font-size: 20px; text-transform: uppercase; letter-spacing: 1px; }
         .container { padding: 12px; }
-        .match-card { background: #161b22; border-radius: 15px; padding: 15px; margin-bottom: 15px; border: 1px solid #30363d; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
-        .match-header { display: flex; justify-content: space-between; font-size: 11px; font-weight: bold; margin-bottom: 10px; color: #8b949e; }
-        .live-dot { height: 8px; width: 8px; background-color: #ff4444; border-radius: 50%; display: inline-block; margin-right: 5px; animation: blink 1s infinite; }
+        .match-card { background: #161b22; border-radius: 12px; padding: 12px; margin-bottom: 15px; border: 1px solid #30363d; }
+        .match-header { display: flex; justify-content: space-between; font-size: 10px; font-weight: bold; margin-bottom: 8px; color: #8b949e; }
+        .live-dot { height: 7px; width: 7px; background-color: #ff4444; border-radius: 50%; display: inline-block; margin-right: 4px; animation: blink 1s infinite; }
         @keyframes blink { 0% {opacity: 1;} 50% {opacity: 0.3;} 100% {opacity: 1;} }
-        .teams-box { display: flex; align-items: center; justify-content: space-between; margin: 10px 0; }
-        .team { text-align: center; width: 40%; }
-        .team img { width: 45px; height: 45px; object-fit: contain; margin-bottom: 5px; background: white; border-radius: 50%; padding: 2px; }
-        .team-name { font-size: 16px; font-weight: bold; display: block; }
-        .vs-circle { background: #30363d; padding: 5px 10px; border-radius: 20px; font-size: 12px; font-weight: bold; color: gold; }
-        .venue-info { text-align: center; font-size: 12px; color: #8b949e; margin-top: 10px; border-top: 1px solid #30363d; padding-top: 10px; }
-        .btn { display: block; text-align: center; background: gold; color: black; text-decoration: none; padding: 10px; border-radius: 8px; font-weight: bold; margin-top: 12px; font-size: 14px; }
+        .teams-box { display: flex; align-items: center; justify-content: space-between; margin: 8px 0; }
+        .team { text-align: center; width: 45%; }
+        .team img { width: 40px; height: 40px; object-fit: contain; margin-bottom: 4px; background: white; border-radius: 50%; padding: 2px; }
+        .team-name { font-size: 14px; font-weight: bold; display: block; }
+        .vs-circle { background: #30363d; padding: 4px 8px; border-radius: 20px; font-size: 10px; font-weight: bold; color: gold; }
+        .venue-info { text-align: center; font-size: 11px; color: #8b949e; margin-top: 8px; border-top: 1px solid #30363d; padding-top: 8px; }
+        .btn { display: block; text-align: center; background: gold; color: black; text-decoration: none; padding: 8px; border-radius: 6px; font-weight: bold; margin-top: 10px; font-size: 13px; }
+        .date-divider { text-align: center; color: gold; font-size: 12px; font-weight: bold; margin: 20px 0 10px; background: rgba(255,215,0,0.1); padding: 5px; border-radius: 5px; }
     </style>
 </head>
 <body>
@@ -28,59 +29,162 @@
 
 <div class="container">
     
+    <div class="date-divider">TODAY - SATURDAY, 4 APRIL</div>
     <div class="match-card" style="border-top: 3px solid #ef4444;">
         <div class="match-header"><span><span class="live-dot"></span>LIVE 3:30 PM</span><span>MATCH 8</span></div>
         <div class="teams-box">
-            <div class="team"><img src="https://scores.iplt20.com/ipl/teamlogos/DC.png" alt="DC"><span class="team-name">DC</span></div>
+            <div class="team"><img src="https://scores.iplt20.com/ipl/teamlogos/DC.png"><span class="team-name">DC</span></div>
             <div class="vs-circle">VS</div>
-            <div class="team"><img src="https://scores.iplt20.com/ipl/teamlogos/MI.png" alt="MI"><span class="team-name">MI</span></div>
+            <div class="team"><img src="https://scores.iplt20.com/ipl/teamlogos/MI.png"><span class="team-name">MI</span></div>
         </div>
-        <div class="venue-info">Arun Jaitley Stadium, Delhi</div>
+        <div class="venue-info">Delhi | Arun Jaitley Stadium</div>
         <a href="scoreboard.html" class="btn">View Live Score</a>
     </div>
 
     <div class="match-card">
         <div class="match-header"><span>TONIGHT 7:30 PM</span><span>MATCH 9</span></div>
         <div class="teams-box">
-            <div class="team"><img src="https://scores.iplt20.com/ipl/teamlogos/GT.png" alt="GT"><span class="team-name">GT</span></div>
+            <div class="team"><img src="https://scores.iplt20.com/ipl/teamlogos/GT.png"><span class="team-name">GT</span></div>
             <div class="vs-circle">VS</div>
-            <div class="team"><img src="https://scores.iplt20.com/ipl/teamlogos/RR.png" alt="RR"><span class="team-name">RR</span></div>
+            <div class="team"><img src="https://scores.iplt20.com/ipl/teamlogos/RR.png"><span class="team-name">RR</span></div>
         </div>
-        <div class="venue-info">Ahmedabad | Toss at 7:00 PM</div>
+        <div class="venue-info">Ahmedabad | Narendra Modi Stadium</div>
     </div>
 
+    <div class="date-divider">TOMORROW - SUNDAY, 5 APRIL</div>
     <div class="match-card">
         <div class="match-header"><span>SUNDAY 3:30 PM</span><span>MATCH 10</span></div>
         <div class="teams-box">
-            <div class="team"><img src="https://scores.iplt20.com/ipl/teamlogos/SRH.png" alt="SRH"><span class="team-name">SRH</span></div>
+            <div class="team"><img src="https://scores.iplt20.com/ipl/teamlogos/SRH.png"><span class="team-name">SRH</span></div>
             <div class="vs-circle">VS</div>
-            <div class="team"><img src="https://scores.iplt20.com/ipl/teamlogos/LSG.png" alt="LSG"><span class="team-name">LSG</span></div>
+            <div class="team"><img src="https://scores.iplt20.com/ipl/teamlogos/LSG.png"><span class="team-name">LSG</span></div>
         </div>
-        <div class="venue-info">Hyderabad</div>
+        <div class="venue-info">Hyderabad | Rajiv Gandhi Stadium</div>
     </div>
 
     <div class="match-card" style="border: 1px solid gold;">
         <div class="match-header" style="color:gold;"><span>SUNDAY 7:30 PM</span><span>BIG MATCH</span></div>
         <div class="teams-box">
-            <div class="team"><img src="https://scores.iplt20.com/ipl/teamlogos/RCB.png" alt="RCB"><span class="team-name">RCB</span></div>
+            <div class="team"><img src="https://scores.iplt20.com/ipl/teamlogos/RCB.png"><span class="team-name">RCB</span></div>
             <div class="vs-circle">VS</div>
-            <div class="team"><img src="https://scores.iplt20.com/ipl/teamlogos/CSK.png" alt="CSK"><span class="team-name">CSK</span></div>
+            <div class="team"><img src="https://scores.iplt20.com/ipl/teamlogos/CSK.png"><span class="team-name">CSK</span></div>
         </div>
-        <div class="venue-info">Bengaluru</div>
+        <div class="venue-info">Bengaluru | M. Chinnaswamy Stadium</div>
     </div>
 
-    <div style="text-align:center; color:gold; font-weight:bold; margin:20px 0;">UPCOMING MATCHES</div>
+    <div class="date-divider">UPCOMING FIXTURES</div>
     
     <div class="match-card">
-        <div class="match-header"><span>MON 7:30 PM</span><span>MATCH 12</span></div>
+        <div class="match-header"><span>MON, 6 APR 7:30 PM</span><span>MATCH 12</span></div>
         <div class="teams-box">
-            <div class="team"><img src="https://scores.iplt20.com/ipl/teamlogos/KKR.png" alt="KKR"><span class="team-name">KKR</span></div>
+            <div class="team"><img src="https://scores.iplt20.com/ipl/teamlogos/KKR.png"><span class="team-name">KKR</span></div>
             <div class="vs-circle">VS</div>
-            <div class="team"><img src="https://scores.iplt20.com/ipl/teamlogos/PBKS.png" alt="PBKS"><span class="team-name">PBKS</span></div>
+            <div class="team"><img src="https://scores.iplt20.com/ipl/teamlogos/PBKS.png"><span class="team-name">PBKS</span></div>
         </div>
-        <div class="venue-info">Kolkata</div>
+        <div class="venue-info">Kolkata | Eden Gardens</div>
+    </div>
+
+    <div class="match-card">
+        <div class="match-header"><span>TUE, 7 APR 7:30 PM</span><span>MATCH 13</span></div>
+        <div class="teams-box">
+            <div class="team"><img src="https://scores.iplt20.com/ipl/teamlogos/RR.png"><span class="team-name">RR</span></div>
+            <div class="vs-circle">VS</div>
+            <div class="team"><img src="https://scores.iplt20.com/ipl/teamlogos/MI.png"><span class="team-name">MI</span></div>
+        </div>
+        <div class="venue-info">Guwahati | ACA Stadium</div>
+    </div>
+
+    <div class="match-card">
+        <div class="match-header"><span>WED, 8 APR 7:30 PM</span><span>MATCH 14</span></div>
+        <div class="teams-box">
+            <div class="team"><img src="https://scores.iplt20.com/ipl/teamlogos/DC.png"><span class="team-name">DC</span></div>
+            <div class="vs-circle">VS</div>
+            <div class="team"><img src="https://scores.iplt20.com/ipl/teamlogos/GT.png"><span class="team-name">GT</span></div>
+        </div>
+        <div class="venue-info">Delhi | Arun Jaitley Stadium</div>
+    </div>
+
+    <div class="match-card">
+        <div class="match-header"><span>THU, 9 APR 7:30 PM</span><span>MATCH 15</span></div>
+        <div class="teams-box">
+            <div class="team"><img src="https://scores.iplt20.com/ipl/teamlogos/KKR.png"><span class="team-name">KKR</span></div>
+            <div class="vs-circle">VS</div>
+            <div class="team"><img src="https://scores.iplt20.com/ipl/teamlogos/LSG.png"><span class="team-name">LSG</span></div>
+        </div>
+        <div class="venue-info">Kolkata | Eden Gardens</div>
+    </div>
+
+    <div class="match-card">
+        <div class="match-header"><span>FRI, 10 APR 7:30 PM</span><span>MATCH 16</span></div>
+        <div class="teams-box">
+            <div class="team"><img src="https://scores.iplt20.com/ipl/teamlogos/RR.png"><span class="team-name">RR</span></div>
+            <div class="vs-circle">VS</div>
+            <div class="team"><img src="https://scores.iplt20.com/ipl/teamlogos/RCB.png"><span class="team-name">RCB</span></div>
+        </div>
+        <div class="venue-info">Guwahati | ACA Stadium</div>
+    </div>
+
+    <div class="match-card">
+        <div class="match-header"><span>SAT, 11 APR 3:30 PM</span><span>MATCH 17</span></div>
+        <div class="teams-box">
+            <div class="team"><img src="https://scores.iplt20.com/ipl/teamlogos/PBKS.png"><span class="team-name">PBKS</span></div>
+            <div class="vs-circle">VS</div>
+            <div class="team"><img src="https://scores.iplt20.com/ipl/teamlogos/SRH.png"><span class="team-name">SRH</span></div>
+        </div>
+        <div class="venue-info">Mullanpur | Maharaja Stadium</div>
+    </div>
+
+    <div class="match-card">
+        <div class="match-header"><span>SAT, 11 APR 7:30 PM</span><span>MATCH 18</span></div>
+        <div class="teams-box">
+            <div class="team"><img src="https://scores.iplt20.com/ipl/teamlogos/CSK.png"><span class="team-name">CSK</span></div>
+            <div class="vs-circle">VS</div>
+            <div class="team"><img src="https://scores.iplt20.com/ipl/teamlogos/DC.png"><span class="team-name">DC</span></div>
+        </div>
+        <div class="venue-info">Chennai | M.A. Chidambaram</div>
+    </div>
+
+    <div class="match-card">
+        <div class="match-header"><span>SUN, 12 APR 3:30 PM</span><span>MATCH 19</span></div>
+        <div class="teams-box">
+            <div class="team"><img src="https://scores.iplt20.com/ipl/teamlogos/LSG.png"><span class="team-name">LSG</span></div>
+            <div class="vs-circle">VS</div>
+            <div class="team"><img src="https://scores.iplt20.com/ipl/teamlogos/GT.png"><span class="team-name">GT</span></div>
+        </div>
+        <div class="venue-info">Lucknow | Ekana Stadium</div>
+    </div>
+
+    <div class="match-card">
+        <div class="match-header"><span>SUN, 12 APR 7:30 PM</span><span>MATCH 20</span></div>
+        <div class="teams-box">
+            <div class="team"><img src="https://scores.iplt20.com/ipl/teamlogos/MI.png"><span class="team-name">MI</span></div>
+            <div class="vs-circle">VS</div>
+            <div class="team"><img src="https://scores.iplt20.com/ipl/teamlogos/RCB.png"><span class="team-name">RCB</span></div>
+        </div>
+        <div class="venue-info">Mumbai | Wankhede Stadium</div>
+    </div>
+
+    <div class="match-card">
+        <div class="match-header"><span>MON, 13 APR 7:30 PM</span><span>MATCH 21</span></div>
+        <div class="teams-box">
+            <div class="team"><img src="https://scores.iplt20.com/ipl/teamlogos/SRH.png"><span class="team-name">SRH</span></div>
+            <div class="vs-circle">VS</div>
+            <div class="team"><img src="https://scores.iplt20.com/ipl/teamlogos/RR.png"><span class="team-name">RR</span></div>
+        </div>
+        <div class="venue-info">Hyderabad | Rajiv Gandhi Stadium</div>
+    </div>
+
+    <div class="match-card">
+        <div class="match-header"><span>TUE, 14 APR 7:30 PM</span><span>MATCH 22</span></div>
+        <div class="teams-box">
+            <div class="team"><img src="https://scores.iplt20.com/ipl/teamlogos/CSK.png"><span class="team-name">CSK</span></div>
+            <div class="vs-circle">VS</div>
+            <div class="team"><img src="https://scores.iplt20.com/ipl/teamlogos/KKR.png"><span class="team-name">KKR</span></div>
+        </div>
+        <div class="venue-info">Chennai | M.A. Chidambaram</div>
     </div>
 
 </div>
+
 </body>
 </html>

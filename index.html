@@ -22,8 +22,7 @@
         .vs-box { color: #8b949e; font-weight: 900; font-size: 14px; background: #30363d; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; border: 1px solid #ffcc00; }
         .btn-live { background: #ffcc00; color: #000; text-decoration: none; display: block; width: 100%; text-align: center; padding: 12px; border-radius: 8px; font-weight: bold; margin-top: 12px; font-size: 14px; }
         .btn-highlight { background: #4285F4; color: white; text-decoration: none; display: block; width: 100%; text-align: center; padding: 10px; border-radius: 8px; font-weight: bold; margin-top: 10px; font-size: 13px; border: 1px solid #fff; }
-        .win-text { color: #00ff00; font-weight: bold; font-size: 13px; text-transform: uppercase; margin-top: 10px; display: block; text-align: center; border-top: 1px solid #333; padding-top: 8px; }
-
+        
         .footer { background: #161b22; padding: 25px; text-align: center; border-top: 2px solid #ffcc00; margin-top: 20px; }
         .yt-btn { background: #ff0000; color: white; padding: 12px 25px; border-radius: 25px; text-decoration: none; font-weight: bold; display: inline-block; margin-top: 10px; }
         .live-dot { height: 8px; width: 8px; background: #ff4444; border-radius: 50%; display: inline-block; margin-right: 5px; animation: blink 1s infinite; }
@@ -36,10 +35,10 @@
             <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/84/Indian_Premier_League_Official_Logo.svg/1200px-Indian_Premier_League_Official_Logo.svg.png" style="width:35px; margin-right:10px;">
             <div>
                 <h1 style="color:#ffcc00; font-size:18px; margin:0; font-weight:900; line-height:1.1;">TRENDVISHAL</h1>
-                <p style="margin:0; font-size:11px; color:#ffcc00; font-weight:bold; letter-spacing:1px;">FOUNDER: VISHAL SHUKLA</p>
+                <p style="margin:0; font-size:10px; color:#ffcc00; font-weight:bold; letter-spacing:1px;">FOUNDER: VISHAL SHUKLA</p>
             </div>
         </div>
-        <img src="https://i.ibb.co/wrDX1wf/Trend-Vishal.jpg" alt="Vishal Shukla" style="width:55px; height:55px; border-radius:50%; border:2px solid #ffcc00; object-fit:cover; background:#fff;">
+        <img src="https://i.ibb.co/wrDX1wf/Trend-Vishal.jpg" alt="Vishal" style="width:55px; height:55px; border-radius:50%; border:2px solid #ffcc00; object-fit:cover; background:#fff;">
     </header>
 
     <div class="tabs">
@@ -58,7 +57,6 @@
 
     <div class="footer">
         <p style="margin:0; font-size:16px; color:#ffcc00; font-weight:bold;">TrendVishal Cricket</p>
-        <p style="margin:3px 0; font-size:13px; color:#fff;">Founder & Creator: **Vishal Shukla**</p>
         <a href="Https://youtube.com/@trend_vishal?si=q2PEzD2ntl46Dcd5" target="_blank" class="yt-btn">SUBSCRIBE NOW</a>
     </div>
 
@@ -78,8 +76,6 @@
 
         const matches = [
             { t1: "CSK", t2: "PBKS", date: "2026-04-03T19:30:00", win: "PBKS WON BY 5 WICKETS" },
-            { t1: "KKR", t2: "SRH", date: "2026-04-02T19:30:00", win: "SRH WON BY 65 RUNS" },
-            { t1: "LSG", t2: "DC", date: "2026-04-01T19:30:00", win: "DC WON BY 6 WICKETS" },
             { t1: "DC", t2: "MI", date: "2026-04-04T15:30:00" },
             { t1: "GT", t2: "RR", date: "2026-04-04T19:30:00" },
             { t1: "SRH", t2: "LSG", date: "2026-04-05T15:30:00" },
@@ -87,21 +83,7 @@
             { t1: "KKR", t2: "PBKS", date: "2026-04-06T19:30:00" },
             { t1: "RR", t2: "MI", date: "2026-04-07T19:30:00" },
             { t1: "DC", t2: "GT", date: "2026-04-08T19:30:00" },
-            { t1: "KKR", t2: "LSG", date: "2026-04-09T19:30:00" },
-            { t1: "RR", t2: "RCB", date: "2026-04-10T19:30:00" },
-            { t1: "PBKS", t2: "SRH", date: "2026-04-11T15:30:00" },
-            { t1: "CSK", t2: "DC", date: "2026-04-11T19:30:00" },
-            { t1: "LSG", t2: "GT", date: "2026-04-12T15:30:00" },
-            { t1: "MI", t2: "RCB", date: "2026-04-12T19:30:00" },
-            { t1: "SRH", t2: "RR", date: "2026-04-13T19:30:00" },
-            { t1: "CSK", t2: "KKR", date: "2026-04-14T19:30:00" },
-            { t1: "RCB", t2: "LSG", date: "2026-04-15T19:30:00" },
-            { t1: "MI", t2: "PBKS", date: "2026-04-16T19:30:00" },
-            { t1: "GT", t2: "KKR", date: "2026-04-17T19:30:00" },
-            { t1: "RCB", t2: "DC", date: "2026-04-18T15:30:00" },
-            { t1: "SRH", t2: "CSK", date: "2026-04-18T19:30:00" },
-            { t1: "KKR", t2: "RR", date: "2026-04-19T15:30:00" },
-            { t1: "PBKS", t2: "LSG", date: "2026-04-19T19:30:00" }
+            { t1: "KKR", t2: "LSG", date: "2026-04-09T19:30:00" }
         ];
 
         function run() {

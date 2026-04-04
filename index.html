@@ -16,11 +16,13 @@
         
         .teams-row { display: flex; align-items: center; justify-content: space-between; margin: 10px 0; }
         .team { text-align: center; width: 40%; }
-        .team img { width: 65px; height: 65px; border-radius: 50%; background: #fff; padding: 4px; border: 2px solid #ffcc00; object-fit: contain; }
-        .team-name { display: block; color: #fff; font-weight: bold; margin-top: 8px; font-size: 15px; }
         
-        .vs-box { color: #8b949e; font-weight: 900; font-size: 13px; background: #30363d; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
-        .time-status { text-align: center; color: #ffcc00; font-weight: bold; font-size: 16px; margin-top: 10px; }
+        /* 85PX Size Fixed */
+        .team img { width: 85px; height: 85px; border-radius: 50%; background: #fff; padding: 5px; border: 3px solid #ffcc00; object-fit: contain; }
+        .team-name { display: block; color: #fff; font-weight: bold; margin-top: 8px; font-size: 16px; }
+        
+        .vs-box { color: #8b949e; font-weight: 900; font-size: 14px; background: #30363d; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
+        .time-status { text-align: center; color: #ffcc00; font-weight: bold; font-size: 18px; margin-top: 10px; }
         
         .btn-live { background: #ffcc00; color: #000; text-decoration: none; display: block; width: 100%; text-align: center; padding: 12px; border-radius: 8px; font-weight: bold; margin-top: 12px; font-size: 14px; }
         .win-text { color: #00ff00; font-weight: bold; font-size: 13px; text-transform: uppercase; margin-top: 10px; display: block; text-align: center; border-top: 1px solid #333; padding-top: 8px; }
@@ -47,7 +49,7 @@
 
     <script>
         const matches = [
-            // --- RESULTS (As per your Photo) ---
+            // --- RESULTS (100% AS PER YOUR PHOTO) ---
             { t1: "CSK", t1img: "https://upload.wikimedia.org/wikipedia/en/thumb/2/2b/Chennai_Super_Kings_Logo.svg/200px-Chennai_Super_Kings_Logo.svg.png", t2: "PBKS", t2img: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d4/Punjab_Kings_Logo.svg/200px-Punjab_Kings_Logo.svg.png", date: "2026-04-03T19:30:00", win: "PBKS WON BY 5 WICKETS" },
             { t1: "KKR", t1img: "https://upload.wikimedia.org/wikipedia/en/thumb/4/4c/Kolkata_Knight_Riders_Logo.svg/200px-Kolkata_Knight_Riders_Logo.svg.png", t2: "SRH", t2img: "https://upload.wikimedia.org/wikipedia/en/thumb/8/81/Sunrisers_Hyderabad.svg/200px-Sunrisers_Hyderabad.svg.png", date: "2026-04-02T19:30:00", win: "SRH WON BY 65 RUNS" },
             { t1: "LSG", t1img: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d4/Lucknow_Super_Giants_IPL_Logo.svg/200px-Lucknow_Super_Giants_IPL_Logo.svg.png", t2: "DC", t2img: "https://upload.wikimedia.org/wikipedia/en/thumb/f/f5/Delhi_Capitals_Logo.svg/200px-Delhi_Capitals_Logo.svg.png", date: "2026-04-01T19:30:00", win: "DC WON BY 6 WICKETS" },
@@ -56,22 +58,22 @@
             { t1: "MI", t1img: "https://upload.wikimedia.org/wikipedia/en/thumb/c/cd/Mumbai_Indians_Logo.svg/200px-Mumbai_Indians_Logo.svg.png", t2: "KKR", t2img: "https://upload.wikimedia.org/wikipedia/en/thumb/4/4c/Kolkata_Knight_Riders_Logo.svg/200px-Kolkata_Knight_Riders_Logo.svg.png", date: "2026-03-29T19:30:00", win: "MI WON BY 6 WICKETS" },
             { t1: "RCB", t1img: "https://upload.wikimedia.org/wikipedia/en/thumb/2/24/Royal_Challengers_Bangalore_Logo.svg/200px-Royal_Challengers_Bangalore_Logo.svg.png", t2: "SRH", t2img: "https://upload.wikimedia.org/wikipedia/en/thumb/8/81/Sunrisers_Hyderabad.svg/200px-Sunrisers_Hyderabad.svg.png", date: "2026-03-28T19:30:00", win: "RCB WON BY 6 WICKETS" },
 
-            // --- UPCOMING 15 MATCHES ---
-            { t1: "DC", t1img: "https://upload.wikimedia.org/wikipedia/en/thumb/f/f5/Delhi_Capitals_Logo.svg/200px-Delhi_Capitals_Logo.svg.png", t2: "MI", t2img: "https://upload.wikimedia.org/wikipedia/en/thumb/c/cd/Mumbai_Indians_Logo.svg/200px-Mumbai_Indians_Logo.svg.png", date: "2026-04-04T15:30:00" },
+            // --- UPCOMING (NEXT 15 MATCHES CORRECTED) ---
             { t1: "GT", t1img: "https://upload.wikimedia.org/wikipedia/en/thumb/0/09/Gujarat_Titans_Logo.svg/200px-Gujarat_Titans_Logo.svg.png", t2: "RR", t2img: "https://upload.wikimedia.org/wikipedia/en/thumb/6/60/Rajasthan_Royals_Logo.svg/200px-Rajasthan_Royals_Logo.svg.png", date: "2026-04-04T19:30:00" },
             { t1: "SRH", t1img: "https://upload.wikimedia.org/wikipedia/en/thumb/8/81/Sunrisers_Hyderabad.svg/200px-Sunrisers_Hyderabad.svg.png", t2: "LSG", t2img: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d4/Lucknow_Super_Giants_IPL_Logo.svg/200px-Lucknow_Super_Giants_IPL_Logo.svg.png", date: "2026-04-05T15:30:00" },
             { t1: "DC", t1img: "https://upload.wikimedia.org/wikipedia/en/thumb/f/f5/Delhi_Capitals_Logo.svg/200px-Delhi_Capitals_Logo.svg.png", t2: "CSK", t2img: "https://upload.wikimedia.org/wikipedia/en/thumb/2/2b/Chennai_Super_Kings_Logo.svg/200px-Chennai_Super_Kings_Logo.svg.png", date: "2026-04-05T19:30:00" },
             { t1: "MI", t1img: "https://upload.wikimedia.org/wikipedia/en/thumb/c/cd/Mumbai_Indians_Logo.svg/200px-Mumbai_Indians_Logo.svg.png", t2: "RR", t2img: "https://upload.wikimedia.org/wikipedia/en/thumb/6/60/Rajasthan_Royals_Logo.svg/200px-Rajasthan_Royals_Logo.svg.png", date: "2026-04-06T19:30:00" },
             { t1: "RCB", t1img: "https://upload.wikimedia.org/wikipedia/en/thumb/2/24/Royal_Challengers_Bangalore_Logo.svg/200px-Royal_Challengers_Bangalore_Logo.svg.png", t2: "LSG", t2img: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d4/Lucknow_Super_Giants_IPL_Logo.svg/200px-Lucknow_Super_Giants_IPL_Logo.svg.png", date: "2026-04-07T19:30:00" },
-            { t1: "DC", t1img: "https://upload.wikimedia.org/wikipedia/en/thumb/f/f5/Delhi_Capitals_Logo.svg/200px-Delhi_Capitals_Logo.svg.png", t2: "KKR", t2img: "https://upload.wikimedia.org/wikipedia/en/thumb/4/4c/Kolkata_Knight_Riders_Logo.svg/200px-Kolkata_Knight_Riders_Logo.svg.png", date: "2026-04-08T19:30:00" },
-            { t1: "GT", t1img: "https://upload.wikimedia.org/wikipedia/en/thumb/0/09/Gujarat_Titans_Logo.svg/200px-Gujarat_Titans_Logo.svg.png", t2: "PBKS", t2img: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d4/Punjab_Kings_Logo.svg/200px-Punjab_Kings_Logo.svg.png", date: "2026-04-09T19:30:00" },
-            { t1: "SRH", t1img: "https://upload.wikimedia.org/wikipedia/en/thumb/8/81/Sunrisers_Hyderabad.svg/200px-Sunrisers_Hyderabad.svg.png", t2: "CSK", t2img: "https://upload.wikimedia.org/wikipedia/en/thumb/2/2b/Chennai_Super_Kings_Logo.svg/200px-Chennai_Super_Kings_Logo.svg.png", date: "2026-04-10T19:30:00" },
+            { t1: "GT", t1img: "https://upload.wikimedia.org/wikipedia/en/thumb/0/09/Gujarat_Titans_Logo.svg/200px-Gujarat_Titans_Logo.svg.png", t2: "PBKS", t2img: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d4/Punjab_Kings_Logo.svg/200px-Punjab_Kings_Logo.svg.png", date: "2026-04-08T19:30:00" },
+            { t1: "SRH", t1img: "https://upload.wikimedia.org/wikipedia/en/thumb/8/81/Sunrisers_Hyderabad.svg/200px-Sunrisers_Hyderabad.svg.png", t2: "CSK", t2img: "https://upload.wikimedia.org/wikipedia/en/thumb/2/2b/Chennai_Super_Kings_Logo.svg/200px-Chennai_Super_Kings_Logo.svg.png", date: "2026-04-09T19:30:00" },
+            { t1: "KKR", t1img: "https://upload.wikimedia.org/wikipedia/en/thumb/4/4c/Kolkata_Knight_Riders_Logo.svg/200px-Kolkata_Knight_Riders_Logo.svg.png", t2: "MI", t2img: "https://upload.wikimedia.org/wikipedia/en/thumb/c/cd/Mumbai_Indians_Logo.svg/200px-Mumbai_Indians_Logo.svg.png", date: "2026-04-10T19:30:00" },
             { t1: "RR", t1img: "https://upload.wikimedia.org/wikipedia/en/thumb/6/60/Rajasthan_Royals_Logo.svg/200px-Rajasthan_Royals_Logo.svg.png", t2: "RCB", t2img: "https://upload.wikimedia.org/wikipedia/en/thumb/2/24/Royal_Challengers_Bangalore_Logo.svg/200px-Royal_Challengers_Bangalore_Logo.svg.png", date: "2026-04-11T19:30:00" },
-            { t1: "MI", t1img: "https://upload.wikimedia.org/wikipedia/en/thumb/c/cd/Mumbai_Indians_Logo.svg/200px-Mumbai_Indians_Logo.svg.png", t2: "DC", t2img: "https://upload.wikimedia.org/wikipedia/en/thumb/f/f5/Delhi_Capitals_Logo.svg/200px-Delhi_Capitals_Logo.svg.png", date: "2026-04-12T15:30:00" },
-            { t1: "LSG", t1img: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d4/Lucknow_Super_Giants_IPL_Logo.svg/200px-Lucknow_Super_Giants_IPL_Logo.svg.png", t2: "GT", t2img: "https://upload.wikimedia.org/wikipedia/en/thumb/0/09/Gujarat_Titans_Logo.svg/200px-Gujarat_Titans_Logo.svg.png", date: "2026-04-12T19:30:00" },
-            { t1: "CSK", t1img: "https://upload.wikimedia.org/wikipedia/en/thumb/2/2b/Chennai_Super_Kings_Logo.svg/200px-Chennai_Super_Kings_Logo.svg.png", t2: "PBKS", t2img: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d4/Punjab_Kings_Logo.svg/200px-Punjab_Kings_Logo.svg.png", date: "2026-04-13T19:30:00" },
-            { t1: "KKR", t1img: "https://upload.wikimedia.org/wikipedia/en/thumb/4/4c/Kolkata_Knight_Riders_Logo.svg/200px-Kolkata_Knight_Riders_Logo.svg.png", t2: "SRH", t2img: "https://upload.wikimedia.org/wikipedia/en/thumb/8/81/Sunrisers_Hyderabad.svg/200px-Sunrisers_Hyderabad.svg.png", date: "2026-04-14T19:30:00" },
-            { t1: "RR", t1img: "https://upload.wikimedia.org/wikipedia/en/thumb/6/60/Rajasthan_Royals_Logo.svg/200px-Rajasthan_Royals_Logo.svg.png", t2: "GT", t2img: "https://upload.wikimedia.org/wikipedia/en/thumb/0/09/Gujarat_Titans_Logo.svg/200px-Gujarat_Titans_Logo.svg.png", date: "2026-04-15T19:30:00" }
+            { t1: "LSG", t1img: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d4/Lucknow_Super_Giants_IPL_Logo.svg/200px-Lucknow_Super_Giants_IPL_Logo.svg.png", t2: "DC", t2img: "https://upload.wikimedia.org/wikipedia/en/thumb/f/f5/Delhi_Capitals_Logo.svg/200px-Delhi_Capitals_Logo.svg.png", date: "2026-04-12T15:30:00" },
+            { t1: "MI", t1img: "https://upload.wikimedia.org/wikipedia/en/thumb/c/cd/Mumbai_Indians_Logo.svg/200px-Mumbai_Indians_Logo.svg.png", t2: "PBKS", t2img: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d4/Punjab_Kings_Logo.svg/200px-Punjab_Kings_Logo.svg.png", date: "2026-04-12T19:30:00" },
+            { t1: "KKR", t1img: "https://upload.wikimedia.org/wikipedia/en/thumb/4/4c/Kolkata_Knight_Riders_Logo.svg/200px-Kolkata_Knight_Riders_Logo.svg.png", t2: "LSG", t2img: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d4/Lucknow_Super_Giants_IPL_Logo.svg/200px-Lucknow_Super_Giants_IPL_Logo.svg.png", date: "2026-04-13T19:30:00" },
+            { t1: "MI", t1img: "https://upload.wikimedia.org/wikipedia/en/thumb/c/cd/Mumbai_Indians_Logo.svg/200px-Mumbai_Indians_Logo.svg.png", t2: "CSK", t2img: "https://upload.wikimedia.org/wikipedia/en/thumb/2/2b/Chennai_Super_Kings_Logo.svg/200px-Chennai_Super_Kings_Logo.svg.png", date: "2026-04-14T19:30:00" },
+            { t1: "GT", t1img: "https://upload.wikimedia.org/wikipedia/en/thumb/0/09/Gujarat_Titans_Logo.svg/200px-Gujarat_Titans_Logo.svg.png", t2: "DC", t2img: "https://upload.wikimedia.org/wikipedia/en/thumb/f/f5/Delhi_Capitals_Logo.svg/200px-Delhi_Capitals_Logo.svg.png", date: "2026-04-15T19:30:00" },
+            { t1: "RR", t1img: "https://upload.wikimedia.org/wikipedia/en/thumb/6/60/Rajasthan_Royals_Logo.svg/200px-Rajasthan_Royals_Logo.svg.png", t2: "PBKS", t2img: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d4/Punjab_Kings_Logo.svg/200px-Punjab_Kings_Logo.svg.png", date: "2026-04-16T19:30:00" }
         ];
 
         function run() {

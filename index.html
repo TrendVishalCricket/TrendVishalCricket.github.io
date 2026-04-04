@@ -1,94 +1,86 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrendVishal Cricket - IPL 2026</title>
+    <style>
+        body { background-color: #0d1117; color: white; font-family: sans-serif; margin: 0; padding-bottom: 20px; }
+        header { background: #1f2328; padding: 15px; text-align: center; border-bottom: 3px solid gold; position: sticky; top: 0; z-index: 100; }
+        header h1 { margin: 0; color: gold; font-size: 22px; text-transform: uppercase; letter-spacing: 1px; }
+        .container { padding: 12px; }
+        .match-card { background: #161b22; border-radius: 15px; padding: 15px; margin-bottom: 15px; border: 1px solid #30363d; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        .match-header { display: flex; justify-content: space-between; font-size: 11px; font-weight: bold; margin-bottom: 10px; color: #8b949e; }
+        .live-dot { height: 8px; width: 8px; background-color: #ff4444; border-radius: 50%; display: inline-block; margin-right: 5px; animation: blink 1s infinite; }
+        @keyframes blink { 0% {opacity: 1;} 50% {opacity: 0.3;} 100% {opacity: 1;} }
+        .teams-box { display: flex; align-items: center; justify-content: space-between; margin: 10px 0; }
+        .team { text-align: center; width: 40%; }
+        .team img { width: 45px; height: 45px; object-fit: contain; margin-bottom: 5px; background: white; border-radius: 50%; padding: 2px; }
+        .team-name { font-size: 16px; font-weight: bold; display: block; }
+        .vs-circle { background: #30363d; padding: 5px 10px; border-radius: 20px; font-size: 12px; font-weight: bold; color: gold; }
+        .venue-info { text-align: center; font-size: 12px; color: #8b949e; margin-top: 10px; border-top: 1px solid #30363d; padding-top: 10px; }
+        .btn { display: block; text-align: center; background: gold; color: black; text-decoration: none; padding: 10px; border-radius: 8px; font-weight: bold; margin-top: 12px; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+<header><h1>TRENDVISHAL CRICKET</h1></header>
+
 <div class="container">
     
-    <div class="match-card" style="border-top: 4px solid #ef4444;">
-        <div><span class="status-dot"></span><span style="color:#ffcc00; font-size:12px; font-weight:bold;">LIVE 3:30 PM - Match 8</span></div>
-        <div class="teams-row"><div class="team-name">DC</div><div style="color:#8b949e;">VS</div><div class="team-name">MI</div></div>
-        <div class="toss-box">📍 Delhi</div>
+    <div class="match-card" style="border-top: 3px solid #ef4444;">
+        <div class="match-header"><span><span class="live-dot"></span>LIVE 3:30 PM</span><span>MATCH 8</span></div>
+        <div class="teams-box">
+            <div class="team"><img src="https://scores.iplt20.com/ipl/teamlogos/DC.png" alt="DC"><span class="team-name">DC</span></div>
+            <div class="vs-circle">VS</div>
+            <div class="team"><img src="https://scores.iplt20.com/ipl/teamlogos/MI.png" alt="MI"><span class="team-name">MI</span></div>
+        </div>
+        <div class="venue-info">Arun Jaitley Stadium, Delhi</div>
         <a href="scoreboard.html" class="btn">View Live Score</a>
     </div>
 
-    <div class="match-card" style="border-top: 4px solid #1e40af;">
-        <div><span style="color:#8b949e; font-size:12px; font-weight:bold;">TODAY 7:30 PM - Match 9</span></div>
-        <div class="teams-row"><div class="team-name">GT</div><div style="color:#8b949e;">VS</div><div class="team-name">RR</div></div>
-        <div class="toss-box">📍 Ahmedabad</div>
-    </div>
-
-    <div class="match-card" style="border-top: 4px solid #ff8200;">
-        <div><span style="color:#8b949e; font-size:12px; font-weight:bold;">SUNDAY 3:30 PM - Match 10</span></div>
-        <div class="teams-row"><div class="team-name">SRH</div><div style="color:#8b949e;">VS</div><div class="team-name">LSG</div></div>
-        <div class="toss-box">📍 Hyderabad</div>
-    </div>
-
-    <div class="match-card" style="border-top: 4px solid #db0510;">
-        <div><span style="color:#8b949e; font-size:12px; font-weight:bold;">SUNDAY 7:30 PM - Match 11</span></div>
-        <div class="teams-row"><div class="team-name">RCB</div><div style="color:#8b949e;">VS</div><div class="team-name">CSK</div></div>
-        <div class="toss-box">📍 Bengaluru</div>
+    <div class="match-card">
+        <div class="match-header"><span>TONIGHT 7:30 PM</span><span>MATCH 9</span></div>
+        <div class="teams-box">
+            <div class="team"><img src="https://scores.iplt20.com/ipl/teamlogos/GT.png" alt="GT"><span class="team-name">GT</span></div>
+            <div class="vs-circle">VS</div>
+            <div class="team"><img src="https://scores.iplt20.com/ipl/teamlogos/RR.png" alt="RR"><span class="team-name">RR</span></div>
+        </div>
+        <div class="venue-info">Ahmedabad | Toss at 7:00 PM</div>
     </div>
 
     <div class="match-card">
-        <div><span style="color:#8b949e; font-size:12px; font-weight:bold;">MON, 6 APRIL 7:30 PM - Match 12</span></div>
-        <div class="teams-row"><div class="team-name">KKR</div><div style="color:#8b949e;">VS</div><div class="team-name">PBKS</div></div>
-        <div class="toss-box">📍 Kolkata</div>
+        <div class="match-header"><span>SUNDAY 3:30 PM</span><span>MATCH 10</span></div>
+        <div class="teams-box">
+            <div class="team"><img src="https://scores.iplt20.com/ipl/teamlogos/SRH.png" alt="SRH"><span class="team-name">SRH</span></div>
+            <div class="vs-circle">VS</div>
+            <div class="team"><img src="https://scores.iplt20.com/ipl/teamlogos/LSG.png" alt="LSG"><span class="team-name">LSG</span></div>
+        </div>
+        <div class="venue-info">Hyderabad</div>
     </div>
 
-    <div class="match-card">
-        <div><span style="color:#8b949e; font-size:12px; font-weight:bold;">TUE, 7 APRIL 7:30 PM - Match 13</span></div>
-        <div class="teams-row"><div class="team-name">RR</div><div style="color:#8b949e;">VS</div><div class="team-name">MI</div></div>
-        <div class="toss-box">📍 Guwahati</div>
+    <div class="match-card" style="border: 1px solid gold;">
+        <div class="match-header" style="color:gold;"><span>SUNDAY 7:30 PM</span><span>BIG MATCH</span></div>
+        <div class="teams-box">
+            <div class="team"><img src="https://scores.iplt20.com/ipl/teamlogos/RCB.png" alt="RCB"><span class="team-name">RCB</span></div>
+            <div class="vs-circle">VS</div>
+            <div class="team"><img src="https://scores.iplt20.com/ipl/teamlogos/CSK.png" alt="CSK"><span class="team-name">CSK</span></div>
+        </div>
+        <div class="venue-info">Bengaluru</div>
     </div>
 
+    <div style="text-align:center; color:gold; font-weight:bold; margin:20px 0;">UPCOMING MATCHES</div>
+    
     <div class="match-card">
-        <div><span style="color:#8b949e; font-size:12px; font-weight:bold;">WED, 8 APRIL 7:30 PM - Match 14</span></div>
-        <div class="teams-row"><div class="team-name">DC</div><div style="color:#8b949e;">VS</div><div class="team-name">GT</div></div>
-        <div class="toss-box">📍 Delhi</div>
-    </div>
-
-    <div class="match-card">
-        <div><span style="color:#8b949e; font-size:12px; font-weight:bold;">THU, 9 APRIL 7:30 PM - Match 15</span></div>
-        <div class="teams-row"><div class="team-name">KKR</div><div style="color:#8b949e;">VS</div><div class="team-name">LSG</div></div>
-        <div class="toss-box">📍 Kolkata</div>
-    </div>
-
-    <div class="match-card">
-        <div><span style="color:#8b949e; font-size:12px; font-weight:bold;">FRI, 10 APRIL 7:30 PM - Match 16</span></div>
-        <div class="teams-row"><div class="team-name">RR</div><div style="color:#8b949e;">VS</div><div class="team-name">RCB</div></div>
-        <div class="toss-box">📍 Guwahati</div>
-    </div>
-
-    <div class="match-card">
-        <div><span style="color:#8b949e; font-size:12px; font-weight:bold;">SAT, 11 APRIL 3:30 PM - Match 17</span></div>
-        <div class="teams-row"><div class="team-name">PBKS</div><div style="color:#8b949e;">VS</div><div class="team-name">SRH</div></div>
-        <div class="toss-box">📍 New Chandigarh</div>
-    </div>
-
-    <div class="match-card">
-        <div><span style="color:#8b949e; font-size:12px; font-weight:bold;">SAT, 11 APRIL 7:30 PM - Match 18</span></div>
-        <div class="teams-row"><div class="team-name">CSK</div><div style="color:#8b949e;">VS</div><div class="team-name">DC</div></div>
-        <div class="toss-box">📍 Chennai</div>
-    </div>
-
-    <div class="match-card">
-        <div><span style="color:#8b949e; font-size:12px; font-weight:bold;">SUN, 12 APRIL 3:30 PM - Match 19</span></div>
-        <div class="teams-row"><div class="team-name">LSG</div><div style="color:#8b949e;">VS</div><div class="team-name">GT</div></div>
-        <div class="toss-box">📍 Lucknow</div>
-    </div>
-
-    <div class="match-card">
-        <div><span style="color:#8b949e; font-size:12px; font-weight:bold;">SUN, 12 APRIL 7:30 PM - Match 20</span></div>
-        <div class="teams-row"><div class="team-name">MI</div><div style="color:#8b949e;">VS</div><div class="team-name">RCB</div></div>
-        <div class="toss-box">📍 Mumbai</div>
-    </div>
-
-    <div class="match-card">
-        <div><span style="color:#8b949e; font-size:12px; font-weight:bold;">MON, 13 APRIL 7:30 PM - Match 21</span></div>
-        <div class="teams-row"><div class="team-name">SRH</div><div style="color:#8b949e;">VS</div><div class="team-name">RR</div></div>
-        <div class="toss-box">📍 Hyderabad</div>
-    </div>
-
-    <div class="match-card">
-        <div><span style="color:#8b949e; font-size:12px; font-weight:bold;">TUE, 14 APRIL 7:30 PM - Match 22</span></div>
-        <div class="teams-row"><div class="team-name">CSK</div><div style="color:#8b949e;">VS</div><div class="team-name">KKR</div></div>
-        <div class="toss-box">📍 Chennai</div>
+        <div class="match-header"><span>MON 7:30 PM</span><span>MATCH 12</span></div>
+        <div class="teams-box">
+            <div class="team"><img src="https://scores.iplt20.com/ipl/teamlogos/KKR.png" alt="KKR"><span class="team-name">KKR</span></div>
+            <div class="vs-circle">VS</div>
+            <div class="team"><img src="https://scores.iplt20.com/ipl/teamlogos/PBKS.png" alt="PBKS"><span class="team-name">PBKS</span></div>
+        </div>
+        <div class="venue-info">Kolkata</div>
     </div>
 
 </div>
+</body>
+</html>

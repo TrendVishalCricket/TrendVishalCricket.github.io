@@ -59,7 +59,7 @@
 
     <div class="footer">
         <p style="margin:0; font-size:16px; color:#ffcc00; font-weight:bold;">TrendVishal Cricket</p>
-        <a href="https://youtube.com/@trendvishalofficial" target="_blank" class="yt-btn">SUBSCRIBE NOW</a>
+        <a href="https://www.youtube.com/@trendvishalofficial" target="_blank" class="yt-btn">SUBSCRIBE Trend Vishal</a>
         <div class="shayari">
             "मैदान की धूल हो या हार-जीत का शोर,<br>
             क्रिकेट के हर पल में दिखेगा, विशाल का ज़ोर।"
@@ -74,29 +74,29 @@
             KKR: "https://upload.wikimedia.org/wikipedia/en/thumb/4/4c/Kolkata_Knight_Riders_Logo.svg/200px-Kolkata_Knight_Riders_Logo.svg.png",
             GT: "https://upload.wikimedia.org/wikipedia/en/thumb/0/09/Gujarat_Titans_Logo.svg/200px-Gujarat_Titans_Logo.svg.png",
             PBKS: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d4/Punjab_Kings_Logo.svg/200px-Punjab_Kings_Logo.svg.png",
-            RCB: "https://upload.wikimedia.org/wikipedia/en/thumb/2/2a/Royal_Challengers_Bangalore_Logo.svg/200px-Royal_Challengers_Bangalore_Logo.svg.png", 
-            RR: "rr.png", // आपकी फाइल के अनुसार अपडेट किया गया
-            DC: "https://upload.wikimedia.org/wikipedia/en/thumb/f/f5/Delhi_Capitals_Logo.svg/200px-Delhi_Capitals_Logo.svg.png",   
-            LSG: "https://upload.wikimedia.org/wikipedia/en/thumb/a/a9/Lucknow_Super_Giants_IPL_Logo.svg/200px-Lucknow_Super_Giants_IPL_Logo.svg.png",  
-            SRH: "https://upload.wikimedia.org/wikipedia/en/thumb/8/81/Sunrisers_Hyderabad.svg/200px-Sunrisers_Hyderabad.svg.png"  
+            
+            // आपकी फाइलें
+            RCB: "RCB '1000068822.jpg'.jpg", 
+            RR: "rr.png",           
+            DC: "DC '1000068823.jpg'.jpg",   
+            LSG: "LSG '1000068824.jpg'.jpg",  
+            SRH: "SRH '1000068825.jpg'.jpg"  
         };
 
         const matches = [
-            // RESULTS
-            { t1: "RCB", t2: "SRH", date: "2026-03-28T19:30:00", win: "RCB WON BY 5 WICKETS" },
-            { t1: "MI", t2: "KKR", date: "2026-03-29T19:30:00", win: "MI WON BY 6 WICKETS" },
-            { t1: "RR", t2: "CSK", date: "2026-03-30T19:30:00", win: "RR WON BY 8 WICKETS" },
-            { t1: "PBKS", t2: "GT", date: "2026-03-31T19:30:00", win: "PBKS WON BY 3 WICKETS" },
-            { t1: "LSG", t2: "DC", date: "2026-04-01T19:30:00", win: "DC WON BY 6 WICKETS" },
-            { t1: "KKR", t2: "SRH", date: "2026-04-02T19:30:00", win: "SRH WON BY 65 RUNS" },
+            // ✅ RESULTS (आपकी फोटो वाली लिस्ट के अनुसार)
             { t1: "CSK", t2: "PBKS", date: "2026-04-03T19:30:00", win: "PBKS WON BY 5 WICKETS" },
+            { t1: "KKR", t2: "SRH", date: "2026-04-02T19:30:00", win: "SRH WON BY 65 RUNS" },
+            { t1: "LSG", t2: "DC", date: "2026-04-01T19:30:00", win: "DC WON BY 6 WICKETS" },
+            { t1: "RR", t2: "CSK", date: "2026-03-30T19:30:00", win: "RR WON BY 8 WICKETS" },
+            { t1: "MI", t2: "KKR", date: "2026-03-29T19:30:00", win: "MI WON BY 6 WICKETS" },
+            { t1: "RCB", t2: "SRH", date: "2026-03-28T19:30:00", win: "RCB WON BY 5 WICKETS" },
 
-            // UPCOMING & LIVE
+            // 📅 LIVE & UPCOMING
             { t1: "MI", t2: "DC", date: "2026-04-04T15:30:00" },
             { t1: "GT", t2: "RR", date: "2026-04-04T19:30:00" },
             { t1: "SRH", t2: "LSG", date: "2026-04-05T15:30:00" },
-            { t1: "RCB", t2: "CSK", date: "2026-04-05T19:30:00" }
-            // बाकी मैच सिस्टम ऑटोमेटिक दिखाएगा
+            { t1: "RCB", t2: "CSK", date: "2026-04-05T19:30:00" } // ✅ CSK vs RCB यहाँ है
         ];
 
         function run() {
@@ -111,7 +111,7 @@
                 let h = `<div class="match-card"><span class="date-header">${s.toDateString()}</span><div class="teams-row"><div class="team"><img src="${logos[m.t1]}"><span class="team-name">${m.t1}</span></div><div class="vs-box">VS</div><div class="team"><img src="${logos[m.t2]}"><span class="team-name">${m.t2}</span></div></div>`;
                 
                 if (now >= sHrs && now <= e) { 
-                    h += `<div style="text-align:center; color:#ffcc00; font-weight:bold; margin-top:10px;"><span class="live-dot"></span> ${now >= s ? "LIVE NOW" : "STARTS SOON"}</div><a href="https://www.google.com/search?q=${m.t1}+vs+${m.t2}+score" target="_blank" class="btn-live">WATCH LIVE SCORE</a></div>`; 
+                    h += `<div style="text-align:center; color:#ffcc00; font-weight:bold; margin-top:10px;"><span class="live-dot" style="height:8px; width:8px; background:#ff4444; border-radius:50%; display:inline-block; margin-right:5px; animation:blink 1s infinite;"></span> ${now >= s ? "LIVE NOW" : "STARTS SOON"}</div><a href="https://www.google.com/search?q=${m.t1}+vs+${m.t2}+score" target="_blank" class="btn-live">WATCH LIVE SCORE</a></div>`; 
                     lBox.innerHTML += h; 
                 } else if (now < sHrs) { 
                     h += `<div style="text-align:center; color:#8b949e; margin-top:10px;">Starts at ${s.getHours()}:${s.getMinutes().toString().padStart(2, '0')}</div></div>`; 

@@ -5,25 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Live Score - TrendVishal Cricket</title>
     <style>
-        body { background-color: #0d1117; color: white; font-family: sans-serif; margin: 0; text-align: center; }
+        body { background-color: #0d1117; color: white; font-family: sans-serif; margin: 0; display: flex; flex-direction: column; height: 100vh; }
         .header { background: #1f2328; padding: 15px; border-bottom: 2px solid gold; display: flex; align-items: center; }
-        .back-btn { color: gold; text-decoration: none; font-size: 20px; margin-right: 15px; }
-        .widget-container { width: 100%; min-height: 500px; margin-top: 10px; overflow: hidden; }
-        iframe { width: 100%; border: none; min-height: 600px; }
+        .back-btn { color: gold; text-decoration: none; font-size: 20px; margin-right: 15px; font-weight: bold; }
+        .info-box { padding: 20px; text-align: center; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; }
+        .live-btn { background: #ff4444; color: white; padding: 15px 25px; text-decoration: none; border-radius: 30px; font-weight: bold; font-size: 18px; margin-top: 20px; display: inline-block; box-shadow: 0 4px 15px rgba(255,68,68,0.4); }
+        .team-logo { width: 70px; height: 70px; background: white; border-radius: 50%; padding: 5px; margin: 10px; }
     </style>
 </head>
 <body>
 
 <div class="header">
-    <a href="index.html" class="back-btn">←</a>
-    <span style="font-weight:bold;">TATA IPL 2026 LIVE SCORE</span>
+    <a href="index.html" class="back-btn">← Back</a>
+    <span style="font-weight:bold; color:gold;">IPL 2026 LIVE SCORE</span>
 </div>
 
-<div class="widget-container">
-    <iframe src="https://www.cricket-score.pk/embed/live" scrolling="yes"></iframe>
-</div>
-<div style="padding: 10px; font-size: 12px; color: #8b949e;">
-    Score automatically updates every 30 seconds.
+<div class="info-box">
+    <h2 style="margin-bottom:5px;">DC vs MI</h2>
+    <p style="color:#8b949e; margin-top:0;">Match 8 | Arun Jaitley Stadium</p>
+    
+    <div style="margin: 20px 0;">
+        <img src="https://scores.iplt20.com/ipl/teamlogos/DC.png" class="team-logo">
+        <span style="font-size: 24px; font-weight: bold; vertical-align: middle;">VS</span>
+        <img src="https://scores.iplt20.com/ipl/teamlogos/MI.png" class="team-logo">
+    </div>
+
+    <p style="font-size: 14px; line-height: 1.6;">Bhai, niche diye gaye button par click karein.<br>Yahan aapko <b>Ball-by-Ball Live Score</b> aur <b>Commentary</b><br>ekdum automatic (Google Speed) par milegi!</p>
+
+    <a href="https://www.google.com/search?q=ipl+live+score" target="_blank" class="live-btn">
+        🔴 CLICK FOR AUTO-LIVE SCORE
+    </a>
+
+    <p style="margin-top: 30px; font-size: 12px; color: #8b949e;">Powered by TrendVishal Cricket</p>
 </div>
 
 </body>

@@ -3,106 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TrendVishal Cricket - IPL 2026 Schedule</title>
+    <title>TrendVishal Cricket - Live</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
         <img src="https://i.ibb.co/wrDX1wf/Trend-Vishal.jpg" class="header-logo" alt="Logo">
-        <h1>TrendVishal Cricket</h1>
+        <h1 style="font-size: 20px; font-weight: bold;">TRENDVISHAL CRICKET</h1>
         <div style="width:40px"></div>
     </header>
 
     <div class="tabs">
-        <a href="index.html" class="tab-btn active">LIVE</a>
-        <a href="index.html" class="tab-btn">UPCOMING</a>
+        <a href="index.html" class="tab-btn active">LIVE/UPCOMING</a>
         <a href="results.html" class="tab-btn">RESULTS</a>
     </div>
 
-    <div class="container">
-        <div class="date-divider">MARCH 22, 2026</div>
-        <div class="match-card">
-            <div class="match-header"><span>MATCH 1</span><span>7:30 PM IST</span></div>
-            <div class="teams-box">
-                <div class="team"><img src="https://i.postimg.cc/L5v8v8v8/csk.png"><span class="team-name">CSK</span></div>
-                <div class="vs">VS</div>
-                <div class="team"><img src="https://i.postimg.cc/mD3mX6XW/rcb.png"><span class="team-name">RCB</span></div>
-            </div>
-            <div class="venue">MA Chidambaram Stadium, Chennai</div>
+    <div id="match-container" class="container">
         </div>
 
-        <div class="date-divider">MARCH 23, 2026</div>
-        <div class="match-card">
-            <div class="match-header"><span>MATCH 2</span><span>3:30 PM IST</span></div>
-            <div class="teams-box">
-                <div class="team"><img src="https://i.postimg.cc/0jdbYm8n/mi.png"><span class="team-name">MI</span></div>
-                <div class="vs">VS</div>
-                <div class="team"><img src="https://i.postimg.cc/KjL8M9S0/gt.png"><span class="team-name">GT</span></div>
-            </div>
-            <div class="venue">Narendra Modi Stadium, Ahmedabad</div>
-        </div>
+    <script>
+        // Images ke paka link yaha dale hain
+        const matches = [
+            { id: 1, t1: "CSK", t1img: "https://i.postimg.cc/L5v8v8v8/csk.png", t2: "RCB", t2img: "https://i.postimg.cc/mD3mX6XW/rcb.png", date: "2026-03-22T19:30:00", venue: "MA Chidambaram, Chennai" },
+            { id: 2, t1: "MI", t1img: "https://i.postimg.cc/0jdbYm8n/mi.png", t2: "GT", t2img: "https://i.postimg.cc/KjL8M9S0/gt.png", date: "2026-03-23T15:30:00", venue: "Narendra Modi, Ahmedabad" },
+            { id: 3, t1: "DC", t1img: "https://i.postimg.cc/mD3mX6XW/dc.png", t2: "LSG", t2img: "https://i.postimg.cc/mD3mX6XW/lsg.png", date: "2026-03-23T19:30:00", venue: "Arun Jaitley, Delhi" }
+            // Aap aise hi baaki matches bhi jod sakte hain
+        ];
 
-        <div class="match-card">
-            <div class="match-header"><span>MATCH 3</span><span>7:30 PM IST</span></div>
-            <div class="teams-box">
-                <div class="team"><img src="https://i.postimg.cc/mD3mX6XW/dc.png"><span class="team-name">DC</span></div>
-                <div class="vs">VS</div>
-                <div class="team"><img src="https://i.postimg.cc/mD3mX6XW/lsg.png"><span class="team-name">LSG</span></div>
-            </div>
-            <div class="venue">Arun Jaitley Stadium, Delhi</div>
-        </div>
+        const container = document.getElementById('match-container');
+        const now = new Date();
 
-        <div class="date-divider">UPCOMING MATCHES (IPL 2026)</div>
-        
-        <div class="match-card">
-            <div class="match-header"><span>MATCH 4: RR VS KKR</span><span>MARCH 24</span></div>
-            <div class="venue">Sawai Mansingh Stadium, Jaipur</div>
-        </div>
-        <div class="match-card">
-            <div class="match-header"><span>MATCH 5: PBKS VS SRH</span><span>MARCH 25</span></div>
-            <div class="venue">PCA Stadium, Mohali</div>
-        </div>
-        <div class="match-card">
-            <div class="match-header"><span>MATCH 6: RCB VS PBKS</span><span>MARCH 26</span></div>
-            <div class="venue">M. Chinnaswamy Stadium, Bengaluru</div>
-        </div>
-        <div class="match-card">
-            <div class="match-header"><span>MATCH 7: CSK VS GT</span><span>MARCH 27</span></div>
-            <div class="venue">MA Chidambaram Stadium, Chennai</div>
-        </div>
-        <div class="match-card">
-            <div class="match-header"><span>MATCH 8: SRH VS MI</span><span>MARCH 28</span></div>
-            <div class="venue">Rajiv Gandhi Stadium, Hyderabad</div>
-        </div>
-        <div class="match-card">
-            <div class="match-header"><span>MATCH 9: RR VS DC</span><span>MARCH 29</span></div>
-            <div class="venue">Sawai Mansingh Stadium, Jaipur</div>
-        </div>
-        <div class="match-card">
-            <div class="match-header"><span>MATCH 10: RCB VS KKR</span><span>MARCH 30</span></div>
-            <div class="venue">M. Chinnaswamy Stadium, Bengaluru</div>
-        </div>
-        <div class="match-card">
-            <div class="match-header"><span>MATCH 11: LSG VS PBKS</span><span>MARCH 31</span></div>
-            <div class="venue">Ekana Stadium, Lucknow</div>
-        </div>
-        <div class="match-card">
-            <div class="match-header"><span>MATCH 12: MI VS RR</span><span>APRIL 01</span></div>
-            <div class="venue">Wankhede Stadium, Mumbai</div>
-        </div>
-        <div class="match-card">
-            <div class="match-header"><span>MATCH 13: RCB VS LSG</span><span>APRIL 02</span></div>
-            <div class="venue">M. Chinnaswamy Stadium, Bengaluru</div>
-        </div>
-        <div class="match-card">
-            <div class="match-header"><span>MATCH 14: DC VS KKR</span><span>APRIL 03</span></div>
-            <div class="venue">Arun Jaitley Stadium, Delhi</div>
-        </div>
-        <div class="match-card">
-            <div class="match-header"><span>MATCH 15: GT VS PBKS</span><span>APRIL 04</span></div>
-            <div class="venue">Narendra Modi Stadium, Ahmedabad</div>
-        </div>
-
-    </div>
+        matches.forEach(m => {
+            const matchDate = new Date(m.date);
+            if (matchDate > now) {
+                container.innerHTML += `
+                    <div class="match-card" style="border: 2px solid #ffcc00; margin-bottom: 20px;">
+                        <div class="match-header" style="background: #30363d; padding: 5px 10px; border-radius: 5px;">
+                            <span style="color:#ffcc00; font-weight:bold;">MATCH ${m.id}</span>
+                            <span>${matchDate.toDateString()}</span>
+                        </div>
+                        <div class="teams-box">
+                            <div class="team">
+                                <img src="${m.t1img}" onerror="this.src='https://i.ibb.co/wrDX1wf/Trend-Vishal.jpg'">
+                                <span class="team-name">${m.t1}</span>
+                            </div>
+                            <div class="vs">VS</div>
+                            <div class="team">
+                                <img src="${m.t2img}" onerror="this.src='https://i.ibb.co/wrDX1wf/Trend-Vishal.jpg'">
+                                <span class="team-name">${m.t2}</span>
+                            </div>
+                        </div>
+                        <div class="venue" style="font-size: 13px; color: #ffcc00;">📍 ${m.venue}</div>
+                    </div>`;
+            }
+        });
+    </script>
 </body>
 </html>

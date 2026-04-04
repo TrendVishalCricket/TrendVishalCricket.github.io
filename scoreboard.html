@@ -3,31 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live Scoreboard - TrendVishal</title>
+    <title>Live Score - DC vs MI</title>
     <style>
-        body { background-color: #1a1a1a; color: white; font-family: sans-serif; text-align: center; padding: 10px; }
-        .board { background: linear-gradient(90deg, #001eff, #8b0000); padding: 20px; border-radius: 15px; border: 2px solid #444; margin-top: 20px; }
-        .main-score { font-size: 45px; font-weight: bold; margin: 10px 0; }
-        .player-box { display: flex; justify-content: space-around; background: rgba(0,0,0,0.3); padding: 10px; border-radius: 10px; margin-top: 15px; }
-        .btn-back { display: inline-block; margin-top: 20px; color: gold; text-decoration: none; border: 1px solid gold; padding: 5px 15px; border-radius: 5px; }
+        body { background-color: #0d1117; color: white; font-family: sans-serif; margin: 0; }
+        .header { background: #1f2328; padding: 15px; display: flex; align-items: center; border-bottom: 2px solid gold; }
+        .back-btn { color: gold; text-decoration: none; font-size: 20px; margin-right: 15px; }
+        
+        /* Match Summary Box */
+        .score-card { background: linear-gradient(180deg, #161b22 0%, #0d1117 100%); padding: 20px; text-align: center; }
+        .team-info { display: flex; justify-content: space-around; align-items: center; margin-top: 10px; }
+        .team-logo { width: 50px; height: 50px; background: white; border-radius: 50%; padding: 5px; }
+        .score-big { font-size: 32px; font-weight: bold; margin: 10px 0; }
+        .result-text { color: gold; font-weight: bold; font-size: 18px; margin: 15px 0; }
+
+        /* Commentary Style */
+        .tabs { display: flex; background: #161b22; border-bottom: 1px solid #30363d; }
+        .tab { flex: 1; text-align: center; padding: 12px; font-size: 14px; color: #8b949e; border-bottom: 2px solid transparent; }
+        .tab.active { color: white; border-bottom: 2px solid gold; font-weight: bold; }
+        
+        .commentary-box { padding: 15px; }
+        .over-ball { display: flex; gap: 10px; margin-bottom: 15px; }
+        .ball-circle { background: #30363d; min-width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 12px; }
+        .wicket { background: #ff4444; color: white; }
+        .four { background: #2563eb; color: white; }
+        .six { background: #16a34a; color: white; }
+        .comm-text { font-size: 14px; color: #c9d1d9; line-height: 1.5; }
     </style>
 </head>
 <body>
 
-    <a href="index.html" class="btn-back">← Back to Matches</a>
+<div class="header">
+    <a href="index.html" class="back-btn">←</a>
+    <span style="font-weight:bold;">DC Vs MI, Match 8</span>
+</div>
 
-    <div class="board">
-        <div style="font-size: 18px;">IPL 2026: CSK vs GT</div>
-        <div class="main-score">0 / 0</div>
-        <div style="color: #ffcc00;">Over: 0.0</div>
-        
-        <div class="player-box">
-            <div>B.S. SUDHAR<br>0 (0)</div>
-            <div>N. JAGADEES<br>0 (0)</div>
-        </div>
+<div class="score-card">
+    <div class="team-info">
+        <div><img src="https://scores.iplt20.com/ipl/teamlogos/DC.png" class="team-logo"><h3>DC</h3></div>
+        <div class="score-big">185-6 <span style="font-size:14px; color:#8b949e;">(20.0)</span></div>
+        <div><img src="https://scores.iplt20.com/ipl/teamlogos/MI.png" class="team-logo"><h3>MI</h3></div>
+    </div>
+    <div class="result-text">DC won by 15 runs 🏆</div>
+</div>
+
+<div class="tabs">
+    <div class="tab active">Summary</div>
+    <div class="tab">Scorecard</div>
+    <div class="tab">Commentary</div>
+</div>
+
+<div class="commentary-box">
+    <div class="over-ball">
+        <div class="ball-circle wicket">W</div>
+        <div class="comm-text"><b>19.6</b> OUT! Clean Bowled. Bumrah to Pant. Pant swings hard but misses the yorker. DC finishing at 185.</div>
+    </div>
+    
+    <div class="over-ball">
+        <div class="ball-circle four">4</div>
+        <div class="comm-text"><b>19.5</b> FOUR! Pant finds the gap through extra cover.</div>
     </div>
 
-    <p style="margin-top:30px; color:#888;">Match will start at 7:30 PM. <br>Toss update will be live here.</p>
+    <div class="over-ball">
+        <div class="ball-circle">1</div>
+        <div class="comm-text"><b>19.4</b> Short ball, pulled to deep mid-wicket for a single.</div>
+    </div>
+</div>
 
 </body>
 </html>

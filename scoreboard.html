@@ -3,70 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live Score - DC vs MI</title>
+    <title>Live Score - TrendVishal Cricket</title>
     <style>
-        body { background-color: #0d1117; color: white; font-family: sans-serif; margin: 0; }
-        .header { background: #1f2328; padding: 15px; display: flex; align-items: center; border-bottom: 2px solid gold; }
+        body { background-color: #0d1117; color: white; font-family: sans-serif; margin: 0; text-align: center; }
+        .header { background: #1f2328; padding: 15px; border-bottom: 2px solid gold; display: flex; align-items: center; }
         .back-btn { color: gold; text-decoration: none; font-size: 20px; margin-right: 15px; }
-        
-        /* Match Summary Box */
-        .score-card { background: linear-gradient(180deg, #161b22 0%, #0d1117 100%); padding: 20px; text-align: center; }
-        .team-info { display: flex; justify-content: space-around; align-items: center; margin-top: 10px; }
-        .team-logo { width: 50px; height: 50px; background: white; border-radius: 50%; padding: 5px; }
-        .score-big { font-size: 32px; font-weight: bold; margin: 10px 0; }
-        .result-text { color: gold; font-weight: bold; font-size: 18px; margin: 15px 0; }
-
-        /* Commentary Style */
-        .tabs { display: flex; background: #161b22; border-bottom: 1px solid #30363d; }
-        .tab { flex: 1; text-align: center; padding: 12px; font-size: 14px; color: #8b949e; border-bottom: 2px solid transparent; }
-        .tab.active { color: white; border-bottom: 2px solid gold; font-weight: bold; }
-        
-        .commentary-box { padding: 15px; }
-        .over-ball { display: flex; gap: 10px; margin-bottom: 15px; }
-        .ball-circle { background: #30363d; min-width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 12px; }
-        .wicket { background: #ff4444; color: white; }
-        .four { background: #2563eb; color: white; }
-        .six { background: #16a34a; color: white; }
-        .comm-text { font-size: 14px; color: #c9d1d9; line-height: 1.5; }
+        .widget-container { width: 100%; min-height: 500px; margin-top: 10px; overflow: hidden; }
+        iframe { width: 100%; border: none; min-height: 600px; }
     </style>
 </head>
 <body>
 
 <div class="header">
     <a href="index.html" class="back-btn">←</a>
-    <span style="font-weight:bold;">DC Vs MI, Match 8</span>
+    <span style="font-weight:bold;">TATA IPL 2026 LIVE SCORE</span>
 </div>
 
-<div class="score-card">
-    <div class="team-info">
-        <div><img src="https://scores.iplt20.com/ipl/teamlogos/DC.png" class="team-logo"><h3>DC</h3></div>
-        <div class="score-big">185-6 <span style="font-size:14px; color:#8b949e;">(20.0)</span></div>
-        <div><img src="https://scores.iplt20.com/ipl/teamlogos/MI.png" class="team-logo"><h3>MI</h3></div>
-    </div>
-    <div class="result-text">DC won by 15 runs 🏆</div>
+<div class="widget-container">
+    <iframe src="https://www.cricket-score.pk/embed/live" scrolling="yes"></iframe>
 </div>
-
-<div class="tabs">
-    <div class="tab active">Summary</div>
-    <div class="tab">Scorecard</div>
-    <div class="tab">Commentary</div>
-</div>
-
-<div class="commentary-box">
-    <div class="over-ball">
-        <div class="ball-circle wicket">W</div>
-        <div class="comm-text"><b>19.6</b> OUT! Clean Bowled. Bumrah to Pant. Pant swings hard but misses the yorker. DC finishing at 185.</div>
-    </div>
-    
-    <div class="over-ball">
-        <div class="ball-circle four">4</div>
-        <div class="comm-text"><b>19.5</b> FOUR! Pant finds the gap through extra cover.</div>
-    </div>
-
-    <div class="over-ball">
-        <div class="ball-circle">1</div>
-        <div class="comm-text"><b>19.4</b> Short ball, pulled to deep mid-wicket for a single.</div>
-    </div>
+<div style="padding: 10px; font-size: 12px; color: #8b949e;">
+    Score automatically updates every 30 seconds.
 </div>
 
 </body>

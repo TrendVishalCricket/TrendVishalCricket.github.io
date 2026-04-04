@@ -36,7 +36,7 @@
         <div style="display:flex; align-items:center;">
             <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/84/Indian_Premier_League_Official_Logo.svg/1200px-Indian_Premier_League_Official_Logo.svg.png" style="width:35px; margin-right:10px;">
             <div>
-                <h1 style="color:#ffcc00; font-size:18px; margin:0; font-weight:900; line-height:1.1;">TRENDVISHAL<br>CRICKET</h1>
+                <h1 style="color:#ffcc00; font-size:15px; margin:0; font-weight:900; line-height:1.2; white-space: nowrap;">TRENDVISHAL CRICKET</h1>
                 <p style="margin:0; font-size:10px; color:#ffcc00; font-weight:bold; letter-spacing:1px;">FOUNDER: VISHAL SHUKLA</p>
             </div>
         </div>
@@ -59,26 +59,21 @@
 
     <div class="footer">
         <p style="margin:0; font-size:16px; color:#ffcc00; font-weight:bold;">TrendVishal Cricket</p>
-        <a href="https://www.youtube.com/@TrendVishal" target="_blank" class="yt-btn">SUBSCRIBE NOW</a>
-        
+        <a href="https://youtube.com/@trendvishal" target="_blank" class="yt-btn">SUBSCRIBE NOW</a>
         <div class="shayari">
             "मैदान की धूल हो या हार-जीत का शोर,<br>
             क्रिकेट के हर पल में दिखेगा, विशाल का ज़ोर।"
         </div>
-
         <p style="margin-top:15px; font-size:11px; color:#8b949e;">Official Platform by Vishal Shukla<br>© 2026 All Rights Reserved</p>
     </div>
 
     <script>
         const logos = {
-            // ये पुराने Wikipedia लिंक्स जो काम कर रहे हैं
             CSK: "https://upload.wikimedia.org/wikipedia/en/thumb/2/2b/Chennai_Super_Kings_Logo.svg/200px-Chennai_Super_Kings_Logo.svg.png",
             MI: "https://upload.wikimedia.org/wikipedia/en/thumb/c/cd/Mumbai_Indians_Logo.svg/200px-Mumbai_Indians_Logo.svg.png",
             KKR: "https://upload.wikimedia.org/wikipedia/en/thumb/4/4c/Kolkata_Knight_Riders_Logo.svg/200px-Kolkata_Knight_Riders_Logo.svg.png",
             GT: "https://upload.wikimedia.org/wikipedia/en/thumb/0/09/Gujarat_Titans_Logo.svg/200px-Gujarat_Titans_Logo.svg.png",
             PBKS: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d4/Punjab_Kings_Logo.svg/200px-Punjab_Kings_Logo.svg.png",
-            
-            // ✅ आपके अपलोड किए हुए लोगो के असली नाम (जैसा स्क्रीनशॉट में है) ✅
             RCB: "RCB '1000068822.jpg'.jpg", 
             RR: "rr.png",           
             DC: "DC '1000068823.jpg'.jpg",   
@@ -87,19 +82,35 @@
         };
 
         const matches = [
+            // Results
             { t1: "CSK", t2: "PBKS", date: "2026-04-03T19:30:00", win: "PBKS WON BY 5 WICKETS" },
             { t1: "KKR", t2: "SRH", date: "2026-04-02T19:30:00", win: "SRH WON BY 65 RUNS" },
             { t1: "LSG", t2: "DC", date: "2026-04-01T19:30:00", win: "DC WON BY 6 WICKETS" },
-            { t1: "PBKS", t2: "GT", date: "2026-03-31T19:30:00", win: "PBKS WON BY 3 WICKETS" },
             { t1: "RR", t2: "CSK", date: "2026-03-30T19:30:00", win: "RR WON BY 8 WICKETS" },
-            { t1: "MI", t2: "SRH", date: "2026-03-29T19:30:00", win: "MI WON BY 7 RUNS" },
-            { t1: "RCB", t2: "CSK", date: "2026-03-28T19:30:00", win: "CSK WON BY 6 WICKETS" },
+
+            // Upcoming Matches till 19 April
             { t1: "DC", t2: "MI", date: "2026-04-04T15:30:00" },
             { t1: "GT", t2: "RR", date: "2026-04-04T19:30:00" },
             { t1: "SRH", t2: "LSG", date: "2026-04-05T15:30:00" },
             { t1: "RCB", t2: "CSK", date: "2026-04-05T19:30:00" },
             { t1: "KKR", t2: "PBKS", date: "2026-04-06T19:30:00" },
-            { t1: "RR", t2: "MI", date: "2026-04-07T19:30:00" }
+            { t1: "RR", t2: "MI", date: "2026-04-07T19:30:00" },
+            { t1: "DC", t2: "GT", date: "2026-04-08T19:30:00" },
+            { t1: "KKR", t2: "LSG", date: "2026-04-09T19:30:00" },
+            { t1: "RR", t2: "RCB", date: "2026-04-10T19:30:00" },
+            { t1: "MI", t2: "PBKS", date: "2026-04-11T15:30:00" },
+            { t1: "CSK", t2: "GT", date: "2026-04-11T19:30:00" },
+            { t1: "SRH", t2: "DC", date: "2026-04-12T15:30:00" },
+            { t1: "RCB", t2: "LSG", date: "2026-04-12T19:30:00" },
+            { t1: "GT", t2: "KKR", date: "2026-04-13T19:30:00" },
+            { t1: "PBKS", t2: "RR", date: "2026-04-14T19:30:00" },
+            { t1: "DC", t2: "CSK", date: "2026-04-15T19:30:00" },
+            { t1: "MI", t2: "RCB", date: "2026-04-16T19:30:00" },
+            { t1: "LSG", t2: "SRH", date: "2026-04-17T19:30:00" },
+            { t1: "PBKS", t2: "GT", date: "2026-04-18T15:30:00" },
+            { t1: "RR", t2: "KKR", date: "2026-04-18T19:30:00" },
+            { t1: "CSK", t2: "MI", date: "2026-04-19T15:30:00" },
+            { t1: "RCB", t2: "SRH", date: "2026-04-19T19:30:00" }
         ];
 
         function run() {

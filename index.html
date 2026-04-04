@@ -3,46 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TREND VISHAL CRICKET</title>
+    <title>TRENDVISHAL CRICKET</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        .match-section { display: none; padding: 15px; }
+        /* Tabs Styling as per Screenshot */
+        .tabs { display: flex; border-bottom: 2px solid #30363d; margin-bottom: 20px; }
+        .tab-btn { flex: 1; padding: 15px; text-align: center; color: #8b949e; cursor: pointer; font-weight: bold; font-size: 13px; text-transform: uppercase; }
+        .tab-btn.active { color: #ffcc00; border-bottom: 3px solid #ffcc00; background: rgba(255,204,0,0.05); }
+
+        .match-section { display: none; padding: 10px; }
         .match-section.active { display: block; }
-        .live-tag { background: #ff4444; color: white; padding: 4px 12px; border-radius: 4px; font-size: 12px; font-weight: bold; animation: blink 1s infinite; display: inline-block; margin-top: 10px; }
-        @keyframes blink { 0% {opacity: 1;} 50% {opacity: 0.3;} 100% {opacity: 1;} }
-        .status-text { text-align: center; color: #ffcc00; font-weight: bold; margin-top: 10px; font-size: 14px; }
-        
-        /* Premium Card Design for Automatic Logic */
+
+        /* Horizontal Card Design */
         .match-card {
             background: #161b22;
-            border: 1px solid #30363d;
-            border-radius: 15px;
-            padding: 15px;
+            border-radius: 12px;
+            padding: 20px 10px;
             margin-bottom: 20px;
-            text-align: center;
+            border-top: 4px solid #ff4444; /* Red line for live look */
+            position: relative;
         }
-        .date-divider { 
-            background: #30363d; 
-            color: #ffcc00; 
-            padding: 8px; 
-            text-align: center; 
-            font-size: 13px; 
-            margin-bottom: 15px; 
-            border-radius: 5px; 
-            font-weight: bold;
+        .today-banner { 
+            background: #1c2128; color: #ffcc00; text-align: center; 
+            padding: 5px; font-size: 11px; margin-bottom: 15px; 
+            border-radius: 5px; border: 1px solid #30363d;
         }
+        
+        .teams-row { display: flex; align-items: center; justify-content: space-around; position: relative; }
+        .team { text-align: center; width: 40%; }
+        .team img { width: 70px; height: 70px; border-radius: 50%; background: #fff; padding: 5px; border: 2px solid #fff; }
+        .team-name { display: block; color: #fff; margin-top: 10px; font-weight: bold; font-size: 15px; }
+        
+        .vs-circle { background: #30363d; color: #8b949e; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; }
+
+        .match-info { text-align: center; color: #8b949e; font-size: 11px; margin-top: 15px; border-top: 1px solid #30363d; padding-top: 10px; }
+        .live-label { position: absolute; top: 10px; left: 10px; color: #ff4444; font-size: 10px; font-weight: bold; display: flex; align-items: center; }
+        .live-dot { height: 6px; width: 6px; background: #ff4444; border-radius: 50%; display: inline-block; margin-right: 5px; animation: blink 1s infinite; }
+        @keyframes blink { 0% {opacity: 1;} 50% {opacity: 0.3;} 100% {opacity: 1;} }
+
+        .btn-yellow { background: #ffcc00; color: #000; text-decoration: none; display: block; width: 100%; text-align: center; padding: 12px; border-radius: 0 0 12px 12px; font-weight: bold; margin-top: 15px; font-size: 14px; }
     </style>
 </head>
 <body>
     <header>
         <img src="https://i.ibb.co/wrDX1wf/Trend-Vishal.jpg" class="header-logo" alt="Logo">
-        <h1>TREND VISHAL CRICKET</h1>
+        <h1 style="color:#ffcc00; letter-spacing:1px;">TRENDVISHAL CRICKET</h1>
     </header>
 
     <div class="tabs">
-        <div class="tab-btn active" onclick="showTab('live', this)">LIVE</div>
-        <div class="tab-btn" onclick="showTab('upcoming', this)">UPCOMING</div>
-        <div class="tab-btn" onclick="showTab('results', this)">RESULTS</div>
+        <div class="tab-btn active" onclick="showTab('live-sec', this)">LIVE</div>
+        <div class="tab-btn" onclick="showTab('upcoming-sec', this)">UPCOMING</div>
+        <div class="tab-btn" onclick="showTab('results-sec', this)">RESULTS</div>
     </div>
 
     <div class="container">
@@ -52,76 +63,60 @@
     </div>
 
     <script>
-        // 15 Matches Full Schedule IPL 2026 (Automatic Management)
+        // Automatic Match Data (15 matches schedule)
         const matches = [
-            { id: 1, t1: "CSK", t1img: "csk.png", t2: "RCB", t2img: "rcb.png", date: "2026-03-22T19:30:00", venue: "Chennai", winner: "CSK WON BY 6 WICKETS" },
-            { id: 2, t1: "MI", t1img: "mi.png", t2: "GT", t2img: "gt.png", date: "2026-03-23T15:30:00", venue: "Ahmedabad", winner: "GT WON BY 6 RUNS" },
-            { id: 3, t1: "DC", t1img: "dc.png", t2: "LSG", t2img: "lsg.png", date: "2026-03-23T19:30:00", venue: "Delhi", winner: "LSG WON BY 21 RUNS" },
-            { id: 4, t1: "RR", t1img: "rr.png", t2: "KKR", t2img: "kkr.png", date: "2026-03-24T19:30:00", venue: "Jaipur", winner: "Match Completed" },
-            { id: 5, t1: "PBKS", t1img: "pbks.png", t2: "SRH", t2img: "srh.png", date: "2026-03-25T19:30:00", venue: "Mohali", winner: "Match Completed" },
-            { id: 15, t1: "GT", t1img: "gt.png", t2: "PBKS", t2img: "pbks.png", date: "2026-04-05T19:30:00", venue: "Ahmedabad", winner: "Wait for Result" }
-            // Note: Baki matches isi format me add kar sakte hain
+            { id: 8, t1: "DC", t1img: "https://i.postimg.cc/mD3mX6XW/dc.png", t2: "MI", t2img: "https://i.postimg.cc/0jdbYm8n/mi.png", date: "2026-04-04T15:30:00", venue: "Arun Jaitley Stadium, Delhi", winner: "WAITING" },
+            { id: 15, t1: "GT", t1img: "https://i.postimg.cc/KjL8M9S0/gt.png", t2: "PBKS", t2img: "https://i.postimg.cc/mD3mX6XW/pbks.png", date: "2026-04-05T19:30:00", venue: "Narendra Modi Stadium, Ahmedabad", winner: "WAITING" }
+            // Aap baki 13 matches bhi yaha add kar sakte hain isi tarah
         ];
 
         function render() {
             const now = new Date();
-            const liveBox = document.getElementById('live-sec');
-            const upcomingBox = document.getElementById('upcoming-sec');
-            const resultBox = document.getElementById('results-sec');
+            const liveS = document.getElementById('live-sec');
+            const upS = document.getElementById('upcoming-sec');
+            const resS = document.getElementById('results-sec');
 
-            liveBox.innerHTML = ""; upcomingBox.innerHTML = ""; resultBox.innerHTML = "";
+            liveS.innerHTML = ""; upS.innerHTML = ""; resS.innerHTML = "";
 
             matches.forEach(m => {
                 const start = new Date(m.date);
-                const end = new Date(start.getTime() + (4 * 60 * 60 * 1000)); // 4 hours match duration
+                const end = new Date(start.getTime() + (4 * 60 * 60 * 1000));
 
-                let card = `
-                    <div class="match-card" style="border: 2px solid #ffcc00; margin-bottom: 20px;">
-                        <div class="match-header">
-                            <span style="font-weight:bold; color:#ffcc00;">MATCH ${m.id}</span>
-                            <span style="color:#8b949e; font-size:12px;">${start.toDateString()}</span>
+                let cardHtml = `
+                    <div class="match-card">
+                        <div class="today-banner">TODAY - ${start.toDateString().toUpperCase()}</div>
+                        <div class="teams-row">
+                            <div class="team"><img src="${m.t1img}"><span class="team-name">${m.t1}</span></div>
+                            <div class="vs-circle">VS</div>
+                            <div class="team"><img src="${m.t2img}"><span class="team-name">${m.t2}</span></div>
                         </div>
-                        <div class="teams-box">
-                            <div class="team">
-                                <img src="https://i.postimg.cc/mD3mX6XW/${m.t1img}" onerror="this.src='https://i.ibb.co/wrDX1wf/Trend-Vishal.jpg'">
-                                <span class="team-name" style="font-size:16px;">${m.t1}</span>
-                            </div>
-                            <div class="vs" style="font-size:14px; color:#8b949e;">VS</div>
-                            <div class="team">
-                                <img src="https://i.postimg.cc/mD3mX6XW/${m.t2img}" onerror="this.src='https://i.ibb.co/wrDX1wf/Trend-Vishal.jpg'">
-                                <span class="team-name" style="font-size:16px;">${m.t2}</span>
-                            </div>
-                        </div>
-                        <div class="venue" style="font-size:11px; text-align:center; color:#8b949e;">📍 ${m.venue} Stadium</div>
+                        <div class="match-info">${m.venue}</div>
                 `;
 
                 if (now >= start && now <= end) {
-                    // LIVE MATCH
-                    card += `<div style="text-align:center;"><span class="live-tag">LIVE NOW</span></div></div>`;
-                    liveBox.innerHTML += card;
+                    cardHtml = `<div class="live-label"><span class="live-dot"></span> LIVE ${start.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})}</div>` + cardHtml;
+                    cardHtml += `<a href="#" class="btn-yellow">View Live Score</a></div>`;
+                    liveS.innerHTML += cardHtml;
                 } else if (now < start) {
-                    // UPCOMING
-                    card += `<div class="status-text">Starts at ${start.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div></div>`;
-                    upcomingBox.innerHTML += card;
+                    cardHtml += `<div style="text-align:center; color:#ffcc00; margin-top:10px; font-weight:bold;">STARTS AT ${start.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})}</div></div>`;
+                    upS.innerHTML += cardHtml;
                 } else {
-                    // RESULTS (with Winner or wait text)
-                    card += `<div class="status-text" style="border-top: 1px solid #30363d; padding-top:10px;">${m.winner}</div></div>`;
-                    resultBox.innerHTML += card;
+                    cardHtml += `<div style="text-align:center; color:#ffcc00; margin-top:10px; font-weight:bold;">${m.winner}</div></div>`;
+                    resS.innerHTML += cardHtml;
                 }
             });
-
-            if(!liveBox.innerHTML) liveBox.innerHTML = "<p style='text-align:center;'>अभी कोई मैच लाइव नहीं है।</p>";
+            if(!liveS.innerHTML) liveS.innerHTML = "<p style='text-align:center; color:#8b949e;'>No match live right now.</p>";
         }
 
         function showTab(id, btn) {
             document.querySelectorAll('.match-section').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById(id + '-sec').classList.add('active');
+            document.getElementById(id).classList.add('active');
             btn.classList.add('active');
         }
 
         render();
-        setInterval(render, 60000); // Har minute check karega
+        setInterval(render, 60000);
     </script>
 </body>
 </html>

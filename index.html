@@ -3,60 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TrendVishal Cricket - Live</title>
+    <title>TREND VISHAL CRICKET</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        .match-section { display: none; padding: 15px; }
+        .match-section.active { display: block; }
+        .live-tag { background: #ff4444; color: white; padding: 4px 12px; border-radius: 4px; font-size: 12px; font-weight: bold; animation: blink 1s infinite; display: inline-block; margin-top: 10px; }
+        @keyframes blink { 0% {opacity: 1;} 50% {opacity: 0.3;} 100% {opacity: 1;} }
+        .status-text { text-align: center; color: #ffcc00; font-weight: bold; margin-top: 10px; font-size: 13px; }
+    </style>
 </head>
 <body>
     <header>
-    <img src="https://i.ibb.co/wrDX1wf/Trend-Vishal.jpg" class="header-logo" alt="Logo">
-    <h1>TREND VISHAL CRICKET</h1>
+        <img src="https://i.ibb.co/wrDX1wf/Trend-Vishal.jpg" class="header-logo" alt="Logo">
+        <h1>TREND VISHAL CRICKET</h1>
     </header>
-    
 
     <div class="tabs">
-        <a href="index.html" class="tab-btn active">LIVE/UPCOMING</a>
-        <a href="results.html" class="tab-btn">RESULTS</a>
+        <div class="tab-btn active" onclick="showTab('live', this)">LIVE</div>
+        <div class="tab-btn" onclick="showTab('upcoming', this)">UPCOMING</div>
+        <div class="tab-btn" onclick="showTab('results', this)">RESULTS</div>
     </div>
 
-    <div id="match-container" class="container">
-        </div>
+    <div class="container">
+        <div id="live-sec" class="match-section active"></div>
+        <div id="upcoming-sec" class="match-section"></div>
+        <div id="results-sec" class="match-section"></div>
+    </div>
 
     <script>
-        // Images ke paka link yaha dale hain
+        // IPL 2026 Full 15 Matches Schedule (No Pre-filled winners for future matches)
         const matches = [
-            { id: 1, t1: "CSK", t1img: "https://i.postimg.cc/L5v8v8v8/csk.png", t2: "RCB", t2img: "https://i.postimg.cc/mD3mX6XW/rcb.png", date: "2026-03-22T19:30:00", venue: "MA Chidambaram, Chennai" },
-            { id: 2, t1: "MI", t1img: "https://i.postimg.cc/0jdbYm8n/mi.png", t2: "GT", t2img: "https://i.postimg.cc/KjL8M9S0/gt.png", date: "2026-03-23T15:30:00", venue: "Narendra Modi, Ahmedabad" },
-            { id: 3, t1: "DC", t1img: "https://i.postimg.cc/mD3mX6XW/dc.png", t2: "LSG", t2img: "https://i.postimg.cc/mD3mX6XW/lsg.png", date: "2026-03-23T19:30:00", venue: "Arun Jaitley, Delhi" }
-            // Aap aise hi baaki matches bhi jod sakte hain
+            { id: 1, t1: "CSK", t1img: "csk.png", t2: "RCB", t2img: "rcb.png", date: "2026-03-22T19:30:00", venue: "Chennai", winner: "CSK WON BY 6 WICKETS" },
+            { id: 2, t1: "MI", t1img: "mi.png", t2: "GT", t2img: "gt.png", date: "2026-03-23T15:30:00", venue: "Ahmedabad", winner: "GT WON BY 6 RUNS" },
+            { id: 3, t1: "DC", t1img: "dc.png", t2: "LSG", t2img: "lsg.png", date: "2026-03-23T19:30:00", venue: "Delhi", winner: "LSG WON BY 21 RUNS" },
+            { id: 4, t1: "RR", t1img: "rr.png", t2: "KKR", t2img: "kkr.png", date: "2026-03-24T19:30:00", venue: "Jaipur", winner: "Match Completed" },
+            { id: 5, t1: "PBKS", t1img: "pbks.png", t2: "SRH", t2img: "srh.png", date: "2026-03-25T19:30:00", venue: "Mohali", winner: "Match Completed" },
+            { id: 6, t1: "RCB", t1img: "rcb.png", t2: "PBKS", t2img: "pbks.png", date: "2026-03-26T19:30:00", venue: "Bengaluru", winner: "Match Completed" },
+            { id: 7, t1: "CSK", t1img: "csk.png", t2: "GT", t2img: "gt.png", date: "2026-03-27T19:30:00", venue: "Chennai", winner: "Match Completed" },
+            { id: 8, t1: "SRH", t1img: "srh.png", t2: "MI", t2img: "mi.png", date: "2026-03-28T19:30:00", venue: "Hyderabad", winner: "Match Completed" },
+            { id: 9, t1: "RR", t1img: "rr.png", t2: "DC", t2img: "dc.png", date: "2026-03-29T15:30:00", venue: "Jaipur", winner: "Match Completed" },
+            { id: 10, t1: "RCB", t1img: "rcb.png", t2: "KKR", t2img: "kkr.png", date: "2026-03-30T19:30:00", venue: "Bengaluru", winner: "Match Completed" },
+            { id: 11, t1: "LSG", t1img: "lsg.png", t2: "PBKS", t2img: "pbks.png", date: "2026-03-31T19:30:00", venue: "Lucknow", winner: "Match Completed" },
+            { id: 12, t1: "MI", t1img: "mi.png", t2: "RR", t2img: "rr.png", date: "2026-04-01T19:30:00", venue: "Mumbai", winner: "Match Completed" },
+            { id: 13, t1: "RCB", t1img: "rcb.png", t2: "LSG", t2img: "lsg.png", date: "2026-04-02T19:30:00", venue: "Bengaluru", winner: "Match Completed" },
+            { id: 14, t1: "DC", t1img: "dc.png", t2: "KKR", t2img: "kkr.png", date: "2026-04-03T19:30:00", venue: "Delhi", winner: "Match Completed" },
+            { id: 15, t1: "GT", t1img: "gt.png", t2: "PBKS", t2img: "pbks.png", date: "2026-04-04T19:30:00", venue: "Ahmedabad", winner: "Wait for Result" }
         ];
 
-        const container = document.getElementById('match-container');
-        const now = new Date();
+        function render() {
+            const now = new Date();
+            const liveBox = document.getElementById('live-sec');
+            const upcomingBox = document.getElementById('upcoming-sec');
+            const resultBox = document.getElementById('results-sec');
 
-        matches.forEach(m => {
-            const matchDate = new Date(m.date);
-            if (matchDate > now) {
-                container.innerHTML += `
-                    <div class="match-card" style="border: 2px solid #ffcc00; margin-bottom: 20px;">
-                        <div class="match-header" style="background: #30363d; padding: 5px 10px; border-radius: 5px;">
-                            <span style="color:#ffcc00; font-weight:bold;">MATCH ${m.id}</span>
-                            <span>${matchDate.toDateString()}</span>
-                        </div>
+            liveBox.innerHTML = ""; upcomingBox.innerHTML = ""; resultBox.innerHTML = "";
+
+            matches.forEach(m => {
+                const start = new Date(m.date);
+                const end = new Date(start.getTime() + (4 * 60 * 60 * 1000));
+
+                let card = `
+                    <div class="match-card" style="border: 1px solid #ffcc00; margin-bottom: 15px;">
+                        <div class="match-header"><span>MATCH ${m.id}</span><span>${start.toDateString()}</span></div>
                         <div class="teams-box">
-                            <div class="team">
-                                <img src="${m.t1img}" onerror="this.src='https://i.ibb.co/wrDX1wf/Trend-Vishal.jpg'">
-                                <span class="team-name">${m.t1}</span>
-                            </div>
+                            <div class="team"><img src="https://i.postimg.cc/mD3mX6XW/${m.t1img}"><span class="team-name">${m.t1}</span></div>
                             <div class="vs">VS</div>
-                            <div class="team">
-                                <img src="${m.t2img}" onerror="this.src='https://i.ibb.co/wrDX1wf/Trend-Vishal.jpg'">
-                                <span class="team-name">${m.t2}</span>
-                            </div>
+                            <div class="team"><img src="https://i.postimg.cc/mD3mX6XW/${m.t2img}"><span class="team-name">${m.t2}</span></div>
                         </div>
-                        <div class="venue" style="font-size: 13px; color: #ffcc00;">📍 ${m.venue}</div>
-                    </div>`;
-            }
-        });
+                        <div class="venue" style="font-size:11px; text-align:center;">📍 ${m.venue}</div>
+                `;
+
+                if (now >= start && now <= end) {
+                    card += `<div style="text-align:center;"><span class="live-tag">LIVE NOW</span></div></div>`;
+                    liveBox.innerHTML += card;
+                } else if (now < start) {
+                    card += `<div class="status-text">Starts at ${start.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div></div>`;
+                    upcomingBox.innerHTML += card;
+                } else {
+                    card += `<div class="status-text">${m.winner}</div></div>`;
+                    resultBox.innerHTML += card;
+                }
+            });
+
+            if(!liveBox.innerHTML) liveBox.innerHTML = "<p style='text-align:center;'>अभी कोई मैच लाइव नहीं है।</p>";
+        }
+
+        function showTab(id, btn) {
+            document.querySelectorAll('.match-section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(id + '-sec').classList.add('active');
+            btn.classList.add('active');
+        }
+
+        render();
+        setInterval(render, 60000);
     </script>
 </body>
 </html>

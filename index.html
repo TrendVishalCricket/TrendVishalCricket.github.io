@@ -22,13 +22,10 @@
         
         .vs-box { color: #8b949e; font-weight: 900; font-size: 14px; background: #30363d; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; border: 1px solid #ffcc00; }
         .btn-live { background: #ffcc00; color: #000; text-decoration: none; display: block; width: 100%; text-align: center; padding: 12px; border-radius: 8px; font-weight: bold; margin-top: 12px; font-size: 14px; }
-        
-        /* GOOGLE SEARCH BUTTON STYLE */
         .btn-highlight { background: #4285F4; color: white; text-decoration: none; display: block; width: 100%; text-align: center; padding: 10px; border-radius: 8px; font-weight: bold; margin-top: 10px; font-size: 13px; border: 1px solid #fff; }
-        
         .win-text { color: #00ff00; font-weight: bold; font-size: 13px; text-transform: uppercase; margin-top: 10px; display: block; text-align: center; border-top: 1px solid #333; padding-top: 8px; }
 
-        #points-sec iframe { width: 100%; height: 550px; border: none; background: white; }
+        #points-sec iframe { width: 100%; height: 500px; border: none; background: white; }
 
         .footer { background: #161b22; padding: 25px; text-align: center; border-top: 2px solid #ffcc00; margin-top: 20px; }
         .yt-btn { background: #ff0000; color: white; padding: 12px 25px; border-radius: 25px; text-decoration: none; font-weight: bold; display: inline-block; margin-top: 10px; }
@@ -40,9 +37,9 @@
     <header>
         <div style="display:flex; align-items:center;">
             <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/84/Indian_Premier_League_Official_Logo.svg/1200px-Indian_Premier_League_Official_Logo.svg.png" style="width:35px; margin-right:10px;">
-            <h1 style="color:#ffcc00; font-size:18px; margin:0; font-weight:900; line-height:1;">TRENDVISHAL<br>CRICKET</h1>
+            <h1 style="color:#ffcc00; font-size:18px; margin:0; font-weight:900;">TRENDVISHAL CRICKET</h1>
         </div>
-        <img src="https://i.ibb.co/wrDX1wf/Trend-Vishal.jpg" alt="Vishal Shukla" style="width:50px; height:50px; border-radius:50%; border:2px solid #ffcc00; object-fit:cover;">
+        <img src="image_5.png" alt="Vishal Shukla" style="width:50px; height:50px; border-radius:50%; border:2px solid #ffcc00; object-fit:cover;">
     </header>
 
     <div class="tabs">
@@ -61,8 +58,7 @@
 
     <div class="footer">
         <p style="margin:0; font-size:15px; color:#fff; font-weight:bold;">Trend Vishal Cricket</p>
-        <p style="margin:5px 0; font-size:12px; color:#8b949e;">सब्सक्राइब करें हमारे यूट्यूब चैनल को!</p>
-        <a href="https://www.youtube.com/@TrendVishal" target="_blank" class="yt-btn">SUBSCRIBE NOW</a>
+        <a href="Https://youtube.com/@trend_vishal?si=q2PEzD2ntl46Dcd5" target="_blank" class="yt-btn">SUBSCRIBE NOW</a>
     </div>
 
     <script>
@@ -86,15 +82,11 @@
             { t1: "LSG", t2: "DC", date: "2026-04-01T19:30:00", win: "DC WON BY 6 WICKETS" },
             { t1: "PBKS", t2: "GT", date: "2026-03-31T19:30:00", win: "PBKS WON BY 3 WICKETS" },
             { t1: "RR", t2: "CSK", date: "2026-03-30T19:30:00", win: "RR WON BY 8 WICKETS" },
-            { t1: "MI", t2: "KKR", date: "2026-03-29T19:30:00", win: "MI WON BY 6 WICKETS" },
-            { t1: "RCB", t2: "SRH", date: "2026-03-28T19:30:00", win: "RCB WON BY 6 WICKETS" },
             // UPCOMING
             { t1: "DC", t2: "MI", date: "2026-04-04T15:30:00" },
             { t1: "GT", t2: "RR", date: "2026-04-04T19:30:00" },
             { t1: "SRH", t2: "LSG", date: "2026-04-05T15:30:00" },
-            { t1: "RCB", t2: "CSK", date: "2026-04-05T19:30:00" },
-            { t1: "MI", t2: "PBKS", date: "2026-04-06T19:30:00" },
-            { t1: "KKR", t2: "GT", date: "2026-04-07T19:30:00" }
+            { t1: "RCB", t2: "CSK", date: "2026-04-05T19:30:00" }
         ];
 
         function run() {
@@ -114,16 +106,13 @@
 
                 if (now >= sHrs && now <= e) {
                     let lbl = (now >= s) ? "LIVE NOW" : "STARTS SOON";
-                    h += `<div style="text-align:center; color:#ffcc00; font-weight:bold; margin-top:10px;"><span class="live-dot"></span> ${lbl}</div><a href="https://www.google.com/search?q=${m.t1}+vs+${m.t2}+live+score" target="_blank" class="btn-live">WATCH LIVE SCORE</a></div>`;
+                    h += `<div style="text-align:center; color:#ffcc00; font-weight:bold; margin-top:10px;"><span class="live-dot"></span> ${lbl}</div><a href="https://www.google.com/search?q=${m.t1}+vs+${m.t2}+score" target="_blank" class="btn-live">Watch Score</a></div>`;
                     lBox.innerHTML += h;
                 } else if (now < sHrs) {
-                    h += `<div style="text-align:center; color:#8b949e; margin-top:10px;">Starts at ${s.getHours()}:${s.getMinutes().toString().padStart(2, '0')}</div></div>`;
+                    h += `<div style="text-align:center; color:#8b949e; margin-top:10px;">Starts at ${s.getHours()}:${s.getMinutes()}</div></div>`;
                     uBox.innerHTML += h;
                 } else {
-                    h += `<span class="win-text">${m.win || 'MATCH FINISHED'}</span>`;
-                    // GOOGLE SEARCH FOR HIGHLIGHTS
-                    let googleSearch = `https://www.google.com/search?q=${m.t1}+vs+${m.t2}+IPL+2026+Highlights+and+Result`;
-                    h += `<a href="${googleSearch}" target="_blank" class="btn-highlight">🔍 GOOGLE HIGHLIGHTS</a></div>`;
+                    h += `<span class="win-text">${m.win || 'FINISHED'}</span><a href="https://www.google.com/search?q=${m.t1}+vs+${m.t2}+highlights" target="_blank" class="btn-highlight">🔍 GOOGLE HIGHLIGHTS</a></div>`;
                     rBox.innerHTML += h;
                 }
             });

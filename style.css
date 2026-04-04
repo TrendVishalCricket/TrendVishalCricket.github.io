@@ -1,156 +1,19 @@
-/* TrendVishal Cricket - Official Styling */
-body { 
-    background-color: #0d1117; 
-    color: white; 
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-    margin: 0; 
-    padding-bottom: 30px; 
-}
-
-/* Header with Gold Border */
-header { 
-    background: #1f2328; 
-    padding: 12px 15px; 
-    display: flex; 
-    align-items: center; 
-    justify-content: space-between; 
-    border-bottom: 3px solid #ffcc00; 
-    position: sticky; 
-    top: 0; 
-    z-index: 100; 
-    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-}
-
-/* Rounded Logo Styling */
-.header-logo { 
-    width: 42px; 
-    height: 42px; 
-    border-radius: 50%; 
-    object-fit: cover; 
-    border: 2px solid #ffcc00; 
-    background: white; 
-}
-
-header h1 { 
-    margin: 0; 
-    color: #ffcc00; 
-    font-size: 16px; 
-    text-transform: uppercase; 
-    letter-spacing: 1px;
-    text-align: center; 
-    flex-grow: 1; 
-}
-
-/* Tabs for Navigation */
-.tabs { 
-    display: flex; 
-    background: #161b22; 
-    border-bottom: 1px solid #30363d; 
-    position: sticky; 
-    top: 69px; 
-    z-index: 99; 
-}
-
-.tab-btn { 
-    flex: 1; 
-    padding: 14px; 
-    text-align: center; 
-    color: #8b949e; 
-    text-decoration: none; 
-    font-weight: bold; 
-    font-size: 12px; 
-    transition: 0.3s;
-}
-
-.tab-btn.active { 
-    color: #ffcc00; 
-    border-bottom: 3px solid #ffcc00; 
-    background: rgba(255, 204, 0, 0.1); 
-}
-
-/* Match Card Styling */
+body { background-color: #0d1117; color: white; font-family: sans-serif; margin: 0; padding-bottom: 30px; }
+header { background: #1f2328; padding: 12px; display: flex; align-items: center; justify-content: space-between; border-bottom: 3px solid #ffcc00; position: sticky; top: 0; z-index: 100; }
+.header-logo { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #ffcc00; background: white; }
+header h1 { margin: 0; color: #ffcc00; font-size: 16px; text-align: center; flex-grow: 1; text-transform: uppercase; }
+.tabs { display: flex; background: #161b22; border-bottom: 1px solid #30363d; position: sticky; top: 67px; z-index: 99; }
+.tab-btn { flex: 1; padding: 15px; text-align: center; color: #8b949e; text-decoration: none; font-weight: bold; font-size: 12px; }
+.tab-btn.active { color: #ffcc00; border-bottom: 3px solid #ffcc00; background: rgba(255,204,0,0.1); }
 .container { padding: 15px; }
-
-.match-card { 
-    background: #161b22; 
-    border-radius: 12px; 
-    padding: 15px; 
-    margin-bottom: 15px; 
-    border: 1px solid #30363d; 
-    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-}
-
-.teams-box { 
-    display: flex; 
-    align-items: center; 
-    justify-content: space-between; 
-    margin: 10px 0; 
-}
-
+.match-card { background: #161b22; border-radius: 12px; padding: 15px; margin-bottom: 15px; border: 1px solid #30363d; }
+.match-header { display: flex; justify-content: space-between; font-size: 10px; color: #8b949e; margin-bottom: 10px; }
+.live-dot { height: 8px; width: 8px; background: #ff4444; border-radius: 50%; display: inline-block; margin-right: 5px; animation: blink 1s infinite; }
+@keyframes blink { 0% {opacity: 1;} 50% {opacity: 0.3;} 100% {opacity: 1;} }
+.teams-box { display: flex; align-items: center; justify-content: space-between; margin: 10px 0; }
 .team { text-align: center; width: 40%; }
-
-.team img { 
-    width: 45px; 
-    height: 45px; 
-    background: white; 
-    border-radius: 50%; 
-    padding: 3px; 
-    object-fit: contain;
-}
-
-.team-name { 
-    font-size: 14px; 
-    font-weight: bold; 
-    display: block; 
-    margin-top: 6px; 
-}
-
-.vs-circle { 
-    background: #30363d; 
-    padding: 5px 10px; 
-    border-radius: 20px; 
-    font-size: 11px; 
-    font-weight: bold; 
-    color: #ffcc00; 
-}
-
-/* Live Dot Animation */
-.live-dot { 
-    height: 8px; 
-    width: 8px; 
-    background-color: #ff4444; 
-    border-radius: 50%; 
-    display: inline-block; 
-    margin-right: 5px; 
-    animation: blink 1.2s infinite; 
-}
-
-@keyframes blink { 
-    0% { opacity: 1; } 
-    50% { opacity: 0.3; } 
-    100% { opacity: 1; } 
-}
-
-.btn { 
-    display: block; 
-    text-align: center; 
-    background: #ffcc00; 
-    color: #000; 
-    text-decoration: none; 
-    padding: 10px; 
-    border-radius: 8px; 
-    font-weight: bold; 
-    margin-top: 12px; 
-    font-size: 14px; 
-}
-
-.date-divider { 
-    text-align: center; 
-    color: #ffcc00; 
-    font-size: 12px; 
-    font-weight: bold; 
-    margin: 20px 0 10px; 
-    background: rgba(255, 204, 0, 0.1); 
-    padding: 6px; 
-    border-radius: 6px; 
-}
+.team img { width: 45px; height: 45px; background: white; border-radius: 50%; padding: 3px; object-fit: contain; }
+.team-name { font-size: 14px; font-weight: bold; display: block; margin-top: 5px; }
+.vs { background: #30363d; padding: 4px 10px; border-radius: 20px; font-size: 10px; color: #ffcc00; font-weight: bold; }
+.venue { text-align: center; font-size: 11px; color: #8b949e; margin-top: 10px; border-top: 1px solid #30363d; padding-top: 8px; }
+.btn { display: block; text-align: center; background: #ffcc00; color: black; text-decoration: none; padding: 10px; border-radius: 8px; font-weight: bold; margin-top: 12px; font-size: 13px; }

@@ -231,15 +231,25 @@ function handleSmoothSwipe() {
         }
     }
     
-    window.addEventListener('load', function() {
-        setTimeout(function() {
-            var loader = document.getElementById('loading-screen');
-            loader.style.opacity = "0";
+    <script>
+    // ⚡ सुपर फास्ट बैनर रिमूवर ⚡
+    function removeBanner() {
+        var loader = document.getElementById('loading-screen');
+        if (loader) {
+            loader.style.opacity = "0"; // धीरे से धुंधला होगा
             setTimeout(function() {
-                loader.style.display = "none";
-            }, 500);
-        }, 2000); // 2 सेकंड का टाइम
+                loader.style.display = "none"; // पूरी तरह हट जाएगा
+            }, 400); // गायब होने की स्पीड
+        }
+    }
+
+    // जैसे ही पेज के जरूरी हिस्से लोड हों, 1.5 सेकंड में हटा दो
+    window.addEventListener('load', function() {
+        setTimeout(removeBanner, 1500); 
     });
+
+    // बैकअप: अगर नेट स्लो है, तब भी 3 सेकंड से ज्यादा मत रुको
+    setTimeout(removeBanner, 3000); 
         
     </script>
 </body>

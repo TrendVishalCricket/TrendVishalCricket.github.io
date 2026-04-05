@@ -14,24 +14,49 @@
     <title>TRENDVISHAL CRICKET</title>
 
     <style>
-        /* --- Splash Screen Style --- */
+        /* --- ⚡ ट्रेंड विशाल - प्रीमियम स्प्लैश स्क्रीन ⚡ --- */
 #loading-screen {
     position: fixed;
     top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: #000; /* पूरा काला बैकग्राउंड */
+    width: 100vw; height: 100vh;
+    background: #000;
     z-index: 99999;
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
     transition: opacity 0.5s ease;
 }
+
 #loading-screen img {
-    width: 100%;
-    max-width: 500px; /* फोटो की चौड़ाई */
-    height: auto;
-    object-fit: contain;
+    width: 100vw; height: 100vh;
+    object-fit: cover; /* पूरी स्क्रीन पर फोटो */
+    animation: trendZoom 1.2s ease-out forwards;
 }
+
+/* गोल-गोल घूमने वाला लोडर */
+#loading-screen::after {
+    content: "";
+    position: absolute;
+    bottom: 15%;
+    width: 45px; height: 45px;
+    border: 4px solid rgba(255,255,255,0.2);
+    border-top: 4px solid #ffcc00; /* CSK पीला रंग */
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    z-index: 100001;
+}
+
+@keyframes trendZoom {
+    0% { opacity: 0; transform: scale(1.1); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
         body { background: #0d1117; margin: 0; font-family: sans-serif; color: white; padding-bottom: 80px; }
         header { display: flex; align-items: center; justify-content: space-between; padding: 10px 15px; background: #161b22; border-bottom: 2px solid #ffcc00; position: sticky; top: 0; z-index: 1000; }
         .tabs { display: flex; background: #0d1117; border-bottom: 1px solid #30363d; position: sticky; top: 60px; z-index: 999; overflow-x: auto; }
@@ -229,24 +254,24 @@ function handleSmoothSwipe() {
     }
 }
 
-// ⚡ सुपर फास्ट बैनर रिमूवर ⚡
-function removeBanner() {
-    var loader = document.getElementById('loading-screen');
-    if (loader) {
-        loader.style.opacity = "0";
-        setTimeout(function() {
-            loader.style.display = "none";
-        }, 500);
+    // ⚡ 1 सेकंड वाला सुपर फास्ट लोडर ⚡
+    function hideTrendSplash() {
+        var loader = document.getElementById('loading-screen');
+        if (loader) {
+            loader.style.opacity = "0";
+            setTimeout(function() {
+                loader.style.display = "none";
+            }, 400); 
+        }
     }
-}
 
-// 1.5 सेकंड का टाइमर
-window.addEventListener('load', function() {
-    setTimeout(removeBanner, 1500);
-});
+    // 1000ms = 1 सेकंड का इंतज़ार
+    window.addEventListener('load', function() {
+        setTimeout(hideTrendSplash, 1000); 
+    });
 
-// बैकअप: 3 सेकंड बाद अपने आप हट जाएगा
-setTimeout(removeBanner, 3000);
+    // बैकअप
+    setTimeout(hideTrendSplash, 2500); 
 </script>
 </body>
 </html>

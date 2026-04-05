@@ -185,8 +185,8 @@ function handleSmoothSwipe() {
     const activeBtn = document.querySelector('.tab-btn.active');
     if (!activeBtn) return;
 
-    const activeTabText = activeBtn.innerText.toUpperCase().split(' ')[0];
-    let currentIndex = tabs.findIndex(t => activeTabText.includes(t.toUpperCase()));
+    let currentIndex = activeBtn.innerText.toLowerCase().includes('live') ? 0 : activeBtn.innerText.toLowerCase().includes('upcoming') ? 1 : activeBtn.innerText.toLowerCase().includes('results') ? 2 : 3;
+
 
     if (touchendX < touchstartX - 100) {
         // Left Swipe -> Next

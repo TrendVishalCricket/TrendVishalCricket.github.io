@@ -1,102 +1,163 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TrendVishal Cricket - IPL 2026</title>
+    <meta name="google-site-verification" content="GwlOOVxRX8yWPFRBxrWAhJrBlTpgyvsEW0vZ12aptig" />
+    <title>TRENDVISHAL CRICKET</title>
     <style>
-        body { font-family: Arial, sans-serif; background: #000; color: #fff; margin: 0; padding: 0; }
-        .header { background: #1a1a1a; padding: 20px; text-align: center; border-bottom: 3px solid #ffcc00; }
-        .tabs { display: flex; justify-content: space-around; background: #222; position: sticky; top: 0; z-index: 100; }
-        .tab-btn { padding: 15px; color: #888; font-weight: bold; cursor: pointer; flex: 1; text-align: center; border-bottom: 3px solid transparent; }
-        .tab-btn.active { color: #ffcc00; border-bottom: 3px solid #ffcc00; }
-        .match-section { display: none; padding: 15px; }
-        .match-card { background: #1a1a1a; border-radius: 10px; padding: 15px; margin-bottom: 15px; border: 1px solid #333; }
-        .date-header { display: block; color: #8b949e; font-size: 12px; margin-bottom: 10px; text-align: center; }
-        .teams-row { display: flex; justify-content: space-around; align-items: center; }
-        .team-col { text-align: center; flex: 1; }
-        .team-col img { width: 50px; height: 50px; object-fit: contain; }
-        .team-col span { display: block; margin-top: 5px; font-weight: bold; }
-        .vs-col { font-weight: bold; color: #ffcc00; font-size: 20px; }
-        .res-win { text-align: center; color: #ffcc00; font-weight: bold; margin-top: 10px; border-top: 1px solid #333; padding-top: 5px; }
-        .live-dot { height: 10px; width: 10px; background-color: #ff0000; border-radius: 50%; display: inline-block; animation: blink 1s infinite; }
+        body { background: #0d1117; margin: 0; font-family: sans-serif; color: white; padding-bottom: 80px; }
+        header { display: flex; align-items: center; justify-content: space-between; padding: 10px 15px; background: #161b22; border-bottom: 2px solid #ffcc00; position: sticky; top: 0; z-index: 1000; }
+        .tabs { display: flex; background: #0d1117; border-bottom: 1px solid #30363d; position: sticky; top: 60px; z-index: 999; overflow-x: auto; }
+        .tab-btn { flex: 1; min-width: 90px; padding: 15px 5px; text-align: center; color: #8b949e; font-weight: bold; font-size: 12px; cursor: pointer; border-bottom: 3px solid transparent; white-space: nowrap; }
+        .tab-btn.active { color: #ffcc00; border-bottom: 3px solid #ffcc00; background: rgba(255, 204, 0, 0.05); }
+
+        .match-card { background: #161b22; border-radius: 12px; padding: 15px; margin: 15px; border-left: 5px solid #ffcc00; border-top: 1px solid #30363d; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+        .date-header { color: #ffcc00; font-weight: bold; font-size: 11px; margin-bottom: 10px; display: block; text-transform: uppercase; }
+        
+        .teams-row { display: flex; align-items: center; justify-content: space-between; margin: 10px 0; }
+        .team { text-align: center; width: 42%; }
+        /* लोगो साइज फिक्स किया गया है */
+        .team img { width: 60px !important; height: 60px !important; border-radius: 50%; background: #fff; padding: 4px; border: 2px solid #ffcc00; object-fit: contain; }
+        .team-name { display: block; color: #fff; font-weight: bold; margin-top: 8px; font-size: 14px; }
+        
+        .vs-box { color: #8b949e; font-weight: 900; font-size: 12px; background: #30363d; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; border: 1px solid #ffcc00; }
+        .btn-live { background: #ffcc00; color: #000; text-decoration: none; display: block; width: 100%; text-align: center; padding: 12px; border-radius: 8px; font-weight: bold; margin-top: 12px; font-size: 14px; }
+        .btn-highlight { background: #1a1a1a; color: #ffcc00; text-decoration: none; display: block; width: 100%; text-align: center; padding: 10px; border-radius: 8px; font-weight: bold; margin-top: 10px; font-size: 13px; border: 1px solid #ffcc00; }
+        .win-text { color: #00ff00; font-weight: bold; font-size: 13px; text-transform: uppercase; margin-top: 10px; display: block; text-align: center; border-top: 1px solid #333; padding-top: 8px; }
+
+        .footer { background: #161b22; padding: 30px 20px; text-align: center; border-top: 2px solid #ffcc00; margin-top: 20px; }
+        .yt-btn { background: #ff0000; color: white; padding: 12px 25px; border-radius: 25px; text-decoration: none; font-weight: bold; display: inline-block; margin-top: 10px; box-shadow: 0 4px 10px rgba(255,0,0,0.3); }
+        .live-dot { height: 8px; width: 8px; background: #ff4444; border-radius: 50%; display: inline-block; margin-right: 5px; animation: blink 1s infinite; }
         @keyframes blink { 0% {opacity: 1;} 50% {opacity: 0.3;} 100% {opacity: 1;} }
+        .shayari { margin-top: 25px; font-style: italic; color: #ffcc00; font-size: 15px; line-height: 1.5; border-top: 1px solid #30363d; padding-top: 15px; }
     </style>
 </head>
 <body>
+    <header>
+        <div style="display:flex; align-items:center;">
+            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/84/Indian_Premier_League_Official_Logo.svg/1200px-Indian_Premier_League_Official_Logo.svg.png" style="width:35px; margin-right:10px;">
+            <div>
+                <h1 style="color:#ffcc00; font-size:18px; margin:0; font-weight:900; line-height:1.1;">TRENDVISHAL<br>CRICKET</h1>
+                <p style="margin:0; font-size:10px; color:#ffcc00; font-weight:bold; letter-spacing:1px;">FOUNDER: VISHAL SHUKLA</p>
+            </div>
+        </div>
+        <img src="vishal.jpg" alt="Vishal" style="width:55px; height:55px; border-radius:50%; border:2px solid #ffcc00; object-fit:cover; background:#fff;">
+    </header>
 
-<div class="header">
-    <h1 style="margin:0; color:#ffcc00;">IPL 2026 LIVE</h1>
-    <p style="margin:5px 0 0; font-size:14px; color:#ccc;">Official Platform by Vishal Shukla</p>
-</div>
+    <div class="tabs">
+        <div class="tab-btn active" onclick="showT('live', this)">LIVE</div>
+        <div class="tab-btn" onclick="showT('upcoming', this)">UPCOMING</div>
+        <div class="tab-btn" onclick="showT('results', this)">RESULTS</div>
+        <div class="tab-btn" onclick="showT('points', this)">POINT TABLE</div>
+    </div>
 
-<div class="tabs">
-    <div class="tab-btn active" onclick="showT('live', this)">LIVE</div>
-    <div class="tab-btn" onclick="showT('upcoming', this)">UPCOMING</div>
-    <div class="tab-btn" onclick="showT('results', this)">RESULTS</div>
-</div>
+    <div id="live-sec" class="match-section" style="display:block;"></div>
+    <div id="upcoming-sec" class="match-section" style="display:none;"></div>
+    <div id="results-sec" class="match-section" style="display:none;"></div>
+    <div id="points-sec" class="match-section" style="display:none;">
+        <iframe src="https://www.cricbuzz.com/cricket-series/ipl-2026/points-table" style="width:100%; height:550px; border:none; background:white;"></iframe>
+    </div>
 
-<div id="live-sec" class="match-section" style="display:block;"></div>
-<div id="upcoming-sec" class="match-section"></div>
-<div id="results-sec" class="match-section"></div>
+    <div class="footer">
+        <p style="margin:0; font-size:16px; color:#ffcc00; font-weight:bold;">TrendVishal Cricket</p>
+        <a href="Https://youtube.com/@trend_vishal?si=ZRYbol82DziKOQVN" target="_blank" class="yt-btn">SUBSCRIBE NOW</a>
+        <div class="shayari">
+            "मैदान की धूल हो या हार-जीत का शोर,<br>
+            क्रिकेट के हर पल में दिखेगा, विशाल का ज़ोर।"
+        </div>
+        <p style="margin-top:15px; font-size:11px; color:#8b949e;">Official Platform by Vishal Shukla<br>© 2026 All Rights Reserved</p>
+    </div>
 
-<script>
-const logos = {
-    CSK: "https://upload.wikimedia.org/wikipedia/en/thumb/2/2b/Chennai_Super_Kings_Logo.svg/200px-Chennai_Super_Kings_Logo.svg.png",
-    MI: "https://upload.wikimedia.org/wikipedia/en/thumb/c/cd/Mumbai_Indians_Logo.svg/200px-Mumbai_Indians_Logo.svg.png",
-    KKR: "https://upload.wikimedia.org/wikipedia/en/thumb/4/4c/Kolkata_Knight_Riders_Logo.svg/200px-Kolkata_Knight_Riders_Logo.svg.png",
-    GT: "https://upload.wikimedia.org/wikipedia/en/thumb/0/09/Gujarat_Titans_Logo.svg/200px-Gujarat_Titans_Logo.svg.png",
-    PBKS: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d4/Punjab_Kings_Logo.svg/200px-Punjab_Kings_Logo.svg.png",
-    RCB: "https://upload.wikimedia.org/wikipedia/en/thumb/0/0a/Royal_Challengers_Bangalore_Logo.svg/200px-Royal_Challengers_Bangalore_Logo.svg.png",
-    RR: "https://upload.wikimedia.org/wikipedia/en/thumb/6/60/Rajasthan_Royals_Logo.svg/200px-Rajasthan_Royals_Logo.svg.png",
-    DC: "https://upload.wikimedia.org/wikipedia/en/thumb/f/f5/Delhi_Capitals_Logo.svg/200px-Delhi_Capitals_Logo.svg.png",
-    LSG: "https://upload.wikimedia.org/wikipedia/en/thumb/c/c3/Lucknow_Super_Giants_Logo.svg/200px-Lucknow_Super_Giants_Logo.svg.png",
-    SRH: "https://upload.wikimedia.org/wikipedia/en/thumb/8/81/Sunrisers_Hyderabad.svg/200px-Sunrisers_Hyderabad.svg.png"
-};
+    <script>
+        const logos = {
+            CSK: "https://upload.wikimedia.org/wikipedia/en/thumb/2/2b/Chennai_Super_Kings_Logo.svg/200px-Chennai_Super_Kings_Logo.svg.png",
+            MI: "https://upload.wikimedia.org/wikipedia/en/thumb/c/cd/Mumbai_Indians_Logo.svg/200px-Mumbai_Indians_Logo.svg.png",
+            KKR: "https://upload.wikimedia.org/wikipedia/en/thumb/4/4c/Kolkata_Knight_Riders_Logo.svg/200px-Kolkata_Knight_Riders_Logo.svg.png",
+            GT: "https://upload.wikimedia.org/wikipedia/en/thumb/0/09/Gujarat_Titans_Logo.svg/200px-Gujarat_Titans_Logo.svg.png",
+            PBKS: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d4/Punjab_Kings_Logo.svg/200px-Punjab_Kings_Logo.svg.png",
+            RCB: "https://upload.wikimedia.org/wikipedia/en/thumb/0/0a/Royal_Challengers_Bangalore_Logo.svg/200px-Royal_Challengers_Bangalore_Logo.svg.png", 
+            RR: "https://upload.wikimedia.org/wikipedia/en/thumb/6/60/Rajasthan_Royals_Logo.svg/200px-Rajasthan_Royals_Logo.svg.png",           
+            DC: "https://upload.wikimedia.org/wikipedia/en/thumb/f/f5/Delhi_Capitals_Logo.svg/200px-Delhi_Capitals_Logo.svg.png",   
+            LSG: "https://upload.wikimedia.org/wikipedia/en/thumb/c/c3/Lucknow_Super_Giants_Logo.svg/200px-Lucknow_Super_Giants_Logo.svg.png",  
+            SRH: "https://upload.wikimedia.org/wikipedia/en/thumb/8/81/Sunrisers_Hyderabad.svg/200px-Sunrisers_Hyderabad.svg.png"  
+        };
 
-const matches = [
-    { t1: "GT", t2: "RR", date: "2026-04-04T19:30:00", win: "RR WON BY 6 RUNS" },
-    { t1: "MI", t2: "DC", date: "2026-04-04T15:30:00", win: "DC WON BY 6 WICKETS" },
-    { t1: "CSK", t2: "PBKS", date: "2026-04-03T19:30:00", win: "PBKS WON BY 5 WICKETS" },
-    { t1: "KKR", t2: "SRH", date: "2026-04-02T19:30:00", win: "SRH WON BY 65 RUNS" },
-    { t1: "SRH", t2: "LSG", date: "2026-04-05T15:30:00" },
-    { t1: "RCB", t2: "CSK", date: "2026-04-05T19:30:00" },
-    { t1: "KKR", t2: "PBKS", date: "2026-04-06T19:30:00" },
-    { t1: "RR", t2: "MI", date: "2026-04-07T19:30:00" },
-    { t1: "MI", t2: "RCB", date: "2026-04-30T19:30:00" }
-];
+        const matches = [
+            // RESULTS
+            { t1: "GT", t2: "RR", date: "2026-04-04T19:30:00", win: "RR WON BY 6 RUNS" },
+            { t1: "MI", t2: "DC", date: "2026-04-04T15:30:00", win: "DC WON BY 6 WICKETS" },
+            { t1: "CSK", t2: "PBKS", date: "2026-04-03T19:30:00", win: "PBKS WON BY 5 WICKETS" },
+            { t1: "KKR", t2: "SRH", date: "2026-04-02T19:30:00", win: "SRH WON BY 65 RUNS" },
+            { t1: "LSG", t2: "DC", date: "2026-04-01T19:30:00", win: "DC WON BY 6 WICKETS" },
+            { t1: "RR", t2: "CSK", date: "2026-03-30T19:30:00", win: "RR WON BY 8 WICKETS" },
+            { t1: "MI", t2: "KKR", date: "2026-03-29T19:30:00", win: "MI WON BY 6 WICKETS" },
+            { t1: "RCB", t2: "SRH", date: "2026-03-28T19:30:00", win: "RCB WON BY 5 WICKETS" },
 
-function run() {
-    const now = new Date();
-    const lB = document.getElementById('live-sec'), uB = document.getElementById('upcoming-sec'), rB = document.getElementById('results-sec');
-    lB.innerHTML = ""; uB.innerHTML = ""; rB.innerHTML = "";
+            // UPCOMING
+            { t1: "SRH", t2: "LSG", date: "2026-04-05T15:30:00" },
+            { t1: "RCB", t2: "CSK", date: "2026-04-05T19:30:00" },
+            { t1: "KKR", t2: "PBKS", date: "2026-04-06T19:30:00" },
+            { t1: "RR", t2: "MI", date: "2026-04-07T19:30:00" },
+            { t1: "DC", t2: "GT", date: "2026-04-08T19:30:00" },
+            { t1: "KKR", t2: "LSG", date: "2026-04-09T19:30:00" },
+            { t1: "RR", t2: "RCB", date: "2026-04-10T19:30:00" },
+            { t1: "MI", t2: "PBKS", date: "2026-04-11T15:30:00" },
+            { t1: "CSK", t2: "GT", date: "2026-04-11T19:30:00" },
+            { t1: "SRH", t2: "DC", date: "2026-04-12T15:30:00" },
+            { t1: "RCB", t2: "LSG", date: "2026-04-12T19:30:00" },
+            { t1: "GT", t2: "KKR", date: "2026-04-13T19:30:00" },
+            { t1: "PBKS", t2: "RR", date: "2026-04-14T19:30:00" },
+            { t1: "DC", t2: "CSK", date: "2026-04-15T19:30:00" },
+            { t1: "MI", t2: "RCB", date: "2026-04-16T19:30:00" },
+            { t1: "LSG", t2: "SRH", date: "2026-04-17T19:30:00" },
+            { t1: "PBKS", t2: "GT", date: "2026-04-18T15:30:00" },
+            { t1: "RR", t2: "KKR", date: "2026-04-18T19:30:00" },
+            { t1: "CSK", t2: "MI", date: "2026-04-19T15:30:00" },
+            { t1: "RCB", t2: "SRH", date: "2026-04-19T19:30:00" },
+            { t1: "RCB", t2: "GT", date: "2026-04-20T19:30:00" },
+            { t1: "LSG", t2: "KKR", date: "2026-04-21T19:30:00" },
+            { t1: "CSK", t2: "MI", date: "2026-04-22T19:30:00" },
+            { t1: "DC", t2: "PBKS", date: "2026-04-23T19:30:00" },
+            { t1: "RR", t2: "SRH", date: "2026-04-24T19:30:00" },
+            { t1: "PBKS", t2: "RR", date: "2026-04-25T15:30:00" },
+            { t1: "LSG", t2: "GT", date: "2026-04-25T19:30:00" },
+            { t1: "DC", t2: "SRH", date: "2026-04-26T19:30:00" },
+            { t1: "KKR", t2: "RCB", date: "2026-04-27T19:30:00" },
+            { t1: "CSK", t2: "LSG", date: "2026-04-28T19:30:00" },
+            { t1: "GT", t2: "DC", date: "2026-04-29T19:30:00" },
+            { t1: "MI", t2: "RCB", date: "2026-04-30T19:30:00" }
+        ];
 
-    matches.forEach(m => {
-        const s = new Date(m.date), e = new Date(s.getTime() + (4*3600000)), sH = new Date(s.getTime() - (7*3600000));
-        let h = `<div class="match-card"><span class="date-header">${s.toDateString()}</span><div class="teams-row"><div class="team-col"><img src="${logos[m.t1]}"><span>${m.t1}</span></div><div class="vs-col">VS</div><div class="team-col"><img src="${logos[m.t2]}"><span>${m.t2}</span></div></div>`;
+        function run() {
+            const now = new Date();
+            const lBox = document.getElementById('live-sec'), uBox = document.getElementById('upcoming-sec'), rBox = document.getElementById('results-sec');
+            lBox.innerHTML = ""; uBox.innerHTML = ""; rBox.innerHTML = "";
 
-        if (m.win) {
-            h += `<div class="res-win">${m.win}</div></div>`;
-            rB.innerHTML += h;
-        } else if (now >= s && now <= e) {
-            h += `<div style="text-align:center; color:#ffcc00; margin-top:10px;"><span class="live-dot"></span> LIVE NOW</div></div>`;
-            lB.innerHTML += h;
-        } else if (now < s) {
-            h += `<div style="text-align:center; color:#8b949e; margin-top:10px;">Starts at ${s.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div></div>`;
-            uB.innerHTML += h;
+            const sortedResults = [...matches].filter(m => m.win).sort((a, b) => new Date(b.date) - new Date(a.date));
+            const upcomingMatches = [...matches].filter(m => !m.win).sort((a, b) => new Date(a.date) - new Date(b.date));
+
+            upcomingMatches.forEach(m => {
+                const s = new Date(m.date), e = new Date(s.getTime() + (4*3600000)), sHrs = new Date(s.getTime() - (7*3600000));
+                let h = `<div class="match-card"><span class="date-header">${s.toDateString()}</span><div class="teams-row"><div class="team"><img src="${logos[m.t1]}"><span class="team-name">${m.t1}</span></div><div class="vs-box">VS</div><div class="team"><img src="${logos[m.t2]}"><span class="team-name">${m.t2}</span></div></div>`;
+                
+                if (now >= sHrs && now <= e) { 
+                    h += `<div style="text-align:center; color:#ffcc00; font-weight:bold; margin-top:10px;"><span class="live-dot"></span> ${now >= s ? "LIVE NOW" : "STARTS SOON"}</div><a href="https://www.google.com/search?q=${m.t1}+vs+${m.t2}+score" target="_blank" class="btn-live">WATCH LIVE SCORE</a></div>`; 
+                    lBox.innerHTML += h; 
+                } else if (now < sHrs) { 
+                    h += `<div style="text-align:center; color:#8b949e; margin-top:10px;">Starts at ${s.getHours()}:${s.getMinutes().toString().padStart(2, '0')}</div></div>`; 
+                    uBox.innerHTML += h; 
+                }
+            });
+
+            sortedResults.forEach(m => {
+                const s = new Date(m.date);
+                let h = `<div class="match-card"><span class="date-header">${s.toDateString()}</span><div class="teams-row"><div class="team"><img src="${logos[m.t1]}"><span class="team-name">${m.t1}</span></div><div class="vs-box">VS</div><div class="team"><img src="${logos[m.t2]}"><span class="team-name">${m.t2}</span></div></div><span class="win-text">${m.win}</span><a href="https://www.google.com/search?q=${m.t1}+vs+${m.t2}+highlights" target="_blank" class="btn-highlight">🎥 WATCH HIGHLIGHTS</a></div>`;
+                rBox.innerHTML += h;
+            });
         }
-    });
-}
-
-function showT(t, b) {
-    document.querySelectorAll('.match-section').forEach(s => s.style.display = 'none');
-    document.getElementById(t + '-sec').style.display = 'block';
-    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-    b.classList.add('active');
-}
-
-run();
-setInterval(run, 60000);
-</script>
+        function showT(t, b) { document.querySelectorAll('.match-section').forEach(x => x.style.display = 'none'); document.querySelectorAll('.tab-btn').forEach(x => x.classList.remove('active')); document.getElementById(t + '-sec').style.display = 'block'; b.classList.add('active'); }
+        run(); setInterval(run, 60000);
+    </script>
 </body>
 </html>

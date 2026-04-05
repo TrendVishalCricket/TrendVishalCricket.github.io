@@ -17,13 +17,12 @@
         
         .teams-row { display: flex; align-items: center; justify-content: space-between; margin: 10px 0; }
         .team { text-align: center; width: 42%; }
-        /* लोगो साइज फिक्स किया गया है */
-        .team img { width: 60px !important; height: 60px !important; border-radius: 50%; background: #fff; padding: 4px; border: 2px solid #ffcc00; object-fit: contain; }
-        .team-name { display: block; color: #fff; font-weight: bold; margin-top: 8px; font-size: 14px; }
+        .team img { width: 85px; height: 85px; border-radius: 50%; background: #fff; padding: 6px; border: 3px solid #ffcc00; object-fit: contain; }
+        .team-name { display: block; color: #fff; font-weight: bold; margin-top: 8px; font-size: 16px; }
         
-        .vs-box { color: #8b949e; font-weight: 900; font-size: 12px; background: #30363d; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; border: 1px solid #ffcc00; }
+        .vs-box { color: #8b949e; font-weight: 900; font-size: 14px; background: #30363d; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; border: 1px solid #ffcc00; }
         .btn-live { background: #ffcc00; color: #000; text-decoration: none; display: block; width: 100%; text-align: center; padding: 12px; border-radius: 8px; font-weight: bold; margin-top: 12px; font-size: 14px; }
-        .btn-highlight { background: #1a1a1a; color: #ffcc00; text-decoration: none; display: block; width: 100%; text-align: center; padding: 10px; border-radius: 8px; font-weight: bold; margin-top: 10px; font-size: 13px; border: 1px solid #ffcc00; }
+        .btn-highlight { background: #4285F4; color: white; text-decoration: none; display: block; width: 100%; text-align: center; padding: 10px; border-radius: 8px; font-weight: bold; margin-top: 10px; font-size: 13px; border: 1px solid #fff; }
         .win-text { color: #00ff00; font-weight: bold; font-size: 13px; text-transform: uppercase; margin-top: 10px; display: block; text-align: center; border-top: 1px solid #333; padding-top: 8px; }
 
         .footer { background: #161b22; padding: 30px 20px; text-align: center; border-top: 2px solid #ffcc00; margin-top: 20px; }
@@ -152,7 +151,7 @@
 
             sortedResults.forEach(m => {
                 const s = new Date(m.date);
-                let h = `<div class="match-card"><span class="date-header">${s.toDateString()}</span><div class="teams-row"><div class="team"><img src="${logos[m.t1]}"><span class="team-name">${m.t1}</span></div><div class="vs-box">VS</div><div class="team"><img src="${logos[m.t2]}"><span class="team-name">${m.t2}</span></div></div><span class="win-text">${m.win}</span><a href="https://www.google.com/search?q=${m.t1}+vs+${m.t2}+highlights" target="_blank" class="btn-highlight">🎥 WATCH HIGHLIGHTS</a></div>`;
+                let h = `<div class="match-card"><span class="date-header">${s.toDateString()}</span><div class="teams-row"><div class="team"><img src="${logos[m.t1]}"><span class="team-name">${m.t1}</span></div><div class="vs-box">VS</div><div class="team"><img src="${logos[m.t2]}"><span class="team-name">${m.t2}</span></div></div><span class="win-text">${m.win}</span><a href="https://www.google.com/search?q=${m.t1}+vs+${m.t2}+highlights" target="_blank" class="btn-highlight">🔍 GOOGLE HIGHLIGHTS</a></div>`;
                 rBox.innerHTML += h;
             });
         }

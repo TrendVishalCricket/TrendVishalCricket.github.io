@@ -157,6 +157,42 @@
         }
         function showT(t, b) { document.querySelectorAll('.match-section').forEach(x => x.style.display = 'none'); document.querySelectorAll('.tab-btn').forEach(x => x.classList.remove('active')); document.getElementById(t + '-sec').style.display = 'block'; b.classList.add('active'); }
         run(); setInterval(run, 60000);
+        // स्वाइप (Swipe) फीचर के लिए कोड
+let touchstartX = 0;
+let touchendX = 0;
+
+const gestureZone = document.body;
+
+gestureZone.addEventListener('touchstart', function(event) {
+    touchstartX = event.changedTouches[0].screenX;
+}, false);
+
+gestureZone.addEventListener('touchend', function(event) {
+    touchendX = event.changedTouches[0].screenX;
+    handleGesture();
+}, false);
+
+function handleGesture() {
+    const tabs = ['live', 'upcoming', 'results', 'points'];
+    let activeIndex = tabs.indexOf(document.querySelector('.tab-btn.active').innerText.toLowerCase().replace(' table', '').trim());
+
+    if (touchendX < touchstartX - 50) {
+        // Left Swipe (अगले टैब पर जाने के लिए)
+        if (activeIndex < tabs.length - 1) {
+            let nextTab = document.querySelectorAll('.tab-btn')[activeIndex + 1];
+            showT(tabs[activeIndex + 1], nextTab);
+        }
+    }
+    
+    if (touchendX > touchstartX + 50) {
+        // Right Swipe (पिछले टैब पर जाने के लिए)
+        if (activeIndex > 0) {
+            let prevTab = document.querySelectorAll('.tab-btn')[activeIndex - 1];
+            showT(tabs[activeIndex - 1], prevTab);
+        }
+    }
+}
+        
     </script>
 </body>
 </html>

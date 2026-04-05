@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="GwlOOVxRX8yWPFRBxrWAhJrBlTpgyvsEW0vZ12aptig" />
     <title>TRENDVISHAL CRICKET</title>
+    .match-section {
+    transition: opacity 0.4s ease-in-out; /* झटके से नहीं, धीरे से खुलेगा */
+    opacity: 0;
+}
+.match-section[style*="display:block"] {
+    opacity: 1;
+}
+
     <style>
         body { background: #0d1117; margin: 0; font-family: sans-serif; color: white; padding-bottom: 80px; }
         header { display: flex; align-items: center; justify-content: space-between; padding: 10px 15px; background: #161b22; border-bottom: 2px solid #ffcc00; position: sticky; top: 0; z-index: 1000; }
@@ -157,41 +165,43 @@
         }
         function showT(t, b) { document.querySelectorAll('.match-section').forEach(x => x.style.display = 'none'); document.querySelectorAll('.tab-btn').forEach(x => x.classList.remove('active')); document.getElementById(t + '-sec').style.display = 'block'; b.classList.add('active'); }
         run(); setInterval(run, 60000);
-        // स्वाइप (Swipe) फीचर के लिए कोड
+        
+        // --- स्मूथ स्वाइप (Smooth Swipe) फीचर ---
 let touchstartX = 0;
 let touchendX = 0;
 
-const gestureZone = document.body;
+document.addEventListener('touchstart', e => {
+    touchstartX = e.changedTouches[0].screenX;
+}, {passive: true});
 
-gestureZone.addEventListener('touchstart', function(event) {
-    touchstartX = event.changedTouches[0].screenX;
-}, false);
+document.addEventListener('touchend', e => {
+    touchendX = e.changedTouches[0].screenX;
+    handleSmoothSwipe();
+}, {passive: true});
 
-gestureZone.addEventListener('touchend', function(event) {
-    touchendX = event.changedTouches[0].screenX;
-    handleGesture();
-}, false);
-
-function handleGesture() {
+function handleSmoothSwipe() {
     const tabs = ['live', 'upcoming', 'results', 'points'];
-    let activeIndex = tabs.indexOf(document.querySelector('.tab-btn.active').innerText.toLowerCase().replace(' table', '').trim());
+    const activeBtn = document.querySelector('.tab-btn.active');
+    if (!activeBtn) return;
 
-    if (touchendX < touchstartX - 50) {
-        // Left Swipe (अगले टैब पर जाने के लिए)
-        if (activeIndex < tabs.length - 1) {
-            let nextTab = document.querySelectorAll('.tab-btn')[activeIndex + 1];
-            showT(tabs[activeIndex + 1], nextTab);
+    const activeTabText = activeBtn.innerText.toUpperCase().split(' ')[0];
+    let currentIndex = tabs.findIndex(t => activeTabText.includes(t.toUpperCase()));
+
+    if (touchendX < touchstartX - 100) {
+        // Left Swipe -> Next
+        if (currentIndex < tabs.length - 1) {
+            let nextBtn = document.querySelectorAll('.tab-btn')[currentIndex + 1];
+            showT(tabs[currentIndex + 1], nextBtn);
         }
     }
-    
-    if (touchendX > touchstartX + 50) {
-        // Right Swipe (पिछले टैब पर जाने के लिए)
-        if (activeIndex > 0) {
-            let prevTab = document.querySelectorAll('.tab-btn')[activeIndex - 1];
-            showT(tabs[activeIndex - 1], prevTab);
+    if (touchendX > touchstartX + 100) {
+        // Right Swipe -> Previous
+        if (currentIndex > 0) {
+            let prevBtn = document.querySelectorAll('.tab-btn')[currentIndex - 1];
+            showT(tabs[currentIndex - 1], prevBtn);
         }
     }
-}
+        }
         
     </script>
 </body>

@@ -215,42 +215,38 @@ function handleSmoothSwipe() {
 
     let currentIndex = activeBtn.innerText.toLowerCase().includes('live') ? 0 : activeBtn.innerText.toLowerCase().includes('upcoming') ? 1 : activeBtn.innerText.toLowerCase().includes('results') ? 2 : 3;
 
-
     if (touchendX < touchstartX - 100) {
-        // Left Swipe -> Next
         if (currentIndex < tabs.length - 1) {
             let nextBtn = document.querySelectorAll('.tab-btn')[currentIndex + 1];
             showT(tabs[currentIndex + 1], nextBtn);
         }
     }
     if (touchendX > touchstartX + 100) {
-        // Right Swipe -> Previous
         if (currentIndex > 0) {
             let prevBtn = document.querySelectorAll('.tab-btn')[currentIndex - 1];
             showT(tabs[currentIndex - 1], prevBtn);
         }
     }
-    
-    
-    // ⚡ सुपर फास्ट बैनर रिमूवर ⚡
-    function removeBanner() {
-        var loader = document.getElementById('loading-screen');
-        if (loader) {
-            loader.style.opacity = "0"; // धीरे से धुंधला होगा
-            setTimeout(function() {
-                loader.style.display = "none"; // पूरी तरह हट जाएगा
-            }, 400); // गायब होने की स्पीड
-        }
+}
+
+// ⚡ सुपर फास्ट बैनर रिमूवर ⚡
+function removeBanner() {
+    var loader = document.getElementById('loading-screen');
+    if (loader) {
+        loader.style.opacity = "0";
+        setTimeout(function() {
+            loader.style.display = "none";
+        }, 500);
     }
+}
 
-    // जैसे ही पेज के जरूरी हिस्से लोड हों, 1.5 सेकंड में हटा दो
-    window.addEventListener('load', function() {
-        setTimeout(removeBanner, 1500); 
-    });
+// 1.5 सेकंड का टाइमर
+window.addEventListener('load', function() {
+    setTimeout(removeBanner, 1500);
+});
 
-    // बैकअप: अगर नेट स्लो है, तब भी 3 सेकंड से ज्यादा मत रुको
-    setTimeout(removeBanner, 3000); 
-        
-    
+// बैकअप: 3 सेकंड बाद अपने आप हट जाएगा
+setTimeout(removeBanner, 3000);
+</script>
 </body>
 </html>

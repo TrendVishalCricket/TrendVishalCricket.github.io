@@ -14,6 +14,24 @@
     <title>TRENDVISHAL CRICKET</title>
 
     <style>
+        /* --- Splash Screen Style --- */
+#loading-screen {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: #000; /* पूरा काला बैकग्राउंड */
+    z-index: 99999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease;
+}
+#loading-screen img {
+    width: 100%;
+    max-width: 500px; /* फोटो की चौड़ाई */
+    height: auto;
+    object-fit: contain;
+}
         body { background: #0d1117; margin: 0; font-family: sans-serif; color: white; padding-bottom: 80px; }
         header { display: flex; align-items: center; justify-content: space-between; padding: 10px 15px; background: #161b22; border-bottom: 2px solid #ffcc00; position: sticky; top: 0; z-index: 1000; }
         .tabs { display: flex; background: #0d1117; border-bottom: 1px solid #30363d; position: sticky; top: 60px; z-index: 999; overflow-x: auto; }
@@ -41,6 +59,9 @@
     </style>
 </head>
 <body>
+    <div id="loading-screen">
+    <img src="splash.png" alt="TrendVishal Banner">
+    </div>
     <header>
         <div style="display:flex; align-items:center;">
             <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/84/Indian_Premier_League_Official_Logo.svg/1200px-Indian_Premier_League_Official_Logo.svg.png" style="width:35px; margin-right:10px;">
@@ -209,7 +230,16 @@ function handleSmoothSwipe() {
             showT(tabs[currentIndex - 1], prevBtn);
         }
     }
-        }
+    
+    window.addEventListener('load', function() {
+        setTimeout(function() {
+            var loader = document.getElementById('loading-screen');
+            loader.style.opacity = "0";
+            setTimeout(function() {
+                loader.style.display = "none";
+            }, 500);
+        }, 2000); // 2 सेकंड का टाइम
+    });
         
     </script>
 </body>

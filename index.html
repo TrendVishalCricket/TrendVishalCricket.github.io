@@ -213,11 +213,41 @@
                 }
             });
 
-            sortedResults.forEach(m => {
-                const s = new Date(m.date);
-                let h = `<div class="match-card"><span class="date-header">${s.toDateString()}</span><div class="teams-row"><div class="team"><img src="${logos[m.t1]}"><span class="team-name">${m.t1}</span></div><div class="vs-box">VS</div><div class="team"><img src="${logos[m.t2]}"><span class="team-name">${m.t2}</span></div></div><span class="win-text">${m.win}</span><a href="https://www.google.com/search?q=${m.t1}+vs+${m.t2}+highlights" target="_blank" class="btn-highlight">🔍 GOOGLE HIGHLIGHTS</a></div>`;
-                rBox.innerHTML += h;
-            });
+                    sortedResults.forEach((m, index) => {
+            const s = new Date(m.date);
+            let h = `
+            <div class="match-card" style="border: 1px solid #444; padding: 15px; border-radius: 12px; margin-bottom: 15px; background: #1a1a1a; text-align: center;">
+                <div class="date-header" style="color: #ffcc00; font-weight: bold; font-size: 11px; margin-bottom: 10px; text-transform: uppercase;">IPL 2026 - ${s.toDateString()}</div>
+                
+                <div class="teams-row" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+                    <div class="team" style="width: 40%;">
+                        <img src="${logos[m.t1]}" alt="${m.t1}" style="width: 48px; height: 48px; background: #fff; border-radius: 50%; padding: 4px; border: 2px solid #ffcc00;">
+                        <span class="team-name" style="display: block; color: #fff; font-weight: bold; margin-top: 5px; font-size: 13px;">${m.t1}</span>
+                    </div>
+                    <div class="vs-box" style="color: #8b949e; font-weight: 900; font-size: 15px;">VS</div>
+                    <div class="team" style="width: 40%;">
+                        <img src="${logos[m.t2]}" alt="${m.t2}" style="width: 48px; height: 48px; background: #fff; border-radius: 50%; padding: 4px; border: 2px solid #ffcc00;">
+                        <span class="team-name" style="display: block; color: #fff; font-weight: bold; margin-top: 5px; font-size: 13px;">${m.t2}</span>
+                    </div>
+                </div>
+                
+                <div class="win-text" style="color: #00ff00; font-weight: bold; font-size: 13px; margin-bottom: 12px;">${m.win}</div>
+                
+                <a href="https://www.google.com/search?q=${m.t1}+vs+${m.t2}+ipl+2026+match+scorecard" 
+                   target="_blank" 
+                   style="background: #ff6600; color: #fff; font-weight: bold; display: block; text-decoration: none; padding: 10px 0; border-radius: 8px; margin-bottom: 10px; font-size: 12px; text-transform: uppercase;">
+                   VIEW FULL DETAILS
+                </a>
+                
+                <a href="https://www.youtube.com/results?search_query=${m.t1}+vs+${m.t2}+ipl+2026+highlights" 
+                   target="_blank" 
+                   style="background: #ff0000; color: #fff; font-weight: bold; display: block; text-decoration: none; padding: 10px 0; border-radius: 8px; font-size: 12px; text-transform: uppercase;">
+                   WATCH HIGHLIGHTS
+                </a>
+            </div>`;
+            rBox.innerHTML += h;
+        });
+
         }
         function showT(t, b) { document.querySelectorAll('.match-section').forEach(x => x.style.display = 'none'); document.querySelectorAll('.tab-btn').forEach(x => x.classList.remove('active')); document.getElementById(t + '-sec').style.display = 'block'; b.classList.add('active'); }
         run(); setInterval(run, 60000);

@@ -442,6 +442,32 @@ function handleSmoothSwipe() {
 
     // बैकअप
     setTimeout(hideTrendSplash, 2500); 
+        // ऑटोमैटिक लाइव या अपकमिंग सेक्शन सेट करने का लॉजिक
+window.addEventListener('DOMContentLoaded', () => {
+    // चेक करेंगे कि लाइव सेक्शन के अंदर कोई मैचकार्ड (match-card) है या नहीं
+    const hasLiveMatch = document.querySelector('#live-sec .match-card');
+    
+    if (!hasLiveMatch) {
+        // अगर कोई लाइव मैच नहीं है, तो अपकमिंग बटन को एक्टिव करो
+        const liveBtn = document.querySelector(".tab-btn[onclick*='live']");
+        const upcomingBtn = document.querySelector(".tab-btn[onclick*='upcoming']");
+        
+        if (liveBtn && upcomingBtn) {
+            liveBtn.classList.remove('active');
+            upcomingBtn.classList.add('active');
+        }
+        
+        // लाइव सेक्शन को छुपाओ और अपकमिंग सेक्शन को दिखाओ
+        const liveSec = document.getElementById('live-sec');
+        const upcomingSec = document.getElementById('upcoming-sec');
+        
+        if (liveSec && upcomingSec) {
+            liveSec.style.display = 'none';
+            upcomingSec.style.display = 'block';
+        }
+    }
+});
+        
 </script>
 </body>
 </html>

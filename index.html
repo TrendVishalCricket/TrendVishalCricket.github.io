@@ -2,17 +2,30 @@
 <html lang="en">
     <link rel="manifest" href="manifest.json">
 <script>
+  let deferredPrompt;
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/sw.js');
   }
-</script>
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
     
-<head>
-    <link rel="manifest" href="manifest.json">
-<script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js');
-  }
+    // यह आपके लाइन 192 वाले बटन को एक्टिवेट करेगा
+    const downloadBtn = document.querySelector('#download-btn');
+    if(downloadBtn) {
+      downloadBtn.addEventListener('click', (event) => {
+        event.preventDefault();
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            console.log('User installed the app');
+          }
+          deferredPrompt = null;
+        });
+      });
+    }
+  });
 </script>
     
     <meta charset="UTF-8">
@@ -189,8 +202,8 @@
 <div style="text-align: center; margin: 20px 0; padding: 10px;">
     <p style="color: #ffcc00; font-size: 13px; margin-bottom: 10px; font-weight: 900; text-transform: uppercase;">⚡ Download Our OFFICIAL APP for Fastest IPL Score ⚡</p>
     
-    <a href="https://drive.google.com/uc?export=download&id=1dzoo17vbwgLUFeJGi8RUdJC6y5RkLCxo&confirm=t" 
-       target="_self"
+    <a href="#" id="download-btn" target="_self"
+
        style="background: linear-gradient(45deg, #ffcc00, #ff8800); 
               color: #000; 
               padding: 10px 35px; 

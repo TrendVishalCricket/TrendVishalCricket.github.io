@@ -1,8 +1,8 @@
 {
-  "name": "TrendVishal Cricket",
+  "name": "Trend Vishal Cricket",
   "short_name": "TV Cricket",
   "description": "Live IPL 2026 Updates by TrendVishal",
-  "start_url": "index.html",
+  "start_url": "/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#000000",

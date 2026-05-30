@@ -126,7 +126,12 @@
         <div class="tab-btn" onclick="showT('results', this)">RESULTS</div>
         <div class="tab-btn" onclick="showT('points', this)">POINT TABLE</div>
     </div>
-
+    <div class="category-container" style="display: flex; justify-content: center; gap: 10px; margin: 15px 0; padding: 0 10px;">
+        <button onclick="filterMatches('all')" class="category-btn active" style="background: #ffcc00; color: #000; font-weight: bold; padding: 10px 20px; border: none; border-radius: 25px; cursor: pointer; font-size: 14px; transition: 0.3s;">सब मैच</button>
+        <button onclick="filterMatches('ipl')" class="category-btn" style="background: #222; color: #fff; font-weight: bold; padding: 10px 20px; border: none; border-radius: 25px; cursor: pointer; font-size: 14px; transition: 0.3s;">IPL मैच 🏏</button>
+        <button onclick="filterMatches('india')" class="category-btn" style="background: #222; color: #fff; font-weight: bold; padding: 10px 20px; border: none; border-radius: 25px; cursor: pointer; font-size: 14px; transition: 0.3s;">India मैच 🇮🇳</button>
+    </div>
+    
 <div id="live-sec" class="match-section" style="display:block; padding: 15px; text-align: center;">
 
     <div style="background: linear-gradient(145deg, #1a1a1a, #000); border: 2px solid #ffcc00; border-radius: 20px; padding: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.5);">
@@ -466,7 +471,40 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
-        
+    // बटन पर क्लिक करते ही मैच फ़िल्टर करने का फ़ंक्शन
+function filterMatches(type) {
+    // 1. सभी बटनों का रंग पहले जैसा डार्क करने के लिए
+    const buttons = document.querySelectorAll('.category-btn');
+    buttons.forEach(btn => {
+        btn.style.background = '#222';
+        btn.style.color = '#fff';
+    });
+    
+    // 2. जिस बटन को क्लिक किया, उसे पीला (Active) करने के लिए
+    event.target.style.background = '#ffcc00';
+    event.target.style.color = '#000';
+
+    // 3. स्क्रीन पर दिखने वाले सभी मैचों को जांचने के लिए
+    const matchCards = document.querySelectorAll('.match-card');
+    
+    // सभी मैचों की एक कंबाइंड लिस्ट बनाएंगे
+    const allMatchData = [...upcomingMatches, ...sortedResults];
+
+    matchCards.forEach((card, index) => {
+        const matchData = allMatchData[index];
+        if (!matchData) return;
+
+        // अगर 'सब मैच' चुना है या मैच की कैटेगरी मैच खाती है तो दिखाओ, वरना छुपा दो
+        if (type === 'all') {
+            card.style.display = 'block';
+        } else if (matchData.category === type) {
+            card.style.display = 'block';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+}
+    
 </script>
 </body>
 </html>

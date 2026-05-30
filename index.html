@@ -362,7 +362,7 @@
             }
         }
 
-        function createCardHtml(m, isResult) {
+                function createCardHtml(m, isResult) {
             const logo1 = logos[m.t1] || 'ipl.jpeg';
             const logo2 = logos[m.t2] || 'ipl.jpeg';
             const matchDate = new Date(m.date).toLocaleDateString('hi-IN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
@@ -382,10 +382,21 @@
                     </div>
                     <div style="color:#ffcc00; font-size:12px; font-weight:bold; margin-top:5px; text-align:center;">${m.stage || ''}</div>
                     <div style="color:#8b949e; font-size:11px; margin-top:2px; text-align:center;">📍 ${m.venue || ''}</div>
-                    ${isResult ? `<span class="win-text">${m.win}</span>` : `<span class="win-text" style="color:#ffcc00;">⏳ UPCOMING MATCH</span>`}
+                    
+                    ${isResult ? `
+                        <span class="win-text">${m.win}</span>
+                        <a href="https://www.google.com/search?q=${m.t1}+vs+${m.t2}+match+highlight" target="_blank" class="btn-highlight">
+                            🎬 WATCH HIGHLIGHT
+                        </a>
+                        <a href="https://www.google.com/search?q=${m.t1}+vs+${m.t2}+match+details" target="_blank" class="btn-live" style="margin-top:8px; background:#30363d; color:#fff; border:1px solid #ffcc00;">
+                            📊 VIEW DETAILS
+                        </a>
+                    ` : `
+                        <span class="win-text" style="color:#ffcc00;">⏳ UPCOMING MATCH</span>
+                    `}
                 </div>
             `;
-        }
+                }
 
         function hideTrendSplash() {
             var loader = document.getElementById("loading-screen");

@@ -102,7 +102,7 @@
         .yt-btn { background: #ff0000; color: white; padding: 12px 25px; border-radius: 25px; text-decoration: none; font-weight: bold; display: inline-block; margin-top: 10px; box-shadow: 0 4px 10px rgba(255,0,0,0.3); }
         .live-dot { height: 8px; width: 8px; background: #ff4444; border-radius: 50%; display: inline-block; margin-right: 5px; animation: blink 1s infinite; }
         @keyframes blink { 0% {opacity: 1;} 50% {opacity: 0.3;} 100% {opacity: 1;} }
-        .shayari { margin-top: 25px; font-style: italic; color: #ffcc00; font-size: 15px; line-height: 1.5; border-top: 1px solid #30363d; padding-top: 15px; }
+        .shayari { margin-top: 25px; font-style: italic; color: #ffcc00; font-size: 15px; line-height: 1.5; border-top: 1px solid #30363d; padding-top: 15px; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -134,27 +134,7 @@
     </div>
     
     <div id="live-sec" class="match-section" style="display:block; padding: 15px; text-align: center;">
-        <div style="background: linear-gradient(145deg, #1a1a1a, #000); border: 2px solid #ffcc00; border-radius: 20px; padding: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.5);">
-            <div style="display: flex; justify-content: space-around; align-items: center; margin-bottom: 20px;">
-                 <div>
-                     <img src="https://upload.wikimedia.org/wikipedia/en/thumb/6/60/Rajasthan_Royals_Logo.svg/1200px-Rajasthan_Royals_Logo.svg.png" style="width: 70px; height: 70px; border-radius: 50%; border: 2px solid #fff; padding: 5px; background: #fff;">
-                     <p style="color: #fff; font-weight: bold; margin-top: 5px;">RR</p>
-                 </div>
-                 <div style="color: #ffcc00; font-weight: 900; font-size: 20px;">VS</div>
-                 <div>
-                     <img src="https://upload.wikimedia.org/wikipedia/en/thumb/6/67/Mumbai_Indians_Logo.svg/1200px-Mumbai_Indians_Logo.svg.png" style="width: 70px; height: 70px; border-radius: 50%; border: 2px solid #fff; padding: 5px; background: #fff;">
-                     <p style="color: #fff; font-weight: bold; margin-top: 5px;">MI</p>
-                 </div>
-            </div>
-            <p style="color: #ffcc00; font-size: 14px; font-weight: bold; margin-bottom: 15px;">📅 TODAY | ⏰ 07:30 PM</p>
-            <p style="color: #ccc; font-size: 11px; margin-bottom: 15px;">टॉस और लाइव स्कोर के लिए नीचे बटन दबाएं</p>
-            <a href="https://www.google.com/search?q=ipl+live+score" 
-               target="_blank"
-               style="background: #ffcc00; color: #000; padding: 12px 25px; text-decoration: none; font-weight: 900; border-radius: 50px; display: block; font-size: 14px; text-transform: uppercase; border: 1px solid #fff;">
-                ⚡ CLICK FOR LIVE SCORE ⚡
-            </a>
         </div>
-    </div>
 
     <div id="upcoming-sec" class="match-section" style="display:none;"></div>
     <div id="results-sec" class="match-section" style="display:none;"></div>
@@ -335,10 +315,12 @@
         window.filterMatches = function(type) {
             const buttons = document.querySelectorAll('.category-btn');
             buttons.forEach(btn => {
+                btn.classList.remove('active');
                 btn.style.background = '#222';
                 btn.style.color = '#fff';
             });
             if(event && event.target && event.target.classList.contains('category-btn')) {
+                event.target.classList.add('active');
                 event.target.style.background = '#ffcc00';
                 event.target.style.color = '#000';
             }
@@ -359,6 +341,7 @@
         };
 
         function renderMatchCards() {
+            const liveSec = document.getElementById('live-sec');
             const upcomingSec = document.getElementById('upcoming-sec');
             const resultsSec = document.getElementById('results-sec');
             
@@ -372,6 +355,19 @@
             sortedResults.forEach(m => {
                 if(resultsSec) resultsSec.innerHTML += createCardHtml(m, true);
             });
+
+            // 🚫 अगर लाइव सेक्शन खाली है, तो सुंदर अक्षरों में संदेश दिखाओ (शायरी यहाँ से हटाकर फुटर में कर दी है)
+            if (liveSec) {
+                const hasLiveCard = liveSec.querySelector('.match-card') !== null;
+                if (!hasLiveCard) {
+                    liveSec.innerHTML = `
+                        <div style="padding: 40px 20px; background: #161b22; border-radius: 12px; border: 1px dashed #ffcc00; margin: 15px;">
+                            <h2 style="color: #ffcc00; font-size: 22px; font-weight: 900; margin: 0 0 10px 0; letter-spacing: 1px;">🚫 NO LIVE MATCH TODAY</h2>
+                            <p style="color: #8b949e; font-size: 13px; margin: 0;">आज कोई लाइव मैच नहीं है। आगामी और पुराने मैचों के परिणाम देखने के लिए ऊपर टैब बदलें।</p>
+                        </div>
+                    `;
+                }
+            }
         }
 
         function createCardHtml(m, isResult) {
@@ -415,13 +411,63 @@
         
         setTimeout(hideTrendSplash, 2500);
 
+        // 🚀 ऐप ओपन होते ही सही टैब खोलने का स्मार्ट लॉजिक
         function run() {
             filterMatches('all');
+
+            const liveSec = document.getElementById('live-sec');
+            // चेक करें कि लाइव सेक्शन में कोई असली लाइव मैच कार्ड है या नहीं
+            const hasLiveMatch = liveSec && liveSec.querySelector('.match-card') !== null;
+
+            if (!hasLiveMatch) {
+                // 📅 अगर आज लाइव मैच नहीं है, तो तुरंत UPCOMING टैब खोलो
+                const upcomingBtn = document.querySelectorAll('.tab-btn')[1];
+                showT('upcoming', upcomingBtn);
+            } else {
+                // ⚡ अगर लाइव मैच चल रहा है, तो LIVE टैब ही खुला रहने दो
+                const liveBtn = document.querySelectorAll('.tab-btn')[0];
+                showT('live', liveBtn);
+            }
         }
 
         window.addEventListener('DOMContentLoaded', () => {
             run();
         });
+
+        // 👆 अंगूठे से लेफ्ट-राइट स्वाइप (स्क्रोल) करके टैब बदलने का कड़क लॉजिक
+        let touchstartX = 0;
+        let touchendX = 0;
+        const tabsOrder = ['live', 'upcoming', 'results', 'points'];
+
+        window.addEventListener('touchstart', e => {
+            touchstartX = e.changedTouches[0].screenX;
+        });
+
+        window.addEventListener('touchend', e => {
+            touchendX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            let currentIndex = tabsOrder.indexOf(currentTab);
+            
+            // अगर उल्टे हाथ की तरफ स्वाइप किया (Next Tab)
+            if (touchendX < touchstartX - 80) {
+                if (currentIndex < tabsOrder.length - 1) {
+                    const nextTabId = tabsOrder[currentIndex + 1];
+                    const nextBtn = document.querySelectorAll('.tab-btn')[currentIndex + 1];
+                    showT(nextTabId, nextBtn);
+                }
+            }
+            // अगर सीधे हाथ की तरफ स्वाइप किया (Previous Tab)
+            if (touchendX > touchstartX + 80) {
+                if (currentIndex > 0) {
+                    const prevTabId = tabsOrder[currentIndex - 1];
+                    const prevBtn = document.querySelectorAll('.tab-btn')[currentIndex - 1];
+                    showT(prevTabId, prevBtn);
+                }
+            }
+        }
     </script>
 </body>
 </html>

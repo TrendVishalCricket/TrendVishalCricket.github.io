@@ -411,24 +411,33 @@
         
         setTimeout(hideTrendSplash, 2500);
 
-        // 🚀 ऐप ओपन होते ही सही टैब खोलने का स्मार्ट लॉजिक
-        function run() {
-            filterMatches('all');
+        // 🚀 ऐप ओपन होते ही सही टैब खोजने और 'सब मैच' बटन एक्टिव करने का स्मार्ट लॉजिक
+function run() {
+    // 1. सबसे पहले 'सब मैच' वाला फ़िल्टर चलाएँ ताकि सारे मैच लोड हो जाएँ
+    filterMatches('all');
 
-            const liveSec = document.getElementById('live-sec');
-            // चेक करें कि लाइव सेक्शन में कोई असली लाइव मैच कार्ड है या नहीं
-            const hasLiveMatch = liveSec && liveSec.querySelector('.match-card') !== null;
+    // 2. ऐप खुलते ही 'सब मैच' वाले बटन को अपने आप पीला (एक्टिव) कर दें
+    const allBtn = document.querySelectorAll('.category-btn')[0]; // पहला बटन (सब मैच)
+    if (allBtn) {
+        allBtn.style.background = '#ffcc00';
+        allBtn.style.color = '#000';
+    }
 
-            if (!hasLiveMatch) {
-                // 📅 अगर आज लाइव मैच नहीं है, तो तुरंत UPCOMING टैब खोलो
-                const upcomingBtn = document.querySelectorAll('.tab-btn')[1];
-                showT('upcoming', upcomingBtn);
-            } else {
-                // ⚡ अगर लाइव मैच चल रहा है, तो LIVE टैब ही खुला रहने दो
-                const liveBtn = document.querySelectorAll('.tab-btn')[0];
-                showT('live', liveBtn);
-            }
-        }
+    // 3. लाइव मैच चेक करने का लॉजिक
+    const liveSec = document.getElementById('live-sec');
+    const hasLiveMatch = liveSec && liveSec.querySelector('.match-card') !== null;
+
+    if (!hasLiveMatch) {
+        // 📅 अगर आज लाइव मैच नहीं है, तो तुरंत UPCOMING टैब खोलो
+        const upcomingBtn = document.querySelectorAll('.tab-btn')[1];
+        showT('upcoming', upcomingBtn);
+    } else {
+        // ⚡ अगर लाइव मैच चल रहा है, तो LIVE टैब ही खुला रहने दो
+        const liveBtn = document.querySelectorAll('.tab-btn')[0];
+        showT('live', liveBtn);
+    }
+}
+
 
         window.addEventListener('DOMContentLoaded', () => {
             run();

@@ -133,8 +133,7 @@
         <button onclick="filterMatches('india')" class="category-btn" style="background: #222; color: #fff; font-weight: bold; padding: 10px 20px; border: none; border-radius: 25px; cursor: pointer; font-size: 14px; transition: 0.3s;">India मैच 🇮🇳</button>
     </div>
     
-    <div id="live-sec" class="match-section" style="display:block; padding: 15px; text-align: center;">
-        </div>
+    <div id="live-sec" class="match-section" style="display:block; padding: 15px; text-align: center;"></div>
 
     <div id="upcoming-sec" class="match-section" style="display:none;"></div>
     <div id="results-sec" class="match-section" style="display:none;"></div>
@@ -190,23 +189,24 @@
 
     <script>
         const logos = {
-            GT: `gt.jpeg`,
+            GT: `gt.png`,
             CSK: `csk.png`,
             PBKS: `pbks.png`,
             KKR: `kkr.png`,
-            MI: `mi.jpeg`,
+            MI: `mi.png`,
             IPL: `ipl.jpeg`,
             RCB: "rcb.png",
             RR: "rr.png",
-            DC: "dc.jpg",
-            LSG: "lsg.jpg",
-            SRH: "srh.jpg",
+            DC: "dc.png",
+            LSG: "lsg.png",
+            SRH: "srh.png",
             IND: "india.png",
             AUS: "australia.png",
             PAK: "pakistan.png",
             ENG: "england.png",
             SL: "srilanka.png",
-            NZ: "newzealand.png"
+            NZ: "newzealand.png",
+            SA: "southafrica.png"
         };
 
         // 🏏 1. आईपीएल के मैचों का डेटा
@@ -271,7 +271,7 @@
             { t1: "RCB", t2: "SRH", date: "2026-03-28T19:30:00", win: "RCB WON BY 5 WICKETS" }
         ];
 
-        // 🇮🇳 2. टीम इंडिया के आगामी 12 मैच और 5 पुराने रिजल्ट्स
+        // 🇮🇳 2. टीम इंडिया के मैच
         const indiaMatches = [
             { t1: "IND", t2: "AUS", date: "2026-06-15T19:30:00", stage: "🏆 1st T20 MATCH", venue: "Wankhede Stadium, Mumbai" },
             { t1: "IND", t2: "AUS", date: "2026-06-18T19:30:00", stage: "🏆 2nd T20 MATCH", venue: "M. Chinnaswamy Stadium, Bengaluru" },
@@ -285,7 +285,6 @@
             { t1: "IND", t2: "NZ", date: "2026-10-08T09:30:00", stage: "🔥 1st TEST MATCH", venue: "Green Park, Kanpur" },
             { t1: "IND", t2: "NZ", date: "2026-10-16T09:30:00", stage: "🏆 2nd TEST MATCH", venue: "M. Chinnaswamy Stadium, Bengaluru" },
             { t1: "IND", t2: "NZ", date: "2026-10-24T09:30:00", stage: "👑 3rd TEST MATCH", venue: "Wankhede Stadium, Mumbai" },
-            // रिजल्ट्स
             { t1: "IND", t2: "PAK", date: "2026-05-10T19:30:00", stage: "🏆 ASIA CUP (SUPER 4)", venue: "Eden Gardens, Kolkata", win: "INDIA WON BY 6 WICKETS 🇮🇳 (PAK: 152/10, IND: 154/4)" },
             { t1: "IND", t2: "SA", date: "2026-04-25T19:30:00", stage: "💥 T20 SERIES", venue: "JSCA Stadium, Ranchi", win: "INDIA WON BY 45 RUNS 🇮🇳 (IND: 198/5, SA: 153/8)" },
             { t1: "IND", t2: "AUS", date: "2026-03-15T19:30:00", stage: "🏏 ODI SERIES", venue: "MA Chidambaram Stadium, Chennai", win: "AUSTRALIA WON BY 2 WICKETS (IND: 242/10, AUS: 245/8)" },
@@ -297,7 +296,6 @@
         let sortedResults = [];
         let currentTab = 'live';
 
-        // टैब चेंज लॉजिक
         window.showT = function(tabId, btn) {
             currentTab = tabId;
             const tabs = document.querySelectorAll('.tab-btn');
@@ -311,7 +309,6 @@
             if(activeSec) activeSec.style.display = 'block';
         };
 
-        // कैटेगरी फ़िल्टर
         window.filterMatches = function(type) {
             const buttons = document.querySelectorAll('.category-btn');
             buttons.forEach(btn => {
@@ -319,11 +316,6 @@
                 btn.style.background = '#222';
                 btn.style.color = '#fff';
             });
-            if(event && event.target && event.target.classList.contains('category-btn')) {
-                event.target.classList.add('active');
-                event.target.style.background = '#ffcc00';
-                event.target.style.color = '#000';
-            }
 
             let selectedData = [];
             if (type === 'all') {
@@ -356,7 +348,6 @@
                 if(resultsSec) resultsSec.innerHTML += createCardHtml(m, true);
             });
 
-            // 🚫 अगर लाइव सेक्शन खाली है, तो सुंदर अक्षरों में संदेश दिखाओ (शायरी यहाँ से हटाकर फुटर में कर दी है)
             if (liveSec) {
                 const hasLiveCard = liveSec.querySelector('.match-card') !== null;
                 if (!hasLiveCard) {
@@ -411,39 +402,33 @@
         
         setTimeout(hideTrendSplash, 2500);
 
-        // 🚀 ऐप ओपन होते ही सही टैब खोजने और 'सब मैच' बटन एक्टिव करने का स्मार्ट लॉजिक
-function run() {
-    // 1. सबसे पहले 'सब मैच' वाला फ़िल्टर चलाएँ ताकि सारे मैच लोड हो जाएँ
-    filterMatches('all');
+        // 🚀 ऐप ओपन होते ही 'सब मैच' ऑटोमैटिक चालू करने का कड़क लॉजिक
+        function run() {
+            filterMatches('all');
 
-    // 2. ऐप खुलते ही 'सब मैच' वाले बटन को अपने आप पीला (एक्टिव) कर दें
-    const allBtn = document.querySelectorAll('.category-btn')[0]; // पहला बटन (सब मैच)
-    if (allBtn) {
-        allBtn.style.background = '#ffcc00';
-        allBtn.style.color = '#000';
-    }
+            const allBtn = document.querySelectorAll('.category-btn')[0];
+            if (allBtn) {
+                allBtn.style.background = '#ffcc00';
+                allBtn.style.color = '#000';
+            }
 
-    // 3. लाइव मैच चेक करने का लॉजिक
-    const liveSec = document.getElementById('live-sec');
-    const hasLiveMatch = liveSec && liveSec.querySelector('.match-card') !== null;
+            const liveSec = document.getElementById('live-sec');
+            const hasLiveMatch = liveSec && liveSec.querySelector('.match-card') !== null;
 
-    if (!hasLiveMatch) {
-        // 📅 अगर आज लाइव मैच नहीं है, तो तुरंत UPCOMING टैब खोलो
-        const upcomingBtn = document.querySelectorAll('.tab-btn')[1];
-        showT('upcoming', upcomingBtn);
-    } else {
-        // ⚡ अगर लाइव मैच चल रहा है, तो LIVE टैब ही खुला रहने दो
-        const liveBtn = document.querySelectorAll('.tab-btn')[0];
-        showT('live', liveBtn);
-    }
-}
-
+            if (!hasLiveMatch) {
+                const upcomingBtn = document.querySelectorAll('.tab-btn')[1];
+                showT('upcoming', upcomingBtn);
+            } else {
+                const liveBtn = document.querySelectorAll('.tab-btn')[0];
+                showT('live', liveBtn);
+            }
+        }
 
         window.addEventListener('DOMContentLoaded', () => {
             run();
         });
 
-        // 👆 अंगूठे से लेफ्ट-राइट स्वाइप (स्क्रोल) करके टैब बदलने का कड़क लॉजिक
+        // 👆 स्वाइप फ़ंक्शन (ऑटो-क्लिक के साथ)
         let touchstartX = 0;
         let touchendX = 0;
         const tabsOrder = ['live', 'upcoming', 'results', 'points'];
@@ -454,61 +439,56 @@ function run() {
 
         window.addEventListener('touchend', e => {
             touchendX = e.changedTouches[0].screenX;
-            handleSwipe();
         });
 
         function handleSwipe() {
-    let currentIndex = tabsOrder.indexOf(currentTab);
-    
-    // 👈 उल्टे हाथ की तरफ स्वाइप किया (Next Tab)
-    if (touchendX < touchstartX - 80) {
-        if (currentIndex < tabsOrder.length - 1) {
-            const nextTabId = tabsOrder[currentIndex + 1];
-            const nextBtn = document.querySelectorAll('.tab-btn')[currentIndex + 1];
-            showT(nextTabId, nextBtn);
+            let currentIndex = tabsOrder.indexOf(currentTab);
             
-            // ⚡ ऑटो-क्लिक: स्वाइप होते ही 'सब मैच' फ़िल्टर बटन को पीला और एक्टिव करो
-            if (typeof filterMatches === 'function') {
-                filterMatches('all');
-                const allBtn = document.querySelectorAll('.category-btn')[0];
-                if (allBtn) {
-                    allBtn.style.background = '#ffcc00';
-                    allBtn.style.color = '#000';
+            if (touchendX < touchstartX - 80) {
+                if (currentIndex < tabsOrder.length - 1) {
+                    const nextTabId = tabsOrder[currentIndex + 1];
+                    const nextBtn = document.querySelectorAll('.tab-btn')[currentIndex + 1];
+                    showT(nextTabId, nextBtn);
+                    
+                    if (typeof filterMatches === 'function') {
+                        filterMatches('all');
+                        const allBtn = document.querySelectorAll('.category-btn')[0];
+                        if (allBtn) {
+                            allBtn.style.background = '#ffcc00';
+                            allBtn.style.color = '#000';
+                        }
+                        const iplBtn = document.querySelectorAll('.category-btn')[1];
+                        const indiaBtn = document.querySelectorAll('.category-btn')[2];
+                        if(iplBtn) { iplBtn.style.background = ''; iplBtn.style.color = ''; }
+                        if(indiaBtn) { indiaBtn.style.background = ''; indiaBtn.style.color = ''; }
+                    }
                 }
-                // बाकी बटनों का रंग वापस सामान्य करने के लिए
-                const iplBtn = document.querySelectorAll('.category-btn')[1];
-                const indiaBtn = document.querySelectorAll('.category-btn')[2];
-                if(iplBtn) { iplBtn.style.background = ''; iplBtn.style.color = ''; }
-                if(indiaBtn) { indiaBtn.style.background = ''; indiaBtn.style.color = ''; }
+            }
+            if (touchendX > touchstartX + 80) {
+                if (currentIndex > 0) {
+                    const prevTabId = tabsOrder[currentIndex - 1];
+                    const prevBtn = document.querySelectorAll('.tab-btn')[currentIndex - 1];
+                    showT(prevTabId, prevBtn);
+                    
+                    if (typeof filterMatches === 'function') {
+                        filterMatches('all');
+                        const allBtn = document.querySelectorAll('.category-btn')[0];
+                        if (allBtn) {
+                            allBtn.style.background = '#ffcc00';
+                            allBtn.style.color = '#000';
+                        }
+                        const iplBtn = document.querySelectorAll('.category-btn')[1];
+                        const indiaBtn = document.querySelectorAll('.category-btn')[2];
+                        if(iplBtn) { iplBtn.style.background = ''; iplBtn.style.color = ''; }
+                        if(indiaBtn) { indiaBtn.style.background = ''; indiaBtn.style.color = ''; }
+                    }
+                }
             }
         }
-    }
-    // 👉 सीधे हाथ की तरफ स्वाइप किया (Previous Tab)
-    if (touchendX > touchstartX + 80) {
-        if (currentIndex > 0) {
-            const prevTabId = tabsOrder[currentIndex - 1];
-            const prevBtn = document.querySelectorAll('.tab-btn')[currentIndex - 1];
-            showT(prevTabId, prevBtn);
-            
-            // ⚡ ऑटो-क्लिक: स्वाइप होते ही 'सब मैच' फ़िल्टर बटन को पीला और एक्टिव करो
-            if (typeof filterMatches === 'function') {
-                filterMatches('all');
-                const allBtn = document.querySelectorAll('.category-btn')[0];
-                if (allBtn) {
-                    allBtn.style.background = '#ffcc00';
-                    allBtn.style.color = '#000';
-                }
-                // बाकी बटनों का रंग वापस सामान्य करने के लिए
-                const iplBtn = document.querySelectorAll('.category-btn')[1];
-                const indiaBtn = document.querySelectorAll('.category-btn')[2];
-                if(iplBtn) { iplBtn.style.background = ''; iplBtn.style.color = ''; }
-                if(indiaBtn) { indiaBtn.style.background = ''; indiaBtn.style.color = ''; }
-            }
-        }
-    }
-}
-
-        }
+        
+        window.addEventListener('touchend', e => {
+            handleSwipe();
+        });
     </script>
 </body>
 </html>

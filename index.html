@@ -262,9 +262,15 @@
 
         const matches = [
             // RESULTS
-                       
+                               // ======= हाल ही में हुए मैचों के परिणाम (RESULTS) =======
+        { t1: "IND", t2: "PAK", date: "2026-05-10T19:30:00", stage: "🏆 ASIA CUP (SUPER 4)", venue: "Eden Gardens, Kolkata", win: "INDIA WON BY 6 WICKETS 🇮🇳 (PAK: 152/10, IND: 154/4)" },
+        { t1: "IND", t2: "SA", date: "2026-04-25T19:30:00", stage: "💥 T20 SERIES", venue: "JSCA Stadium, Ranchi", win: "INDIA WON BY 45 RUNS 🇮🇳 (IND: 198/5, SA: 153/8)" },
+        { t1: "IND", t2: "AUS", date: "2026-03-15T19:30:00", stage: "🏏 ODI SERIES", venue: "MA Chidambaram Stadium, Chennai", win: "AUSTRALIA WON BY 2 WICKETS (IND: 242/10, AUS: 245/8)" },
+        { t1: "IND", t2: "SL", date: "2026-02-28T19:30:00", stage: "🏆 T20 CUP", venue: "Wankhede Stadium, Mumbai", win: "INDIA WON BY 7 WICKETS 🇮🇳 (SL: 138/9, IND: 142/3)" },
+        { t1: "IND", t2: "ENG", date: "2026-01-20T09:30:00", stage: "🔥 TEST MATCH", venue: "Narendra Modi Stadium, Ahmedabad", win: "INDIA WON BY AN INNINGS & 34 RUNS 🇮🇳" },
+    
           // आगामी फाइनल मैच
-      { t1: "GT", t2: "RCB", date: "2026-05-31T19:30:00", win: "UPCOMING FINAL MATCH 🏆" },
+      { t1: "GT", t2: "RCB", date: "2026-05-31T19:30:00", "UPCOMING FINAL MATCH 🏆" },
 
       // कल का क्वालीफायर 2 रिजल्ट
       { t1: "GT", t2: "RR", date: "2026-05-29T19:30:00", win: "GUJARAT TITANS WON BY 4 WICKETS (RR: 214/6, GT: 215/2)" },
@@ -330,7 +336,28 @@
             
 
             // UPCOMING
-                        { t1: "GT", t2: "RCB", date: "2026-05-31T19:30:00", stage: "FINAL MATCH 🏆", venue: "Narendra Modi Stadium, Ahmedabad" },
+                          // 🇮🇳 टीम इंडिया के आगामी सभी धमाकेदार मुकाबले (TOTAL 12 MATCHES)
+    const indiaMatches = [
+        // ======= भारत बनाम ऑस्ट्रेलिया (T20 सीरीज़) =======
+        { t1: "IND", t2: "AUS", date: "2026-06-15T19:30:00", stage: "🏆 1st T20 MATCH", venue: "Wankhede Stadium, Mumbai" },
+        { t1: "IND", t2: "AUS", date: "2026-06-18T19:30:00", stage: "🏆 2nd T20 MATCH", venue: "M. Chinnaswamy Stadium, Bengaluru" },
+        { t1: "IND", t2: "AUS", date: "2026-06-21T19:30:00", stage: "🏆 3rd T20 MATCH", venue: "Narendra Modi Stadium, Ahmedabad" },
+
+        // ======= भारत बनाम इंग्लैंड (ODI और T20 सीरीज़) =======
+        { t1: "IND", t2: "ENG", date: "2026-07-05T19:30:00", stage: "🏏 1st ODI MATCH", venue: "Eden Gardens, Kolkata" },
+        { t1: "IND", t2: "ENG", date: "2026-07-08T19:30:00", stage: "🏏 2nd ODI MATCH", venue: "MA Chidambaram Stadium, Chennai" },
+        { t1: "IND", t2: "ENG", date: "2026-07-11T19:30:00", stage: "🏏 3rd ODI MATCH", venue: "Arun Jaitley Stadium, Delhi" },
+        { t1: "IND", t2: "ENG", date: "2026-07-15T19:30:00", stage: "💥 1st T20 MATCH", venue: "PCA Stadium, Mohali" },
+
+        // ======= भारत बनाम श्रीलंका (Bilateral सीरीज़) =======
+        { t1: "IND", t2: "SL", date: "2026-08-20T19:30:00", stage: "🏆 1st ODI MATCH", venue: "R. Premadasa Stadium, Colombo" },
+        { t1: "IND", t2: "SL", date: "2026-08-23T19:30:00", stage: "🏆 2nd ODI MATCH", venue: "Pallekele International Stadium" },
+
+        // ======= भारत बनाम न्यूजीलैंड (टेस्ट सीरीज़) =======
+        { t1: "IND", t2: "NZ", date: "2026-10-08T09:30:00", stage: "🔥 1st TEST MATCH", venue: "Green Park, Kanpur" },
+        { t1: "IND", t2: "NZ", date: "2026-10-16T09:30:00", stage: "🏆 2nd TEST MATCH", venue: "M. Chinnaswamy Stadium, Bengaluru" },
+        { t1: "IND", t2: "NZ", date: "2026-10-24T09:30:00", stage: "👑 3rd TEST MATCH", venue: "Wankhede Stadium, Mumbai" }
+        { t1: "GT", t2: "RCB", date: "2026-05-31T19:30:00", stage: "FINAL MATCH 🏆", venue: "Narendra Modi Stadium, Ahmedabad" },
         ];
 
         function run() {

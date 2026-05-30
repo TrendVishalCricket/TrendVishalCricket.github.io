@@ -458,24 +458,56 @@ function run() {
         });
 
         function handleSwipe() {
-            let currentIndex = tabsOrder.indexOf(currentTab);
+    let currentIndex = tabsOrder.indexOf(currentTab);
+    
+    // 👈 उल्टे हाथ की तरफ स्वाइप किया (Next Tab)
+    if (touchendX < touchstartX - 80) {
+        if (currentIndex < tabsOrder.length - 1) {
+            const nextTabId = tabsOrder[currentIndex + 1];
+            const nextBtn = document.querySelectorAll('.tab-btn')[currentIndex + 1];
+            showT(nextTabId, nextBtn);
             
-            // अगर उल्टे हाथ की तरफ स्वाइप किया (Next Tab)
-            if (touchendX < touchstartX - 80) {
-                if (currentIndex < tabsOrder.length - 1) {
-                    const nextTabId = tabsOrder[currentIndex + 1];
-                    const nextBtn = document.querySelectorAll('.tab-btn')[currentIndex + 1];
-                    showT(nextTabId, nextBtn);
+            // ⚡ ऑटो-क्लिक: स्वाइप होते ही 'सब मैच' फ़िल्टर बटन को पीला और एक्टिव करो
+            if (typeof filterMatches === 'function') {
+                filterMatches('all');
+                const allBtn = document.querySelectorAll('.category-btn')[0];
+                if (allBtn) {
+                    allBtn.style.background = '#ffcc00';
+                    allBtn.style.color = '#000';
                 }
+                // बाकी बटनों का रंग वापस सामान्य करने के लिए
+                const iplBtn = document.querySelectorAll('.category-btn')[1];
+                const indiaBtn = document.querySelectorAll('.category-btn')[2];
+                if(iplBtn) { iplBtn.style.background = ''; iplBtn.style.color = ''; }
+                if(indiaBtn) { indiaBtn.style.background = ''; indiaBtn.style.color = ''; }
             }
-            // अगर सीधे हाथ की तरफ स्वाइप किया (Previous Tab)
-            if (touchendX > touchstartX + 80) {
-                if (currentIndex > 0) {
-                    const prevTabId = tabsOrder[currentIndex - 1];
-                    const prevBtn = document.querySelectorAll('.tab-btn')[currentIndex - 1];
-                    showT(prevTabId, prevBtn);
+        }
+    }
+    // 👉 सीधे हाथ की तरफ स्वाइप किया (Previous Tab)
+    if (touchendX > touchstartX + 80) {
+        if (currentIndex > 0) {
+            const prevTabId = tabsOrder[currentIndex - 1];
+            const prevBtn = document.querySelectorAll('.tab-btn')[currentIndex - 1];
+            showT(prevTabId, prevBtn);
+            
+            // ⚡ ऑटो-क्लिक: स्वाइप होते ही 'सब मैच' फ़िल्टर बटन को पीला और एक्टिव करो
+            if (typeof filterMatches === 'function') {
+                filterMatches('all');
+                const allBtn = document.querySelectorAll('.category-btn')[0];
+                if (allBtn) {
+                    allBtn.style.background = '#ffcc00';
+                    allBtn.style.color = '#000';
                 }
+                // बाकी बटनों का रंग वापस सामान्य करने के लिए
+                const iplBtn = document.querySelectorAll('.category-btn')[1];
+                const indiaBtn = document.querySelectorAll('.category-btn')[2];
+                if(iplBtn) { iplBtn.style.background = ''; iplBtn.style.color = ''; }
+                if(indiaBtn) { indiaBtn.style.background = ''; indiaBtn.style.color = ''; }
             }
+        }
+    }
+}
+
         }
     </script>
 </body>

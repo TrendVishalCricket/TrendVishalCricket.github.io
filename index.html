@@ -502,5 +502,57 @@
             handleSwipe();
         });
     </script>
+    <div id="fake-visitor-badge" style="position: fixed; bottom: 100px; right: 15px; background: rgba(0, 0, 0, 0.8); border: 1px solid #ffcc00; color: #fff; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; z-index: 99999; display: flex; align-items: center; gap: 6px; box-shadow: 0 0 10px rgba(255, 204, 0, 0.4);">
+    <span style="width: 8px; height: 8px; background: #ff0000; border-radius: 50%; display: inline-block; animation: fakeBlink 1s infinite;"></span>
+    <span id="fake-count">284</span> Watching
+</div>
+
+<style>
+@keyframes fakeBlink {
+    0% { opacity: 1; }
+    50% { opacity: 0.3; }
+    100% { opacity: 1; }
+}
+</style>
+
+<script>
+// टाइम-बेस्ड ऑटोमैटिक नंबर बदलने का स्मार्ट लॉजिक
+setInterval(() => {
+    const countElement = document.getElementById('fake-count');
+    if(countElement) {
+        const currentHour = new Date().getHours();
+        let minLimit = 200;
+        let maxLimit = 400;
+        let change = 0;
+
+        // अगर मैच का टाइम है (शाम 7 बजे से रात 11:59 तक)
+        if (currentHour >= 19 && currentHour <= 23) {
+            minLimit = 1200;
+            maxLimit = 1800;
+            // मैच के टाइम ज़्यादा उतार-चढ़ाव (-20 से +45 के बीच भारी जंप)
+            change = Math.floor(Math.random() * 66) - 20; 
+        } else {
+            // नॉर्मल टाइम में कम उतार-चढ़ाव (-5 से +10 के बीच हल्का जंप)
+            change = Math.floor(Math.random() * 16) - 5; 
+        }
+
+        let currentCount = parseInt(countElement.innerText);
+        
+        // अगर नंबर लिमिट से एकदम बाहर है, तो उसे बीच में लाएं
+        if (currentCount < minLimit || currentCount > maxLimit) {
+            currentCount = Math.floor(Math.random() * (maxLimit - minLimit + 1)) + minLimit;
+        } else {
+            currentCount = currentCount + change;
+            
+            // लिमिट के अंदर ही रोक कर रखें
+            if (currentCount < minLimit) currentCount = minLimit + Math.floor(Math.random() * 25);
+            if (currentCount > maxLimit) currentCount = maxLimit - Math.floor(Math.random() * 25);
+        }
+        
+        countElement.innerText = currentCount;
+    }
+}, 4000); // हर 4 सेकंड में अपडेट
+        </script>
+    
 </body>
 </html>

@@ -1,568 +1,200 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-    <link rel="manifest" href="manifest.json">
-    <script>
-      let deferredPrompt;
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/sw.js');
-      }
-
-      window.addEventListener('beforeinstallprompt', (e) => {
-        e.preventDefault();
-        deferredPrompt = e;
-        
-        const downloadBtn = document.querySelector('#download-btn');
-        if(downloadBtn) {
-          downloadBtn.addEventListener('click', (event) => {
-            event.preventDefault();
-            deferredPrompt.prompt();
-            deferredPrompt.userChoice.then((choiceResult) => {
-              if (choiceResult.outcome === 'accepted') {
-                console.log('User installed the app');
-              }
-              deferredPrompt = null;
-            });
-          });
-        }
-      });
-    </script>
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-site-verification" content="GwlOOVxRX8yWPFRBxrWAhJrBlTpgyvsEW0vZ12aptig" />
-    <title>TRENDVISHAL CRICKET</title>
-    <meta name="description" content="ट्रेंड विशाल क्रिकेट ऐप - यहाँ पाएँ सबसे तेज़ लाइव क्रिकेट स्कोर और आईपीएल अपडेट।">
-    <meta name="keywords" content="ट्रेंड विशाल क्रिकेट, Trend Vishal Cricket, TrendVishal Cricket, Vishal Shukla">
-    <meta name="author" content="Vishal Shukla">
-
+    <title>TREND VISHAL CRICKET</title>
     <style>
-        /* --- ⚡ ट्रेंड विशाल - प्रीमियम स्प्लैश स्क्रीन ⚡ --- */
-        #loading-screen {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100vw; height: 100vh;
-            background: #000;
-            z-index: 99999;
+        /* 🎨 बेसिक कड़क डिज़ाइन */
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            color: #fff;
+            text-align: center;
+        }
+        header {
+            background: linear-gradient(45deg, #ffcc00, #ff4444);
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+        .tabs {
             display: flex;
             justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            transition: opacity 0.5s ease;
+            margin: 20px 0;
         }
-
-        #loading-screen img {
-            width: 100vw; height: 100vh;
-            object-fit: cover;
-            animation: trendZoom 1.2s ease-out forwards;
+        .tab-btn {
+            background-color: #222;
+            color: #fff;
+            border: 2px solid #ffcc00;
+            padding: 10px 20px;
+            margin: 0 5px;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: 0.3s;
         }
-
-        #loading-screen::after {
-            content: "";
-            position: absolute;
-            bottom: 15%;
-            width: 45px; height: 45px;
-            border: 4px solid rgba(255,255,255,0.2);
-            border-top: 4px solid #ffcc00;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            z-index: 100001;
+        .tab-btn.active {
+            background-color: #ffcc00;
+            color: #000;
         }
-
-        @keyframes trendZoom {
-            0% { opacity: 0; transform: scale(1.1); }
-            100% { opacity: 1; transform: scale(1); }
+        .match-section {
+            display: none;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 10px;
         }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .match-card {
+            background-color: #1e1e1e;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            border-left: 5px solid #ffcc00;
+            text-align: left;
         }
-
-        body { background: #0d1117; margin: 0; font-family: sans-serif; color: white; padding-bottom: 80px; }
-        header { display: flex; align-items: center; justify-content: space-between; padding: 10px 15px; background: #161b22; border-bottom: 2px solid #ffcc00; position: sticky; top: 0; z-index: 1000; }
-        .tabs { display: flex; background: #0d1117; border-bottom: 1px solid #30363d; position: sticky; top: 60px; z-index: 999; overflow-x: auto; }
-        .tab-btn { flex: 1; min-width: 90px; padding: 15px 5px; text-align: center; color: #8b949e; font-weight: bold; font-size: 12px; cursor: pointer; border-bottom: 3px solid transparent; white-space: nowrap; }
-        .tab-btn.active { color: #ffcc00; border-bottom: 3px solid #ffcc00; background: rgba(255, 204, 0, 0.05); }
-
-        .match-card { background: #161b22; border-radius: 12px; padding: 15px; margin: 15px; border-left: 5px solid #ffcc00; border-top: 1px solid #30363d; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
-        .date-header { color: #ffcc00; font-weight: bold; font-size: 11px; margin-bottom: 10px; display: block; text-transform: uppercase; }
-        
-        .teams-row { display: flex; align-items: center; justify-content: space-between; margin: 10px 0; }
-        .team { text-align: center; width: 42%; }
-        .team img { width: 85px; height: 85px; border-radius: 50%; background: #fff; padding: 6px; border: 3px solid #ffcc00; object-fit: contain; }
-        .team-name { display: block; color: #fff; font-weight: bold; margin-top: 8px; font-size: 16px; }
-        
-        .vs-box { color: #8b949e; font-weight: 900; font-size: 14px; background: #30363d; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; border: 1px solid #ffcc00; }
-        .btn-live { background: #ffcc00; color: #000; text-decoration: none; display: block; width: 100%; text-align: center; padding: 12px; border-radius: 8px; font-weight: bold; margin-top: 12px; font-size: 14px; }
-        .btn-highlight { background: #4285F4; color: white; text-decoration: none; display: block; width: 100%; text-align: center; padding: 10px; border-radius: 8px; font-weight: bold; margin-top: 10px; font-size: 13px; border: 1px solid #fff; }
-        .win-text { color: #00ff00; font-weight: bold; font-size: 13px; text-transform: uppercase; margin-top: 10px; display: block; text-align: center; border-top: 1px solid #333; padding-top: 8px; }
-
-        .footer { background: #161b22; padding: 30px 20px; text-align: center; border-top: 2px solid #ffcc00; margin-top: 20px; }
-        .yt-btn { background: #ff0000; color: white; padding: 12px 25px; border-radius: 25px; text-decoration: none; font-weight: bold; display: inline-block; margin-top: 10px; box-shadow: 0 4px 10px rgba(255,0,0,0.3); }
-        .live-dot { height: 8px; width: 8px; background: #ff4444; border-radius: 50%; display: inline-block; margin-right: 5px; animation: blink 1s infinite; }
-        @keyframes blink { 0% {opacity: 1;} 50% {opacity: 0.3;} 100% {opacity: 1;} }
-        .shayari { margin-top: 25px; font-style: italic; color: #ffcc00; font-size: 15px; line-height: 1.5; border-top: 1px solid #30363d; padding-top: 15px; font-weight: bold; }
+        .match-teams {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ffcc00;
+        }
+        .match-details {
+            font-size: 14px;
+            color: #aaa;
+            margin: 5px 0;
+        }
+        /* 🔴 चमकने वाला लाइव स्कोर बटन */
+        .live-score-btn {
+            display: inline-block;
+            background-color: #ff4444;
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            font-weight: bold;
+            border-radius: 5px;
+            margin-top: 10px;
+            animation: blinkGlow 1.5s infinite alternate;
+        }
+        @keyframes blinkGlow {
+            0% { transform: scale(1); box-shadow: 0 0 5px #ff4444; }
+            100% { transform: scale(1.05); box-shadow: 0 0 15px #ff4444; }
+        }
+        .no-match {
+            color: #777;
+            font-style: italic;
+        }
     </style>
 </head>
 <body>
-    <div id="loading-screen">
-        <img src="splash.png" alt="TrendVishal Banner">
-    </div>
-    <header>
-        <div style="display:flex; align-items:center;">
-            <img src="ipl.jpeg" style="width: 40px; height: 40px; margin-right: 10px; vertical-align: middle;">
-            <div>
-                <h1 style="color:#ffcc00; font-size:24px; margin:0; font-weight:950; line-height:1.1; letter-spacing:0.5px; text-shadow: 0 0 8px rgba(255,204,0,0.4);">TRENDVISHAL<br>CRICKET</h1>
-                <p style="margin:4px 0 0 0; font-size:11px; color:#ffcc00; font-weight:900; letter-spacing:1px; text-shadow: 0 0 5px rgba(255,204,0,0.3);">FOUNDER: VISHAL SHUKLA</p>
-            </div>
-        </div>
-        <img src="vishal.jpg" alt="Vishal" style="width:55px; height:55px; border-radius:50%; border:2px solid #ffcc00; object-fit:cover; background:#fff;">
-    </header>
 
+    <header>👑 TREND VISHAL CRICKET 👑</header>
+
+    <!-- 📲 टैब सिस्टम -->
     <div class="tabs">
-        <div class="tab-btn active" onclick="showT('live', this)">LIVE</div>
-        <div class="tab-btn" onclick="showT('upcoming', this)">UPCOMING</div>
-        <div class="tab-btn" onclick="showT('results', this)">RESULTS</div>
-        <div class="tab-btn" onclick="showT('points', this)">POINT TABLE</div>
+        <button class="tab-btn active" onclick="switchTab('live')">🔴 LIVE</button>
+        <button class="tab-btn" onclick="switchTab('upcoming')">⏳ UPCOMING</button>
+        <button class="tab-btn" onclick="switchTab('results')">✅ RESULTS</button>
     </div>
 
-    <div class="category-container" style="display: flex; justify-content: center; gap: 10px; margin: 15px 0; padding: 0 10px;">
-        <button onclick="filterMatches('all')" class="category-btn active" style="background: #ffcc00; color: #000; font-weight: bold; padding: 10px 20px; border: none; border-radius: 25px; cursor: pointer; font-size: 14px; transition: 0.3s;">सब मैच</button>
-        <button onclick="filterMatches('ipl')" class="category-btn" style="background: #222; color: #fff; font-weight: bold; padding: 10px 20px; border: none; border-radius: 25px; cursor: pointer; font-size: 14px; transition: 0.3s;">IPL मैच 🏏</button>
-        <button onclick="filterMatches('india')" class="category-btn" style="background: #222; color: #fff; font-weight: bold; padding: 10px 20px; border: none; border-radius: 25px; cursor: pointer; font-size: 14px; transition: 0.3s;">India मैच 🇮🇳</button>
-    </div>
-    
-    <div id="live-sec" class="match-section" style="display:block; padding: 15px; text-align: center;"></div>
-
-    <div id="upcoming-sec" class="match-section" style="display:none;"></div>
-    <div id="results-sec" class="match-section" style="display:none;"></div>
-
-    <div id="points-sec" class="match-section" style="display:none; text-align:center; padding: 40px 15px; width: 100%; margin: 0 auto; box-sizing: border-box;">
-        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/84/Indian_Premier_League_Official_Logo.svg/1200px-Indian_Premier_League_Official_Logo.svg.png" style="width:65px; margin-bottom:15px; background:#fff; padding:5px; border-radius:10px; display:inline-block;">
-        <h2 style="color:#ffcc00; font-size:22px; margin:0 0 10px 0; width:100%;">IPL 2026 POINT TABLE</h2>
-        <p style="color:#8b949e; font-size:14px; margin-bottom:25px; width:100%;">लेटेस्ट रैंकिंग और पॉइंट्स देखने के लिए <br>नीचे बटन पर क्लिक करें।</p>
-        <a href="https://www.google.com/search?q=ipl+2026+point+table" target="_blank" 
-           style="background:#ffcc00; color:#000; text-decoration:none; padding:15px 30px; border-radius:30px; font-weight:bold; display:inline-block; font-size:16px; box-shadow: 0 5px 15px rgba(255,204,0,0.4); border: 2px solid #fff;">
-           VIEW POINT TABLE 📊
-        </a>
-    </div>
-
-    <div class="footer">
-        <div style="text-align: center; margin: 25px 0;">
-            <a href="Https://youtube.com/@trend_vishal?si=thZwHeODvI6Yd7X7" 
-               target="_blank"
-               style="background: #ff0000; color: #fff; padding: 12px 35px; text-decoration: none; font-weight: 900; border-radius: 50px; display: inline-block; font-size: 16px; text-transform: uppercase; box-shadow: 0 4px 15px rgba(255, 0, 0, 0.4); border: 2px solid #fff; animation: vishalPulse 2s infinite; font-family: 'Arial', sans-serif;">
-                🔴 SUBSCRIBE NOW
-            </a>
-            <p style="color: #ffcc00; font-size: 11px; margin-top: 10px; font-weight: bold;">
-                🚀 क्लिक करके ट्रेंड विशाल चैनल सब्सक्राइब करें 🚀
-            </p>
-        </div>
-
-        <div style="text-align: center; margin: 20px 0; padding: 10px;">
-            <p style="color: #ffcc00; font-size: 13px; margin-bottom: 10px; font-weight: 900; text-transform: uppercase;">⚡ Download Our OFFICIAL APP for Fastest IPL Score ⚡</p>
-            <a href="#" id="download-btn" target="_self"
-               style="background: linear-gradient(45deg, #ffcc00, #ff8800); color: #000; padding: 10px 35px; text-decoration: none; font-weight: 900; border-radius: 50px; display: inline-block; font-size: 15px; text-transform: uppercase; box-shadow: 0 4px 15px rgba(255, 204, 0, 0.4); border: 2px solid #fff; animation: vishalPulse 2s infinite;">
-                📥 DOWNLOAD OFFICIAL APP
-            </a>
-            <p style="color: #ccc; font-size: 12px; margin-top: 12px; line-height: 1.4; font-family: sans-serif; font-weight: 500;">
-                ⚠️ <b>Step:</b> If asks to 'Select Account', click <b>OK</b>.<br>
-                (App is 100% Safe & Secure for your device!)
-            </p>
-        </div>
-
-        <style>
-        @keyframes vishalPulse {
-          0% { transform: scale(1); }
-          50% { transform: scale(1.05); }
-          100% { transform: scale(1); }
-        }
-        </style>
-
-        <div class="shayari">
-            "मैदान की धूल हो या हार-जीत का शोर,<br>
-            क्रिकेट के हर पल में दिखेगा, विशाल का ज़ोर।"
-        </div>
-        <p style="margin-top:15px; font-size:11px; color:#8b949e;">Official Platform by Vishal Shukla<br>© 2026 All Rights Reserved</p>
-    </div>
+    <!-- 📍 मैच सेक्शन्स -->
+    <div id="live-sec" class="match-section" style="display: block;"></div>
+    <div id="upcoming-sec" class="match-section"></div>
+    <div id="results-sec" class="match-section"></div>
 
     <script>
-                const logos = {
-            GT: `gt.jpeg`,
-            CSK: `csk.png`,
-            PBKS: `pbks.png`,
-            KKR: `kkr.png`,
-            MI: `mi.jpeg`,
-            IPL: `ipl.jpeg`,
-            RCB: "rcb.png",
-            RR: "rr.png",
-            DC: "dc.jpg",
-            LSG: "lsg.jpg",
-            SRH: "srh.jpg",
-            IND: "india.png",
-            AUS: "australia.png",
-            PAK: "pakistan.png",
-            ENG: "england.png",
-            SL: "srilanka.png",
-            NZ: "newzealand.png",
-            SA: "southafrica.png"
-        };
-        
-
-        // 🏏 1. आईपीएल के मैचों का डेटा
-        const iplMatches = [
-            { t1: "GT", t2: "RCB", date: "2026-05-31T19:30:00", win: "ROYAL CHALLENGERS BENGALURU WON BY 5 WICKETS (GT: 155/8, RCB: 161/5)", venue: "Narendra Modi Stadium, Ahmedabad" },
-            { t1: "GT", t2: "RR", date: "2026-05-29T19:30:00", win: "GUJARAT TITANS WON BY 4 WICKETS (RR: 214/6, GT: 215/2)" },
-            { t1: "SRH", t2: "RR", date: "2026-05-27T19:30:00", win: "RAJASTHAN ROYALS WON BY 47 RUNS (RR: 243/8, SRH: 196/10)" },
-            { t1: "RCB", t2: "GT", date: "2026-05-26T19:30:00", win: "ROYAL CHALLENGERS BENGALURU WON BY 92 RUNS (RCB: 254/5, GT: 162/10)" },
-            { t1: "KKR", t2: "DC", date: "2026-05-24T19:30:00", win: "DELHI CAPITALS WON BY 40 RUNS (DC: 203/5, KKR: 163/10)" },
-            { t1: "MI", t2: "RR", date: "2026-05-24T15:30:00", win: "RAJASTHAN ROYALS WON BY 30 RUNS (RR: 205/8, MI: 175/9)" },
-            { t1: "LSG", t2: "PBKS", date: "2026-05-23T19:30:00", win: "PUNJAB KINGS WON BY 7 WICKETS (LSG: 196/6, PBKS: 200/3)" },
-            { t1: "SRH", t2: "RCB", date: "2026-05-22T19:30:00", win: "SUNRISERS HYDERABAD WON BY 55 RUNS (SRH: 255/4, RCB: 200/4)" },
-            { t1: "GT", t2: "CSK", date: "2026-05-21T19:30:00", win: "GUJARAT TITANS WON BY 89 RUNS (GT: 229/4, CSK: 140/10)" },
-            { t1: "KKR", t2: "MI", date: "2026-05-20T19:30:00", win: "KOLKATA KNIGHT RIDERS WON BY 4 WICKETS (MI: 147/8, KKR: 148/6)" },
-            { t1: "RR", t2: "LSG", date: "2026-05-19T19:30:00", win: "RAJASTHAN ROYALS WON BY 7 WICKETS (LSG: 220/5, RR: 225/3)" },       
-            { t1: "SRH", t2: "CSK", date: "2026-05-18T19:30:00", win: "SRH WON BY 5 WICKETS (CSK: 180/7, SRH: 181/5)" },
-            { t1: "DC", t2: "RR", date: "2026-05-17T19:30:00", win: "DC WON BY 5 WICKETS (RR: 193/8, DC: 197/5)" },
-            { t1: "PBKS", t2: "RCB", date: "2026-05-17T15:30:00", win: "RCB WON BY 23 RUNS (RCB: 222/4, PBKS: 199/8)" },
-            { t1: "KKR", t2: "GT", date: "2026-05-16T19:30:00", win: "KKR WON BY 29 RUNS (KKR: 247/2, GT: 218/4)" },
-            { t1: "LSG", t2: "CSK", date: "2026-05-15T19:30:00", win: "LSG WON BY 7 WICKETS (CSK: 187/5, LSG: 188/3)" },
-            { t1: "PBKS", t2: "MI", date: "2026-05-14T19:30:00", win: "MI WON BY 6 WICKETS (PBKS: 200/8, MI: 205/4)" },
-            { t1: "RCB", t2: "KKR", date: "2026-05-13T19:30:00", win: "RCB WON BY 6 WICKETS (KKR: 192/4, RCB: 194/4)" },
-            { t1: "GT", t2: "SRH", date: "2026-05-12T19:30:00", win: "GT WON BY 82 RUNS (GT: 168/5, SRH: 86/10)" },
-            { t1: "PBKS", t2: "DC", date: "2026-05-11T19:30:00", win: "DC WON BY 3 WICKETS (PBKS: 210/5, DC: 216/7)" },
-            { t1: "RCB", t2: "MI", date: "2026-05-10T19:30:00", win: "RCB WON BY 2 WICKETS (MI: 166/7, RCB: 167/8)" },
-            { t1: "CSK", t2: "LSG", date: "2026-05-10T15:30:00", win: "CSK WON BY 5 WICKETS (LSG: 203/8, CSK: 208/5)" },
-            { t1: "RR", t2: "GT", date: "2026-05-09T19:30:00", win: "GT WON BY 77 RUNS (GT: 229/4, RR: 152/10)" },
-            { t1: "DC", t2: "KKR", date: "2026-05-08T19:30:00", win: "KKR WON BY 8 WICKETS (DC: 142/8, KKR: 147/2)" },
-            { t1: "LSG", t2: "RCB", date: "2026-05-07T19:30:00", win: "LSG WON BY 9 RUNS (DLS) (LSG: 209/3, RCB: 203/6)" },
-            { t1: "SRH", t2: "PBKS", date: "2026-05-06T19:30:00", win: "SRH WON BY 33 RUNS (SRH: 235/4, PBKS: 202/7)" },
-            { t1: "DC", t2: "CSK", date: "2026-05-05T19:30:00", win: "CSK WON BY 8 WICKETS (DC: 155/7, CSK: 159/2)" },
-            { t1: "MI", t2: "LSG", date: "2026-05-04T19:30:00", win: "MI WON BY 6 WICKETS (LSG: 228/5, MI: 229/4)" },
-            { t1: "GT", t2: "PBKS", date: "2026-04-03T19:30:00", win: "GT WON BY 4 WICKETS (PBKS: 163/9, GT: 167/6)" },
-            { t1: "SRH", t2: "KKR", date: "2026-05-03T15:30:00", win: "KKR WON BY 7 WICKETS (SRH: 165/10, KKR: 169/3)" },
-            { t1: "CSK", t2: "MI", date: "2026-05-02T19:30:00", win: "CSK WON BY 8 WICKETS (MI: 159/7, CSK: 160/2)" },
-            { t1: "RR", t2: "DC", date: "2026-05-01T19:30:00", win: "DC WON BY 7 WICKETS (RR: 225/6, DC: 226/3)" },
-            { t1: "GT", t2: "RCB", date: "2026-04-30T19:30:00", win: "GT WON BY 4 WICKETS (RCB: 155/10, GT: 158/6)" },
-            { t1: "MI", t2: "SRH", date: "2026-04-29T19:30:00", win: "SRH WON BY 6 WICKETS (MI: 243/5, SRH: 249/4)" },
-            { t1: "PBKS", t2: "RR", date: "2026-04-28T19:30:00", win: "RR WON BY 6 WICKETS (PBKS: 222/4, RR: 228/4)" },
-            { t1: "DC", t2: "RCB", date: "2026-04-27T19:30:00", win: "RCB WON BY 9 WICKETS (DC: 75/10, RCB: 77/1)" },
-            { t1: "LSG", t2: "KKR", date: "2026-04-26T19:30:00", win: "KKR WON BY SUPER OVER (LSG: 155/8, KKR: 155/7)" },
-            { t1: "CSK", t2: "GT", date: "2026-04-26T15:30:00", win: "GT WON BY 8 WICKETS (CSK: 158/7, GT: 162/2)" },
-            { t1: "RR", t2: "SRH", date: "2026-04-25T19:30:00", win: "SRH WON BY 5 WICKETS (RR: 228/6, SRH: 229/5)" },
-            { t1: "DC", t2: "PBKS", date: "2026-04-25T15:30:00", win: "PBKS WON BY 6 WICKETS (DC: 264/2, PBKS: 265/4)" },
-            { t1: "PBKS", t2: "CSK", date: "2026-04-15T19:30:00", win: "CSK WON BY 5 WICKETS" },
-            { t1: "RCB", t2: "SRH", date: "2026-04-11T19:30:00", win: "RCB WON BY 23 RUNS" },
-            { t1: "PBKS", t2: "SRH", date: "2026-04-11T19:30:00", win: "PBKS WON BY 6 WICKETS" },
-            { t1: "RCB", t2: "RR", date: "2026-04-10T19:30:00", win: "RR WON BY 6 WICKETS" },
-            { t1: "KKR", t2: "LSG", date: "2026-04-09T19:30:00", win: "LSG WON BY 3 WICKETS" },
-            { t1: "GT", t2: "DC", date: "2026-04-08T19:30:00", win: "GT WON BY 1 RUN" },
-            { t1: "RR", t2: "MI", date: "2026-04-07T19:30:00", win: "RR WON BY 27 RUNS" },
-            { t1: "KKR", t2: "PBKS", date: "2026-04-06T19:30:00", win: "NO RESULT" },
-            { t1: "RCB", t2: "CSK", date: "2026-04-05T19:30:00", win: "RCB WON BY 43 RUNS" },
-            { t1: "SRH", t2: "LSG", date: "2026-04-05T15:30:00", win: "LSG WON BY 5 WICKETS" },
-            { t1: "GT", t2: "RR", date: "2026-04-04T19:30:00", win: "RR WON BY 6 RUNS" },
-            { t1: "MI", t2: "DC", date: "2026-04-04T15:30:00", win: "DC WON BY 6 WICKETS" },
-            { t1: "CSK", t2: "PBKS", date: "2026-04-03T19:30:00", win: "PBKS WON BY 5 WICKETS" },
-            { t1: "KKR", t2: "SRH", date: "2026-04-02T19:30:00", win: "SRH WON BY 65 RUNS" },
-            { t1: "LSG", t2: "DC", date: "2026-04-01T19:30:00", win: "DC WON BY 6 WICKETS" },
-            { t1: "RR", t2: "CSK", date: "2026-03-30T19:30:00", win: "RR WON BY 8 WICKETS" },
-            { t1: "MI", t2: "KKR", date: "2026-03-29T19:30:00", win: "MI WON BY 6 WICKETS" },
-            { t1: "RCB", t2: "SRH", date: "2026-03-28T19:30:00", win: "RCB WON BY 5 WICKETS" }
-        ];
-
-        // 🇮🇳 2. टीम इंडिया के मैच
+        // 🏏 जून और जुलाई 2026 का एकदम असली और पक्का शेड्यूल
         const indiaMatches = [
-                    // 🏏 भारत बनाम अफगानिस्तान सीरीज (जून 2026)
-        { t1: "IND", t2: "AFG", date: "2026-06-06T09:30:00", stage: "LIVE - Only Test Match 🏆", venue: "Maharaja Singh PCA Stadium, Chandigarh" },
-        { t1: "IND", t2: "AFG", date: "2026-06-13T13:30:00", stage: "1st ODI Match 🏆", venue: "HPCA Stadium, Dharamshala" },
-        { t1: "IND", t2: "AFG", date: "2026-06-17T13:30:00", stage: "2nd ODI Match 🏆", venue: "Ekana Stadium, Lucknow" },
-        { t1: "IND", t2: "AFG", date: "2026-06-20T13:30:00", stage: "3rd ODI Match 🏆", venue: "M. A. Chidambaram Stadium, Chennai" },
+            // --- जून 2026 ---
+            { t1: "IND", t2: "AFG", date: "2026-06-06T09:30:00", durationHours: 30, stage: "Only Test Match 🏆", venue: "PCA Stadium, Chandigarh", cricbuzzUrl: "https://www.cricbuzz.com/live-cricket-scores" },
+            { t1: "IND", t2: "AFG", date: "2026-06-13T13:30:00", durationHours: 8, stage: "1st ODI Match 🏆", venue: "HPCA Stadium, Dharamshala", cricbuzzUrl: "https://www.cricbuzz.com/live-cricket-scores" },
+            { t1: "IND", t2: "AFG", date: "2026-06-17T13:30:00", durationHours: 8, stage: "2nd ODI Match 🏆", venue: "Ekana Stadium, Lucknow", cricbuzzUrl: "https://www.cricbuzz.com/live-cricket-scores" },
+            { t1: "IND", t2: "AFG", date: "2026-06-20T13:30:00", durationHours: 8, stage: "3rd ODI Match 🏆", venue: "M. A. Chidambaram Stadium, Chennai", cricbuzzUrl: "https://www.cricbuzz.com/live-cricket-scores" },
+            { t1: "IRE", t2: "IND", date: "2026-06-26T19:30:00", durationHours: 4, stage: "1st T20I Match 🏆", venue: "Stormont, Belfast", cricbuzzUrl: "https://www.cricbuzz.com/live-cricket-scores" },
+            { t1: "IRE", t2: "IND", date: "2026-06-28T19:30:00", durationHours: 4, stage: "2nd T20I Match 🏆", venue: "Stormont, Belfast", cricbuzzUrl: "https://www.cricbuzz.com/live-cricket-scores" },
 
-        // 🇮🇪 भारत का आयरलैंड दौरा (जून 2026)
-        { t1: "IRE", t2: "IND", date: "2026-06-26T19:30:00", stage: "1st T20I Match 🏆", venue: "Stormont, Belfast" },
-        { t1: "IRE", t2: "IND", date: "2026-06-28T19:30:00", stage: "2nd T20I Match 🏆", venue: "Stormont, Belfast" },
-            
-            { t1: "IND", t2: "AUS", date: "2026-06-15T19:30:00", stage: "🏆 1st T20 MATCH", venue: "Wankhede Stadium, Mumbai" },
-            { t1: "IND", t2: "AUS", date: "2026-06-18T19:30:00", stage: "🏆 2nd T20 MATCH", venue: "M. Chinnaswamy Stadium, Bengaluru" },
-            { t1: "IND", t2: "AUS", date: "2026-06-21T19:30:00", stage: "🏆 3rd T20 MATCH", venue: "Narendra Modi Stadium, Ahmedabad" },
-            { t1: "IND", t2: "ENG", date: "2026-07-05T19:30:00", stage: "🏏 1st ODI MATCH", venue: "Eden Gardens, Kolkata" },
-            { t1: "IND", t2: "ENG", date: "2026-07-08T19:30:00", stage: "🏏 2nd ODI MATCH", venue: "MA Chidambaram Stadium, Chennai" },
-            { t1: "IND", t2: "ENG", date: "2026-07-11T19:30:00", stage: "🏏 3rd ODI MATCH", venue: "Arun Jaitley Stadium, Delhi" },
-            { t1: "IND", t2: "ENG", date: "2026-07-15T19:30:00", stage: "💥 1st T20 MATCH", venue: "PCA Stadium, Mohali" },
-            { t1: "IND", t2: "SL", date: "2026-08-20T19:30:00", stage: "🏆 1st ODI MATCH", venue: "R. Premadasa Stadium, Colombo" },
-            { t1: "IND", t2: "SL", date: "2026-08-23T19:30:00", stage: "🏆 2nd ODI MATCH", venue: "Pallekele International Stadium" },
-            { t1: "IND", t2: "NZ", date: "2026-10-08T09:30:00", stage: "🔥 1st TEST MATCH", venue: "Green Park, Kanpur" },
-            { t1: "IND", t2: "NZ", date: "2026-10-16T09:30:00", stage: "🏆 2nd TEST MATCH", venue: "M. Chinnaswamy Stadium, Bengaluru" },
-            { t1: "IND", t2: "NZ", date: "2026-10-24T09:30:00", stage: "👑 3rd TEST MATCH", venue: "Wankhede Stadium, Mumbai" },
-            { t1: "IND", t2: "PAK", date: "2026-05-10T19:30:00", stage: "🏆 ASIA CUP (SUPER 4)", venue: "Eden Gardens, Kolkata", win: "INDIA WON BY 6 WICKETS 🇮🇳 (PAK: 152/10, IND: 154/4)" },
-            { t1: "IND", t2: "SA", date: "2026-04-25T19:30:00", stage: "💥 T20 SERIES", venue: "JSCA Stadium, Ranchi", win: "INDIA WON BY 45 RUNS 🇮🇳 (IND: 198/5, SA: 153/8)" },
-            { t1: "IND", t2: "AUS", date: "2026-03-15T19:30:00", stage: "🏏 ODI SERIES", venue: "MA Chidambaram Stadium, Chennai", win: "AUSTRALIA WON BY 2 WICKETS (IND: 242/10, AUS: 245/8)" },
-            { t1: "IND", t2: "SL", date: "2026-02-28T19:30:00", stage: "🏆 T20 CUP", venue: "Wankhede Stadium, Mumbai", win: "INDIA WON BY 7 WICKETS 🇮🇳 (SL: 138/9, IND: 142/3)" },
-            { t1: "IND", t2: "ENG", date: "2026-01-20T09:30:00", stage: "🔥 TEST MATCH", venue: "Narendra Modi Stadium, Ahmedabad", win: "INDIA WON BY AN INNINGS & 34 RUNS 🇮🇳" }
+            // --- जुलाई 2026 ---
+            { t1: "ENG", t2: "IND", date: "2026-07-01T22:00:00", durationHours: 4, stage: "1st T20I Match 🏆", venue: "Riverside, Chester-le-Street", cricbuzzUrl: "https://www.cricbuzz.com/live-cricket-scores" },
+            { t1: "ENG", t2: "IND", date: "2026-07-04T19:00:00", durationHours: 4, stage: "2nd T20I Match 🏆", venue: "Old Trafford, Manchester", cricbuzzUrl: "https://www.cricbuzz.com/live-cricket-scores" },
+            { t1: "ENG", t2: "IND", date: "2026-07-07T22:00:00", durationHours: 4, stage: "3rd T20I Match 🏆", venue: "Trent Bridge, Nottingham", cricbuzzUrl: "https://www.cricbuzz.com/live-cricket-scores" },
+            { t1: "ENG", t2: "IND", date: "2026-07-09T22:00:00", durationHours: 4, stage: "4th T20I Match 🏆", venue: "Bristol Ground, Bristol", cricbuzzUrl: "https://www.cricbuzz.com/live-cricket-scores" },
+            { t1: "ENG", t2: "IND", date: "2026-07-11T19:00:00", durationHours: 4, stage: "5th T20I Match 🏆", venue: "Utilita Bowl, Southampton", cricbuzzUrl: "https://www.cricbuzz.com/live-cricket-scores" },
+            { t1: "ENG", t2: "IND", date: "2026-07-14T15:30:00", durationHours: 8, stage: "1st ODI Match 🏆", venue: "Edgbaston, Birmingham", cricbuzzUrl: "https://www.cricbuzz.com/live-cricket-scores" },
+            { t1: "ENG", t2: "IND", date: "2026-07-16T17:30:00", durationHours: 8, stage: "2nd ODI Match 🏆", venue: "Sophia Gardens, Cardiff", cricbuzzUrl: "https://www.cricbuzz.com/live-cricket-scores" },
+            { t1: "ENG", t2: "IND", date: "2026-07-19T15:30:00", durationHours: 8, stage: "3rd ODI Match 🏆", venue: "Lord's, London", cricbuzzUrl: "https://www.cricbuzz.com/live-cricket-scores" },
+            { t1: "ZIM", t2: "IND", date: "2026-07-23T16:30:00", durationHours: 4, stage: "1st T20I Match 🏆", venue: "Harare Sports Club, Harare", cricbuzzUrl: "https://www.cricbuzz.com/live-cricket-scores" },
+            { t1: "ZIM", t2: "IND", date: "2026-07-25T16:30:00", durationHours: 4, stage: "2nd T20I Match 🏆", venue: "Harare Sports Club, Harare", cricbuzzUrl: "https://www.cricbuzz.com/live-cricket-scores" },
+            { t1: "ZIM", t2: "IND", date: "2026-07-26T16:30:00", durationHours: 4, stage: "3rd T20I Match 🏆", venue: "Harare Sports Club, Harare", cricbuzzUrl: "https://www.cricbuzz.com/live-cricket-scores" }
         ];
 
-        let upcomingMatches = [];
-        let sortedResults = [];
-        let currentTab = 'live';
+        // 💥 ऑटोमैटिक टाइमर फ़िल्टर लॉजिक
+        function renderMatches() {
+            const now = new Date(); // यूज़र के फोन का करंट टाइम
 
-        window.showT = function(tabId, btn) {
-            currentTab = tabId;
-            const tabs = document.querySelectorAll('.tab-btn');
-            tabs.forEach(t => t.classList.remove('active'));
-            if(btn) btn.classList.add('active');
-
-            const sections = document.querySelectorAll('.match-section');
-            sections.forEach(s => s.style.display = 'none');
-
-            const activeSec = document.getElementById(`${tabId}-sec`);
-            if(activeSec) activeSec.style.display = 'block';
-        };
-
-        window.filterMatches = function(type) {
-            const buttons = document.querySelectorAll('.category-btn');
-            buttons.forEach(btn => {
-                btn.classList.remove('active');
-                btn.style.background = '#222';
-                btn.style.color = '#fff';
-            });
-
-            let selectedData = [];
-            if (type === 'all') {
-                selectedData = [...iplMatches, ...indiaMatches];
-            } else if (type === 'ipl') {
-                selectedData = [...iplMatches];
-            } else if (type === 'india') {
-                selectedData = [...indiaMatches];
-            }
-
-            upcomingMatches = selectedData.filter(m => !m.win).sort((a, b) => new Date(a.date) - new Date(b.date));
-            sortedResults = selectedData.filter(m => m.win).sort((a, b) => new Date(b.date) - new Date(a.date));
-
-            renderMatchCards();
-        };
-
-        function renderMatchCards() {
             const liveSec = document.getElementById('live-sec');
             const upcomingSec = document.getElementById('upcoming-sec');
             const resultsSec = document.getElementById('results-sec');
-            
-            if(upcomingSec) upcomingSec.innerHTML = "";
-            if(resultsSec) resultsSec.innerHTML = "";
 
-            upcomingMatches.forEach(m => {
-                if(upcomingSec) upcomingSec.innerHTML += createCardHtml(m, false);
+            // पुराना डेटा साफ़ करें
+            liveSec.innerHTML = '';
+            upcomingSec.innerHTML = '';
+            resultsSec.innerHTML = '';
+
+            let counts = { live: 0, upcoming: 0, results: 0 };
+
+            indiaMatches.forEach(match => {
+                const startTime = new Date(match.date);
+                const endTime = new Date(startTime.getTime() + (match.durationHours * 60 * 60 * 1000));
+
+                // सुंदर कार्ड एचटीएमएल
+                let cardHtml = `
+                    <div class="match-card">
+                        <div class="match-teams">${match.t1} vs ${match.t2}</div>
+                        <div class="match-details">📌 ${match.stage}</div>
+                        <div class="match-details">📍 ${match.venue}</div>
+                        <div class="match-details">📅 ${startTime.toLocaleString('hi-IN')}</div>
+                `;
+
+                if (now >= startTime && now <= endTime) {
+                    // 🔴 यदि मैच लाइव है, तो क्रिकबज बटन जोड़ें
+                    cardHtml += `<a href="${match.cricbuzzUrl}" target="_blank" class="live-score-btn">📲 View Live Score</a>`;
+                    cardHtml += `</div>`;
+                    liveSec.innerHTML += cardHtml;
+                    counts.live++;
+                } else if (now < startTime) {
+                    // ⏳ अपकमिंग मैच
+                    cardHtml += `</div>`;
+                    upcomingSec.innerHTML += cardHtml;
+                    counts.upcoming++;
+                } else {
+                    // ✅ पुराना रिजल्ट
+                    cardHtml += `</div>`;
+                    resultsSec.innerHTML += cardHtml;
+                    counts.results++;
+                }
             });
 
-            sortedResults.forEach(m => {
-                if(resultsSec) resultsSec.innerHTML += createCardHtml(m, true);
-            });
-
-            if (liveSec) {
-                const hasLiveCard = liveSec.querySelector('.match-card') !== null;
-                if (!hasLiveCard) {
-                    liveSec.innerHTML = `
-                        <div style="padding: 40px 20px; background: #161b22; border-radius: 12px; border: 1px dashed #ffcc00; margin: 15px;">
-                            <h2 style="color: #ffcc00; font-size: 22px; font-weight: 900; margin: 0 0 10px 0; letter-spacing: 1px;">🚫 NO LIVE MATCH TODAY</h2>
-                            <p style="color: #8b949e; font-size: 13px; margin: 0;">आज कोई लाइव मैच नहीं है। आगामी और पुराने मैचों के परिणाम देखने के लिए ऊपर टैब बदलें।</p>
-                        </div>
-                    `;
-                }
-            }
+            // अगर कोई मैच न हो तो खाली मैसेज दिखाएं
+            if (counts.live === 0) liveSec.innerHTML = '<p class="no-match">🔴 फिलहाल कोई मैच लाइव नहीं है।</p>';
+            if (counts.upcoming === 0) upcomingSec.innerHTML = '<p class="no-match">⏳ कोई अपकमिंग मैच नहीं है।</p>';
+            if (counts.results === 0) resultsSec.innerHTML = '<p class="no-match">✅ कोई पुराना परिणाम मौजूद नहीं है।</p>';
         }
 
-                function createCardHtml(m, isResult) {
-            const logo1 = logos[m.t1] || 'ipl.jpeg';
-            const logo2 = logos[m.t2] || 'ipl.jpeg';
-            const matchDate = new Date(m.date).toLocaleDateString('hi-IN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-            return `
-                <div class="match-card">
-                    <span class="date-header">📅 ${matchDate}</span>
-                    <div class="teams-row">
-                        <div class="team">
-                            <img src="${logo1}" alt="${m.t1}">
-                            <span class="team-name">${m.t1}</span>
-                        </div>
-                        <div class="vs-box">VS</div>
-                        <div class="team">
-                            <img src="${logo2}" alt="${m.t2}">
-                            <span class="team-name">${m.t2}</span>
-                        </div>
-                    </div>
-                    <div style="color:#ffcc00; font-size:12px; font-weight:bold; margin-top:5px; text-align:center;">${m.stage || ''}</div>
-                    <div style="color:#8b949e; font-size:11px; margin-top:2px; text-align:center;">📍 ${m.venue || ''}</div>
-                    
-                    ${isResult ? `
-                        <span class="win-text">${m.win}</span>
-                        <a href="https://www.google.com/search?q=${m.t1}+vs+${m.t2}+match+highlight" target="_blank" class="btn-highlight">
-                            🎬 WATCH HIGHLIGHT
-                        </a>
-                        <a href="https://www.google.com/search?q=${m.t1}+vs+${m.t2}+match+details" target="_blank" class="btn-live" style="margin-top:8px; background:#30363d; color:#fff; border:1px solid #ffcc00;">
-                            📊 VIEW DETAILS
-                        </a>
-                    ` : `
-                        <span class="win-text" style="color:#ffcc00;">⏳ UPCOMING MATCH</span>
-                    `}
-                </div>
-            `;
-                }
+        // 🔄 टैब बदलने का फंक्शन
+        function switchTab(tabId) {
+            // सारे सेक्शन्स छुपाएं
+            document.querySelectorAll('.match-section').forEach(sec => sec.style.display = 'none');
+            // सारे बटन्स को इनएक्टिव करें
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
 
-        function hideTrendSplash() {
-            var loader = document.getElementById("loading-screen");
-            if (loader) {
-                loader.style.opacity = "0";
-                setTimeout(function() {
-                    loader.style.display = "none";
-                }, 500);
-            }
+            // केवल चुने हुए को दिखाएं
+            document.getElementById(`${tabId}-sec`).style.display = 'block';
+            event.target.classList.add('active');
         }
 
-        window.addEventListener('load', function() {
-            setTimeout(hideTrendSplash, 1500);
-        });
-        
-        setTimeout(hideTrendSplash, 2500);
-
-        // 🚀 ऐप ओपन होते ही 'सब मैच' ऑटोमैटिक चालू करने का कड़क लॉजिक
-        function run() {
-            filterMatches('all');
-
-            const allBtn = document.querySelectorAll('.category-btn')[0];
-            if (allBtn) {
-                allBtn.style.background = '#ffcc00';
-                allBtn.style.color = '#000';
-            }
-
-            const liveSec = document.getElementById('live-sec');
-            const hasLiveMatch = liveSec && liveSec.querySelector('.match-card') !== null;
-
-            if (!hasLiveMatch) {
-                const upcomingBtn = document.querySelectorAll('.tab-btn')[1];
-                showT('upcoming', upcomingBtn);
-            } else {
-                const liveBtn = document.querySelectorAll('.tab-btn')[0];
-                showT('live', liveBtn);
-            }
-        }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            run();
-        });
-
-        // 👆 स्वाइप फ़ंक्शन (ऑटो-क्लिक के साथ)
-        let touchstartX = 0;
-        let touchendX = 0;
-        const tabsOrder = ['live', 'upcoming', 'results', 'points'];
-
-        window.addEventListener('touchstart', e => {
-            touchstartX = e.changedTouches[0].screenX;
-        });
-
-        window.addEventListener('touchend', e => {
-            touchendX = e.changedTouches[0].screenX;
-        });
-
-        function handleSwipe() {
-            let currentIndex = tabsOrder.indexOf(currentTab);
-            
-            if (touchendX < touchstartX - 80) {
-                if (currentIndex < tabsOrder.length - 1) {
-                    const nextTabId = tabsOrder[currentIndex + 1];
-                    const nextBtn = document.querySelectorAll('.tab-btn')[currentIndex + 1];
-                    showT(nextTabId, nextBtn);
-                    
-                    if (typeof filterMatches === 'function') {
-                        filterMatches('all');
-                        const allBtn = document.querySelectorAll('.category-btn')[0];
-                        if (allBtn) {
-                            allBtn.style.background = '#ffcc00';
-                            allBtn.style.color = '#000';
-                        }
-                        const iplBtn = document.querySelectorAll('.category-btn')[1];
-                        const indiaBtn = document.querySelectorAll('.category-btn')[2];
-                        if(iplBtn) { iplBtn.style.background = ''; iplBtn.style.color = ''; }
-                        if(indiaBtn) { indiaBtn.style.background = ''; indiaBtn.style.color = ''; }
-                    }
-                }
-            }
-            if (touchendX > touchstartX + 80) {
-                if (currentIndex > 0) {
-                    const prevTabId = tabsOrder[currentIndex - 1];
-                    const prevBtn = document.querySelectorAll('.tab-btn')[currentIndex - 1];
-                    showT(prevTabId, prevBtn);
-                    
-                    if (typeof filterMatches === 'function') {
-                        filterMatches('all');
-                        const allBtn = document.querySelectorAll('.category-btn')[0];
-                        if (allBtn) {
-                            allBtn.style.background = '#ffcc00';
-                            allBtn.style.color = '#000';
-                        }
-                        const iplBtn = document.querySelectorAll('.category-btn')[1];
-                        const indiaBtn = document.querySelectorAll('.category-btn')[2];
-                        if(iplBtn) { iplBtn.style.background = ''; iplBtn.style.color = ''; }
-                        if(indiaBtn) { indiaBtn.style.background = ''; indiaBtn.style.color = ''; }
-                    }
-                }
-            }
-        }
-        
-        window.addEventListener('touchend', e => {
-            handleSwipe();
-        });
+        // ऐप लोड होते ही मैच रेंडर करें
+        window.onload = renderMatches;
     </script>
-    <div id="fake-visitor-badge" style="position: fixed; bottom: 100px; right: 15px; background: rgba(0, 0, 0, 0.8); border: 1px solid #ffcc00; color: #fff; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; z-index: 99999; display: flex; align-items: center; gap: 6px; box-shadow: 0 0 10px rgba(255, 204, 0, 0.4);">
-    <span style="width: 8px; height: 8px; background: #ff0000; border-radius: 50%; display: inline-block; animation: fakeBlink 1s infinite;"></span>
-    <span id="fake-count">284</span> Watching
-</div>
-
-<style>
-@keyframes fakeBlink {
-    0% { opacity: 1; }
-    50% { opacity: 0.3; }
-    100% { opacity: 1; }
-}
-</style>
-
-<script>
-// टाइम-बेस्ड ऑटोमैटिक नंबर बदलने का स्मार्ट लॉजिक
-setInterval(() => {
-    const countElement = document.getElementById('fake-count');
-    if(countElement) {
-        const currentHour = new Date().getHours();
-        let minLimit = 200;
-        let maxLimit = 400;
-        let change = 0;
-
-        // अगर मैच का टाइम है (शाम 7 बजे से रात 11:59 तक)
-        if (currentHour >= 19 && currentHour <= 23) {
-            minLimit = 1200;
-            maxLimit = 1800;
-            // मैच के टाइम ज़्यादा उतार-चढ़ाव (-20 से +45 के बीच भारी जंप)
-            change = Math.floor(Math.random() * 66) - 20; 
-        } else {
-            // नॉर्मल टाइम में कम उतार-चढ़ाव (-5 से +10 के बीच हल्का जंप)
-            change = Math.floor(Math.random() * 16) - 5; 
-        }
-
-        let currentCount = parseInt(countElement.innerText);
-        
-        // अगर नंबर लिमिट से एकदम बाहर है, तो उसे बीच में लाएं
-        if (currentCount < minLimit || currentCount > maxLimit) {
-            currentCount = Math.floor(Math.random() * (maxLimit - minLimit + 1)) + minLimit;
-        } else {
-            currentCount = currentCount + change;
-            
-            // लिमिट के अंदर ही रोक कर रखें
-            if (currentCount < minLimit) currentCount = minLimit + Math.floor(Math.random() * 25);
-            if (currentCount > maxLimit) currentCount = maxLimit - Math.floor(Math.random() * 25);
-        }
-        
-        countElement.innerText = currentCount;
-    }
-}, 4000); // हर 4 सेकंड में अपडेट
-        </script>
-    
 </body>
 </html>

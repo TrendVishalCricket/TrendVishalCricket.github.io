@@ -186,7 +186,6 @@ header {
     margin-top: 12px; 
     font-size: 14px; 
 } 
-/* 🔴 लाइव स्कोर के लिए ब्लिंक इफ़ेक्ट वाला बटन स्टाइल */
 .btn-cricbuzz { 
     background: #ff4444; 
     color: white; 
@@ -311,8 +310,7 @@ header {
     <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/84/Indian_Premier_League_Official_Logo.svg/1200px-Indian_Premier_League_Official_Logo.svg.png" style="width:65px; margin-bottom:15px; background:#fff; padding:5px; border-radius:10px; display:inline-block;"> 
     <h2 style="color:#ffcc00; font-size:22px; margin:0 0 10px 0; width:100%;">IPL 2026 POINT TABLE</h2> 
     <p style="color:#8b949e; font-size:14px; margin-bottom:25px; width:100%;">लेटेस्ट रैंकिंग और पॉइंट्स देखने के लिए <br>नीचे बटन पर क्लिक करें।</p> 
-    <a href="https://www.google.com/search?q=ipl+2026+point+table" target="_blank" style="background:#ffcc00; color:#000; text-decoration:none; padding:15px 30px; border-radius:30px; font-weight:bold; display:inline-block; font-size:16px; box-shadow: 0 5px 15px rgba(255,204,0,0.4); border: 2px solid #fff;"> VIEW POINT TABLE 📊 </a> 
-</div> 
+    <a href="https://www.google.com/search?q=ipl+2026+point+table" target="_blank" style="background:#ffcc00; color:#000; text-decoration:none; padding:15px 30px; border-radius:30px; font-weight:bold; display:inline-block; font-size:16px; box-shadow: 0 5px 15px rgba(255,204,0,0.4); border: 2px solid #fff;"> VIEW POINT TABLE 📊 </a> </div> 
 
 <div class="footer"> 
     <div style="text-align: center; margin: 25px 0;"> 
@@ -340,99 +338,67 @@ const logos = {
     IRE: "ipl.jpeg", AFG: "ipl.jpeg", ZIM: "ipl.jpeg" 
 }; 
 
-// 🏏 1. आईपीएल के मैचों का डेटा 
-const iplMatches = [ 
-    { t1: "GT", t2: "RCB", date: "2026-05-31T19:30:00", win: "ROYAL CHALLENGERS BENGALURU WON BY 5 WICKETS (GT: 155/8, RCB: 161/5)", venue: "Narendra Modi Stadium, Ahmedabad" }, 
-    { t1: "GT", t2: "RR", date: "2026-05-29T19:30:00", win: "GUJARAT TITANS WON BY 4 WICKETS (RR: 214/6, GT: 215/2)" }, 
-    { t1: "SRH", t2: "RR", date: "2026-05-27T19:30:00", win: "RAJASTHAN ROYALS WON BY 47 RUNS (RR: 243/8, SRH: 196/10)" }, 
-    { t1: "RCB", t2: "GT", date: "2026-05-26T19:30:00", win: "ROYAL CHALLENGERS BENGALURU WON BY 92 RUNS (RCB: 254/5, GT: 162/10)" }, 
-    { t1: "KKR", t2: "DC", date: "2026-05-24T19:30:00", win: "DELHI CAPITALS WON BY 40 RUNS (DC: 203/5, KKR: 163/10)" }, 
-    { t1: "MI", t2: "RR", date: "2026-05-24T15:30:00", win: "RAJASTHAN ROYALS WON BY 30 RUNS (RR: 205/8, MI: 175/9)" }, 
-    { t1: "LSG", t2: "PBKS", date: "2026-05-23T19:30:00", win: "PUNJAB KINGS WON BY 7 WICKETS (LSG: 196/6, PBKS: 200/3)" }, 
-    { t1: "SRH", t2: "RCB", date: "2026-05-22T19:30:00", win: "SUNRISERS HYDERABAD WON BY 55 RUNS (SRH: 255/4, RCB: 200/4)" }, 
-    { t1: "GT", t2: "CSK", date: "2026-05-21T19:30:00", win: "GUJARAT TITANS WON BY 89 RUNS (GT: 229/4, CSK: 140/10)" }, 
-    { t1: "KKR", t2: "MI", date: "2026-05-20T19:30:00", win: "KOLKATA KNIGHT RIDERS WON BY 4 WICKETS (MI: 147/8, KKR: 148/6)" }, 
-    { t1: "RR", t2: "LSG", date: "2026-05-19T19:30:00", win: "RAJASTHAN ROYALS WON BY 7 WICKETS (LSG: 220/5, RR: 225/3)" }, 
-    { t1: "SRH", t2: "CSK", date: "2026-05-18T19:30:00", win: "SRH WON BY 5 WICKETS (CSK: 180/7, SRH: 181/5)" }, 
-    { t1: "DC", t2: "RR", date: "2026-05-17T19:30:00", win: "DC WON BY 5 WICKETS (RR: 193/8, DC: 197/5)" }, 
-    { t1: "PBKS", t2: "RCB", date: "2026-05-17T15:30:00", win: "RCB WON BY 23 RUNS (RCB: 222/4, PBKS: 199/8)" }, 
-    { t1: "KKR", t2: "GT", date: "2026-05-16T19:30:00", win: "KKR WON BY 29 RUNS (KKR: 247/2, GT: 218/4)" }, 
-    { t1: "LSG", t2: "CSK", date: "2026-05-15T19:30:00", win: "LSG WON BY 7 WICKETS (CSK: 187/5, LSG: 188/3)" }, 
-    { t1: "PBKS", t2: "MI", date: "2026-05-14T19:30:00", win: "MI WON BY 6 WICKETS (PBKS: 200/8, MI: 205/4)" }, 
-    { t1: "RCB", t2: "KKR", date: "2026-05-13T19:30:00", win: "RCB WON BY 6 WICKETS (KKR: 192/4, RCB: 194/4)" }, 
-    { t1: "GT", t2: "SRH", date: "2026-05-12T19:30:00", win: "GT WON BY 82 RUNS (GT: 168/5, SRH: 86/10)" }, 
-    { t1: "PBKS", t2: "DC", date: "2026-05-11T19:30:00", win: "DC WON BY 3 WICKETS (PBKS: 210/5, DC: 216/7)" }, 
-    { t1: "RCB", t2: "MI", date: "2026-05-10T19:30:00", win: "RCB WON BY 2 WICKETS (MI: 166/7, RCB: 167/8)" }, 
-    { t1: "CSK", t2: "LSG", date: "2026-05-10T15:30:00", win: "CSK WON BY 5 WICKETS (LSG: 203/8, CSK: 208/5)" }, 
-    { t1: "RR", t2: "GT", date: "2026-05-09T19:30:00", win: "GT WON BY 77 RUNS (GT: 229/4, RR: 152/10)" }, 
-    { t1: "DC", t2: "KKR", date: "2026-05-08T19:30:00", win: "KKR WON BY 8 WICKETS (DC: 142/8, KKR: 147/2)" }, 
-    { t1: "LSG", t2: "RCB", date: "2026-05-07T19:30:00", win: "LSG WON BY 9 RUNS (DLS) (LSG: 209/3, RCB: 203/6)" }, 
-    { t1: "SRH", t2: "PBKS", date: "2026-05-06T19:30:00", win: "SRH WON BY 33 RUNS (SRH: 235/4, PBKS: 202/7)" }, 
-    { t1: "DC", t2: "CSK", date: "2026-05-05T19:30:00", win: "CSK WON BY 8 WICKETS (DC: 155/7, CSK: 159/2)" }, 
-    { t1: "MI", t2: "LSG", date: "2026-05-04T19:30:00", win: "MI WON BY 6 WICKETS (LSG: 228/5, MI: 229/4)" }, 
-    { t1: "GT", t2: "PBKS", date: "2026-04-03T19:30:00", win: "GT WON BY 4 WICKETS (PBKS: 163/9, GT: 167/6)" }, 
-    { t1: "SRH", t2: "KKR", date: "2026-05-03T15:30:00", win: "KKR WON BY 7 WICKETS (SRH: 165/10, KKR: 169/3)" }, 
-    { t1: "CSK", t2: "MI", date: "2026-05-02T19:30:00", win: "CSK WON BY 8 WICKETS (MI: 159/7, CSK: 160/2)" }, 
-    { t1: "RR", t2: "DC", date: "2026-05-01T19:30:00", win: "DC WON BY 7 WICKETS (RR: 225/6, DC: 226/3)" }, 
-    { t1: "GT", t2: "RCB", date: "2026-04-30T19:30:00", win: "GT WON BY 4 WICKETS (RCB: 155/10, GT: 158/6)" }, 
-    { t1: "MI", t2: "SRH", date: "2026-04-29T19:30:00", win: "SRH WON BY 6 WICKETS (MI: 243/5, SRH: 249/4)" }, 
-    { t1: "PBKS", t2: "RR", date: "2026-04-28T19:30:00", win: "RR WON BY 6 WICKETS (PBKS: 222/4, RR: 228/4)" }, 
-    { t1: "DC", t2: "RCB", date: "2026-04-27T19:30:00", win: "RCB WON BY 9 WICKETS (DC: 75/10, RCB: 77/1)" }, 
-    { t1: "LSG", t2: "KKR", date: "2026-04-26T19:30:00", win: "KKR WON BY SUPER OVER (LSG: 155/8, KKR: 155/7)" }, 
-    { t1: "CSK", t2: "GT", date: "2026-04-26T15:30:00", win: "GT WON BY 8 WICKETS (CSK: 158/7, GT: 162/2)" }, 
-    { t1: "RR", t2: "SRH", date: "2026-04-25T19:30:00", win: "SRH WON BY 5 WICKETS (RR: 228/6, SRH: 229/5)" }, 
-    { t1: "DC", t2: "PBKS", date: "2026-04-25T15:30:00", win: "PBKS WON BY 6 WICKETS (DC: 264/2, PBKS: 265/4)" }, 
-    { t1: "PBKS", t2: "CSK", date: "2026-04-15T19:30:00", win: "CSK WON BY 5 WICKETS" }, 
-    { t1: "RCB", t2: "SRH", date: "2026-04-11T19:30:00", win: "RCB WON BY 23 RUNS" }, 
-    { t1: "PBKS", t2: "SRH", date: "2026-04-11T19:30:00", win: "PBKS WON BY 6 WICKETS" }, 
-    { t1: "RCB", t2: "RR", date: "2026-04-10T19:30:00", win: "RR WON BY 6 WICKETS" }, 
-    { t1: "KKR", t2: "LSG", date: "2026-04-09T19:30:00", win: "LSG WON BY 3 WICKETS" }, 
-    { t1: "GT", t2: "DC", date: "2026-04-08T19:30:00", win: "GT WON BY 1 RUN" }, 
-    { t1: "RR", t2: "MI", date: "2026-04-07T19:30:00", win: "RR WON BY 27 RUNS" }, 
-    { t1: "KKR", t2: "PBKS", date: "2026-04-06T19:30:00", win: "NO RESULT" }, 
-    { t1: "RCB", t2: "CSK", date: "2026-04-05T19:30:00", win: "RCB WON BY 43 RUNS" }, 
-    { t1: "SRH", t2: "LSG", date: "2026-04-05T15:30:00", win: "LSG WON BY 5 WICKETS" }, 
-    { t1: "GT", t2: "RR", date: "2026-04-04T19:30:00", win: "RR WON BY 6 RUNS" }, 
-    { t1: "MI", t2: "DC", date: "2026-04-04T15:30:00", win: "DC WON BY 6 WICKETS" }, 
-    { t1: "CSK", t2: "PBKS", date: "2026-04-03T19:30:00", win: "PBKS WON BY 5 WICKETS" }, 
-    { t1: "KKR", t2: "SRH", date: "2026-04-02T19:30:00", win: "SRH WON BY 65 RUNS" }, 
-    { t1: "LSG", t2: "DC", date: "2026-04-01T19:30:00", win: "DC WON BY 6 WICKETS" }, 
-    { t1: "RR", t2: "CSK", date: "2026-03-30T19:30:00", win: "RR WON BY 8 WICKETS" }, 
-    { t1: "MI", t2: "KKR", date: "2026-03-29T19:30:00", win: "MI WON BY 6 WICKETS" }, 
-    { t1: "RCB", t2: "SRH", date: "2026-03-28T19:30:00", win: "RCB WON BY 5 WICKETS" } 
-]; 
-
-// 🇮🇳 2. टीम इंडिया के मैच (जून और जुलाई का 100% असली अंतरराष्ट्रीय शेड्यूल) 
-const indiaMatches = [ 
-    { t1: "IND", t2: "AFG", date: "2026-06-06T09:30:00", durationHours: 120, stage: "Only Test Match 🏆", venue: "Maharaja Singh PCA Stadium, Chandigarh", cricbuzzUrl: "https://www.cricbuzz.com/live-cricket-scores" }, 
-    { t1: "IND", t2: "AFG", date: "2026-06-13T13:30:00", durationHours: 8, stage: "1st ODI Match 🏆", venue: "HPCA Stadium, Dharamshala", cricbuzzUrl: "https://www.cricbuzz.com/live-cricket-scores" }, 
-    { t1: "IND", t2: "AFG", date: "2026-06-17T13:30:00", durationHours: 8, stage: "2nd ODI Match 🏆", venue: "Ekana Stadium, Lucknow", cricbuzzUrl: "https://www.cricbuzz.com/live-cricket-scores" }, 
-    { t1: "IND", t2: "AFG", date: "2026-06-20T13:30:00", durationHours: 8, stage: "3rd ODI Match 🏆", venue: "M. A. Chidambaram Stadium, Chennai", cricbuzzUrl: "https://www.cricbuzz.com/live-cricket-scores" }, 
-    { t1: "IRE", t2: "IND", date: "2026-06-26T19:30:00", durationHours: 4, stage: "1st T20I Match 🏆", venue: "Stormont, Belfast", cricbuzzUrl: "https://www.cricbuzz.com/live-cricket-scores" }, 
-    { t1: "IRE", t2: "IND", date: "2026-06-28T19:30:00", durationHours: 4, stage: "2nd T20I Match 🏆", venue: "Stormont, Belfast", cricbuzzUrl: "https://www.cricbuzz.com/live-cricket-scores" }, 
-    { t1: "ENG", t2: "IND", date: "2026-07-01T22:00:00", durationHours: 4, stage: "1st T20I Match 🏆", venue: "Riverside, Chester-le-Street", cricbuzzUrl: "https://www.cricbuzz.com/live-cricket-scores" }, 
-    { t1: "ENG", t2: "IND", date: "2026-07-04T19:00:00", durationHours: 4, stage: "2nd T20I Match 🏆", venue: "Old Trafford, Manchester", cricbuzzUrl: "https://www.cricbuzz.com/live-cricket-scores" }, 
-    { t1: "ENG", t2: "IND", date: "2026-07-07T22:00:00", durationHours: 4, stage: "3rd T20I Match 🏆", venue: "Trent Bridge, Nottingham", cricbuzzUrl: "https://www.cricbuzz.com/live-cricket-scores" }, 
-    { t1: "ENG", t2: "IND", date: "2026-07-09T22:00:00", durationHours: 4, stage: "4th T20I Match 🏆", venue: "Bristol Ground, Bristol", cricbuzzUrl: "https://www.cricbuzz.com/live-cricket-scores" }, 
-    { t1: "ENG", t2: "IND", date: "2026-07-11T19:00:00", durationHours: 4, stage: "5th T20I Match 🏆", venue: "Utilita Bowl, Southampton", cricbuzzUrl: "https://www.cricbuzz.com/live-cricket-scores" }, 
-    { t1: "ENG", t2: "IND", date: "2026-07-14T15:30:00", durationHours: 8, stage: "1st ODI Match 🏆", venue: "Edgbaston, Birmingham", cricbuzzUrl: "https://www.cricbuzz.com/live-cricket-scores" }, 
-    { t1: "ENG", t2: "IND", date: "2026-07-16T17:30:00", durationHours: 8, stage: "2nd ODI Match 🏆", venue: "Sophia Gardens, Cardiff", cricbuzzUrl: "https://www.cricbuzz.com/live-cricket-scores" }, 
-    { t1: "ENG", t2: "IND", date: "2026-07-19T15:30:00", durationHours: 8, stage: "3rd ODI Match 🏆", venue: "Lord's, London", cricbuzzUrl: "https://www.cricbuzz.com/live-cricket-scores" }, 
-    { t1: "ZIM", t2: "IND", date: "2026-07-23T16:30:00", durationHours: 4, stage: "1st T20I Match 🏆", venue: "Harare Sports Club, Harare", cricbuzzUrl: "https://www.cricbuzz.com/live-cricket-scores" }, 
-    { t1: "ZIM", t2: "IND", date: "2026-07-25T16:30:00", durationHours: 4, stage: "2nd T20I Match 🏆", venue: "Harare Sports Club, Harare", cricbuzzUrl: "https://www.cricbuzz.com/live-cricket-scores" }, 
-    { t1: "ZIM", t2: "IND", date: "2026-07-26T16:30:00", durationHours: 4, stage: "3rd T20I Match 🏆", venue: "Harare Sports Club, Harare", cricbuzzUrl: "https://www.cricbuzz.com/live-cricket-scores" }, 
-    // पुराने अंतरराष्ट्रीय परिणाम 
-    { t1: "IND", t2: "PAK", date: "2026-05-10T19:30:00", stage: "🏆 ASIA CUP (SUPER 4)", venue: "Eden Gardens, Kolkata", win: "INDIA WON BY 6 WICKETS 🇮🇳 (PAK: 152/10, IND: 154/4)" }, 
-    { t1: "IND", t2: "SA", date: "2026-04-25T19:30:00", stage: "💥 T20 SERIES", venue: "JSCA Stadium, Ranchi", win: "INDIA WON BY 45 RUNS 🇮🇳 (IND: 198/5, SA: 153/8)" }, 
-    { t1: "IND", t2: "AUS", date: "2026-03-15T19:30:00", stage: "🏏 ODI SERIES", venue: "MA Chidambaram Stadium, Chennai", win: "AUSTRALIA WON BY 2 WICKETS (IND: 242/10, AUS: 245/8)" }, 
-    { t1: "IND", t2: "SL", date: "2026-02-28T19:30:00", stage: "🏆 T20 CUP", venue: "Wankhede Stadium, Mumbai", win: "INDIA WON BY 7 WICKETS 🇮🇳 (SL: 138/9, IND: 142/3)" }, 
-    { t1: "IND", t2: "ENG", date: "2026-01-20T09:30:00", stage: "🔥 TEST MATCH", venue: "Narendra Modi Stadium, Ahmedabad", win: "INDIA WON BY AN INNINGS & 34 RUNS 🇮🇳" } 
-]; 
-
+// Master Array - API से आने वाला डेटा इसी में लोड होगा
+let allFetchedMatches = [];
 let upcomingMatches = []; 
 let sortedResults = []; 
 let liveMatches = []; 
 let currentTab = 'live'; 
+
+// 🌐 आपकी CricketData API से डेटा खींचने का ऑटोमैटिक लॉजिक
+async function loadLiveScoresFromAPI() {
+    // स्क्रीनशॉट 1000087242.jpg वाली आपकी असली API Key यहाँ लगा दी है
+    const apiKey = "ed249566-9b8a-4509-b84a-76f57df5fb00"; 
+    const url = `https://api.cricketdata.org/v1/currentMatches?apikey=${apiKey}`;
+
+    try {
+        const response = await fetch(url);
+        const jsonResult = await response.json();
+        
+        if (jsonResult && jsonResult.data) {
+            allFetchedMatches = jsonResult.data.map(m => {
+                // टीमों के नाम से शॉर्ट कोड (जैसे India -> IND) बनाना
+                let team1Raw = m.teams[0] || "TEAM1";
+                let team2Raw = m.teams[1] || "TEAM2";
+                
+                let t1 = team1Raw.substring(0,3).toUpperCase();
+                let t2 = team2Raw.substring(0,3).toUpperCase();
+                
+                // आईपीएल टीमों के लिए स्पेशल शॉर्ट कोड फिक्स
+                if(team1Raw.includes("Chennai")) t1 = "CSK";
+                if(team2Raw.includes("Chennai")) t2 = "CSK";
+                if(team1Raw.includes("Royal Chargers") || team1Raw.includes("Bengaluru")) t1 = "RCB";
+                if(team2Raw.includes("Royal Chargers") || team2Raw.includes("Bengaluru")) t2 = "RCB";
+                if(team1Raw.includes("Mumbai")) t1 = "MI";
+                if(team2Raw.includes("Mumbai")) t2 = "MI";
+                if(team1Raw.includes("Gujarat")) t1 = "GT";
+                if(team2Raw.includes("Gujarat")) t2 = "GT";
+                if(team1Raw.includes("Kolkata")) m1 = "KKR";
+                if(team2Raw.includes("Kolkata")) m2 = "KKR";
+
+                return {
+                    t1: t1,
+                    t2: t2,
+                    date: m.dateTimeGMT ? m.dateTimeGMT + "Z" : new Date().toISOString(),
+                    stage: m.matchType ? m.matchType.toUpperCase() + " MATCH 🏆" : m.status,
+                    venue: m.venue || "International Stadium",
+                    statusText: m.status,
+                    matchStarted: m.matchStarted,
+                    matchEnded: m.matchEnded,
+                    isIpl: team1Raw.includes("IPL") || team2Raw.includes("IPL") || m.status.includes("IPL"),
+                    isIndia: team1Raw.includes("India") || team2Raw.includes("India")
+                };
+            });
+            
+            // डेटा आने के बाद फ़िल्टर चलाएं
+            filterMatches('all');
+        }
+    } catch (error) {
+        console.error("API Error:", error);
+        // अगर API लिमिट खत्म हो जाए तो सुरक्षित ब्लैंक रेंडर करें
+        renderMatchCards();
+    }
+}
 
 window.showT = function(tabId, btn) { 
     currentTab = tabId; 
@@ -452,35 +418,21 @@ window.filterMatches = function(type) {
         btn.style.background = '#222'; 
         btn.style.color = '#fff'; 
     }); 
+    
     let selectedData = []; 
     if (type === 'all') { 
-        selectedData = [...iplMatches, ...indiaMatches]; 
+        selectedData = [...allFetchedMatches]; 
     } else if (type === 'ipl') { 
-        selectedData = [...iplMatches]; 
+        selectedData = allFetchedMatches.filter(m => m.isIpl); 
     } else if (type === 'india') { 
-        selectedData = [...indiaMatches]; 
+        selectedData = allFetchedMatches.filter(m => m.isIndia); 
     } 
-    const now = new Date(); 
-    // ⏱️ टाइमर के हिसाब से लाइव, अपकमिंग और रिजल्ट्स को ऑटो-फ़िल्टर करना 
-    liveMatches = selectedData.filter(m => { 
-        if(m.win) return false; 
-        const startTime = new Date(m.date); 
-        const duration = m.durationHours || 4; 
-        const endTime = new Date(startTime.getTime() + (duration * 60 * 60 * 1000)); 
-        return (now >= startTime && now <= endTime); 
-    }); 
-    upcomingMatches = selectedData.filter(m => { 
-        if(m.win) return false; 
-        const startTime = new Date(m.date); 
-        return (now < startTime); 
-    }).sort((a, b) => new Date(a.date) - new Date(b.date)); 
-    sortedResults = selectedData.filter(m => { 
-        if(m.win) return true; 
-        const startTime = new Date(m.date); 
-        const duration = m.durationHours || 4; 
-        const endTime = new Date(startTime.getTime() + (duration * 60 * 60 * 1000)); 
-        return (now > endTime); 
-    }).sort((a, b) => new Date(b.date) - new Date(a.date)); 
+    
+    // API के स्टेटस के आधार पर मैच छांटना
+    liveMatches = selectedData.filter(m => m.matchStarted && !m.matchEnded); 
+    upcomingMatches = selectedData.filter(m => !m.matchStarted && !m.matchEnded); 
+    sortedResults = selectedData.filter(m => m.matchEnded); 
+    
     renderMatchCards(); 
 }; 
 
@@ -491,6 +443,7 @@ function renderMatchCards() {
     if(liveSec) liveSec.innerHTML = ""; 
     if(upcomingSec) upcomingSec.innerHTML = ""; 
     if(resultsSec) resultsSec.innerHTML = ""; 
+    
     liveMatches.forEach(m => { 
         if(liveSec) liveSec.innerHTML += createCardHtml(m, 'live'); 
     }); 
@@ -500,6 +453,7 @@ function renderMatchCards() {
     sortedResults.forEach(m => { 
         if(resultsSec) resultsSec.innerHTML += createCardHtml(m, 'result'); 
     }); 
+    
     if (liveSec && liveMatches.length === 0) { 
         liveSec.innerHTML = ` 
         <div style="padding: 40px 20px; background: #161b22; border-radius: 12px; border: 1px dashed #ffcc00; margin: 15px;"> 
@@ -514,19 +468,21 @@ function createCardHtml(m, status) {
     const logo2 = logos[m.t2] || 'ipl.jpeg'; 
     const matchDate = new Date(m.date).toLocaleDateString('hi-IN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }); 
     let actionButtons = ""; 
+    
     if(status === 'result') { 
         actionButtons = ` 
-        <span class="win-text">${m.win}</span> 
+        <span class="win-text" style="color: #00ff00;">🏁 ${m.statusText}</span> 
         <a href="https://www.google.com/search?q=${m.t1}+vs+${m.t2}+match+highlight" target="_blank" class="btn-highlight"> 🎬 WATCH HIGHLIGHT </a> 
         <a href="https://www.google.com/search?q=${m.t1}+vs+${m.t2}+match+details" target="_blank" class="btn-live" style="margin-top:8px; background:#30363d; color:#fff; border:1px solid #ffcc00;"> 📊 VIEW DETAILS </a> `; 
     } else if(status === 'live') { 
         actionButtons = ` 
-        <span class="win-text" style="color:#ff4444;"><span class="live-dot"></span>MATCH IS LIVE</span> 
-        <a href="${m.cricbuzzUrl || 'https://www.cricbuzz.com/live-cricket-scores'}" target="_blank" class="btn-cricbuzz"> 🔴 VIEW LIVE SCORE (CRICBUZZ) </a> `; 
+        <span class="win-text" style="color:#ff4444;"><span class="live-dot"></span>${m.statusText}</span> 
+        <a href="https://www.cricbuzz.com/live-cricket-scores" target="_blank" class="btn-cricbuzz"> 🔴 VIEW LIVE SCORE (CRICBUZZ) </a> `; 
     } else { 
         actionButtons = ` 
-        <span class="win-text" style="color:#ffcc00;">⏳ UPCOMING MATCH</span> `; 
+        <span class="win-text" style="color:#ffcc00;">⏳ ${m.statusText || 'UPCOMING MATCH'}</span> `; 
     } 
+    
     return ` 
     <div class="match-card"> 
         <span class="date-header">📅 ${matchDate}</span> 
@@ -561,18 +517,11 @@ window.addEventListener('load', function() {
 setTimeout(hideTrendSplash, 2500); 
 
 function run() { 
-    filterMatches('all'); 
+    loadLiveScoresFromAPI(); // लोड होते ही सीधे API को हिट करेगा
     const allBtn = document.querySelectorAll('.category-btn')[0]; 
     if (allBtn) { 
         allBtn.style.background = '#ffcc00'; 
         allBtn.style.color = '#000'; 
-    } 
-    if (liveMatches.length === 0) { 
-        const upcomingBtn = document.querySelectorAll('.tab-btn')[1]; 
-        showT('upcoming', upcomingBtn); 
-    } else { 
-        const liveBtn = document.querySelectorAll('.tab-btn')[0]; 
-        showT('live', liveBtn); 
     } 
 } 
 
@@ -600,18 +549,6 @@ function handleSwipe() {
             const nextTabId = tabsOrder[currentIndex + 1]; 
             const nextBtn = document.querySelectorAll('.tab-btn')[currentIndex + 1]; 
             showT(nextTabId, nextBtn); 
-            if (typeof filterMatches === 'function') { 
-                filterMatches('all'); 
-                const allBtn = document.querySelectorAll('.category-btn')[0]; 
-                if (allBtn) { 
-                    allBtn.style.background = '#ffcc00'; 
-                    allBtn.style.color = '#000'; 
-                } 
-                const iplBtn = document.querySelectorAll('.category-btn')[1]; 
-                const indiaBtn = document.querySelectorAll('.category-btn')[2]; 
-                if(iplBtn) { iplBtn.style.background = ''; iplBtn.style.color = ''; } 
-                if(indiaBtn) { indiaBtn.style.background = ''; indiaBtn.style.color = ''; } 
-            } 
         } 
     } 
     if (touchendX > touchstartX + 80) { 
@@ -619,26 +556,13 @@ function handleSwipe() {
             const prevTabId = tabsOrder[currentIndex - 1]; 
             const prevBtn = document.querySelectorAll('.tab-btn')[currentIndex - 1]; 
             showT(prevTabId, prevBtn); 
-            if (typeof filterMatches === 'function') { 
-                filterMatches('all'); 
-                const allBtn = document.querySelectorAll('.category-btn')[0]; 
-                if (allBtn) { 
-                    allBtn.style.background = '#ffcc00'; 
-                    allBtn.style.color = '#000'; 
-                } 
-                const iplBtn = document.querySelectorAll('.category-btn')[1]; 
-                const indiaBtn = document.querySelectorAll('.category-btn')[2]; 
-                if(iplBtn) { iplBtn.style.background = ''; iplBtn.style.color = ''; } 
-                if(indiaBtn) { indiaBtn.style.background = ''; indiaBtn.style.color = ''; } 
-            } 
         } 
     } 
 } 
 </script> 
 <div id="fake-visitor-badge" style="position: fixed; bottom: 100px; right: 15px; background: rgba(0, 0, 0, 0.8); border: 1px solid #ffcc00; color: #fff; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; z-index: 99999; display: flex; align-items: center; gap: 6px; box-shadow: 0 0 10px rgba(255, 204, 0, 0.4);"> 
     <span style="width: 8px; height: 8px; background: #ff0000; border-radius: 50%; display: inline-block; animation: fakeBlink 1s infinite;"></span> 
-    <span id="fake-count">284</span> Watching 
-</div> 
+    <span id="fake-count">284</span> Watching </div> 
 <style> 
 @keyframes fakeBlink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } } 
 </style> 

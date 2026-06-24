@@ -31,219 +31,57 @@ window.addEventListener('beforeinstallprompt', (e) => {
 <meta name="description" content="ट्रेंड विशाल क्रिकेट ऐप - यहाँ पाएँ सबसे तेज़ लाइव क्रिकेट स्कोर और आईपीएल अपडेट।">
 <meta name="keywords" content="ट्रेंड विशाल क्रिकेट, Trend Vishal Cricket, TrendVishal Cricket, Vishal Shukla">
 <meta name="author" content="Vishal Shukla">
+
+<!-- ==========================================
+     [SECTION 1: CSS DESIGN - यहाँ से डिज़ाइन बदलें]
+     ========================================== -->
 <style>
-/* --- ⚡ ट्रेंड विशाल - प्रीमियम स्प्लैश स्क्रीन ⚡ --- */
 #loading-screen { 
-    position: fixed; 
-    top: 0; 
-    left: 0; 
-    width: 100vw; 
-    height: 100vh; 
-    background: #000; 
-    z-index: 99999; 
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    overflow: hidden; 
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #000; 
+    z-index: 99999; display: flex; justify-content: center; align-items: center; overflow: hidden; 
     transition: opacity 0.5s ease; 
 } 
-#loading-screen img { 
-    width: 100vw; 
-    height: 100vh; 
-    object-fit: cover; 
-    animation: trendZoom 1.2s ease-out forwards; 
-} 
+#loading-screen img { width: 100vw; height: 100vh; object-fit: cover; animation: trendZoom 1.2s ease-out forwards; } 
 #loading-screen::after { 
-    content: ""; 
-    position: absolute; 
-    bottom: 15%; 
-    width: 45px; 
-    height: 45px; 
-    border: 4px solid rgba(255,255,255,0.2); 
-    border-top: 4px solid #ffcc00; 
-    border-radius: 50%; 
-    animation: spin 0.8s linear infinite; 
-    z-index: 100001; 
+    content: ""; position: absolute; bottom: 15%; width: 45px; height: 45px; 
+    border: 4px solid rgba(255,255,255,0.2); border-top: 4px solid #ffcc00; border-radius: 50%; 
+    animation: spin 0.8s linear infinite; z-index: 100001; 
 } 
-@keyframes trendZoom { 
-    0% { opacity: 0; transform: scale(1.1); } 
-    100% { opacity: 1; transform: scale(1); } 
-} 
-@keyframes spin { 
-    0% { transform: rotate(0deg); } 
-    100% { transform: rotate(360deg); } 
-} 
-body { 
-    background: #0d1117; 
-    margin: 0; 
-    font-family: sans-serif; 
-    color: white; 
-    padding-bottom: 80px; 
-} 
-header { 
-    display: flex; 
-    align-items: center; 
-    justify-content: space-between; 
-    padding: 10px 15px; 
-    background: #161b22; 
-    border-bottom: 2px solid #ffcc00; 
-    position: sticky; 
-    top: 0; 
-    z-index: 1000; 
-} 
-.tabs { 
-    display: flex; 
-    background: #0d1117; 
-    border-bottom: 1px solid #30363d; 
-    position: sticky; 
-    top: 60px; 
-    z-index: 999; 
-    overflow-x: auto; 
-} 
-.tab-btn { 
-    flex: 1; 
-    min-width: 90px; 
-    padding: 15px 5px; 
-    text-align: center; 
-    color: #8b949e; 
-    font-weight: bold; 
-    font-size: 12px; 
-    cursor: pointer; 
-    border-bottom: 3px solid transparent; 
-    white-space: nowrap; 
-} 
-.tab-btn.active { 
-    color: #ffcc00; 
-    border-bottom: 3px solid #ffcc00; 
-    background: rgba(255, 204, 0, 0.05); 
-} 
-.match-card { 
-    background: #161b22; 
-    border-radius: 12px; 
-    padding: 15px; 
-    margin: 15px; 
-    border-left: 5px solid #ffcc00; 
-    border-top: 1px solid #30363d; 
-    box-shadow: 0 5px 15px rgba(0,0,0,0.5); 
-} 
-.date-header { 
-    color: #ffcc00; 
-    font-weight: bold; 
-    font-size: 11px; 
-    margin-bottom: 10px; 
-    display: block; 
-    text-transform: uppercase; 
-} 
-.teams-row { 
-    display: flex; 
-    align-items: center; 
-    justify-content: space-between; 
-    margin: 10px 0; 
-} 
-.team { 
-    text-align: center; 
-    width: 42%; 
-} 
-.team img { 
-    width: 85px; 
-    height: 85px; 
-    border-radius: 50%; 
-    background: #fff; 
-    padding: 6px; 
-    border: 3px solid #ffcc00; 
-    object-fit: contain; 
-} 
-.team-name { 
-    display: block; 
-    color: #fff; 
-    font-weight: bold; 
-    margin-top: 8px; 
-    font-size: 16px; 
-} 
-.vs-box { 
-    color: #8b949e; 
-    font-weight: 900; 
-    font-size: 14px; 
-    background: #30363d; 
-    width: 35px; 
-    height: 35px; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    border-radius: 50%; 
-    border: 1px solid #ffcc00; 
-} 
-.win-text { 
-    color: #00ff00; 
-    font-weight: bold; 
-    font-size: 13px; 
-    text-transform: uppercase; 
-    margin-top: 10px; 
-    display: block; 
-    text-align: center; 
-    border-top: 1px solid #333; 
-    padding-top: 8px; 
-} 
-.footer { 
-    background: #161b22; 
-    padding: 30px 20px; 
-    text-align: center; 
-    border-top: 2px solid #ffcc00; 
-    margin-top: 20px; 
-} 
-.shayari { 
-    margin-top: 25px; 
-    font-style: italic; 
-    color: #ffcc00; 
-    font-size: 15px; 
-    line-height: 1.5; 
-    border-top: 1px solid #30363d; 
-    padding-top: 15px; 
-    font-weight: bold; 
-} 
-
-/* 📺 यूट्यूब सर्च के लिए स्टाइल */
-.search-container {
-    padding: 15px;
-    display: flex;
-    gap: 8px;
-}
-.search-input {
-    flex: 1;
-    padding: 12px;
-    border-radius: 8px;
-    border: 1px solid #30363d;
-    background: #161b22;
-    color: white;
-    font-size: 14px;
-}
-.search-btn {
-    background: #ffcc00;
-    color: black;
-    border: none;
-    padding: 0 20px;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
-}
-.video-card {
-    background: #161b22;
-    margin: 15px;
-    border-radius: 8px;
-    overflow: hidden;
-    border: 1px solid #30363d;
-}
-.video-thumbnail {
-    width: 100%;
-    height: auto;
-    display: block;
-}
+@keyframes trendZoom { 0% { opacity: 0; transform: scale(1.1); } 100% { opacity: 1; transform: scale(1); } } 
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } } 
+body { background: #0d1117; margin: 0; font-family: sans-serif; color: white; padding-bottom: 80px; } 
+header { display: flex; align-items: center; justify-content: space-between; padding: 10px 15px; background: #161b22; border-bottom: 2px solid #ffcc00; position: sticky; top: 0; z-index: 1000; } 
+.tabs { display: flex; background: #0d1117; border-bottom: 1px solid #30363d; position: sticky; top: 60px; z-index: 999; overflow-x: auto; } 
+.tab-btn { flex: 1; min-width: 80px; padding: 15px 5px; text-align: center; color: #8b949e; font-weight: bold; font-size: 11px; cursor: pointer; border-bottom: 3px solid transparent; white-space: nowrap; } 
+.tab-btn.active { color: #ffcc00; border-bottom: 3px solid #ffcc00; background: rgba(255, 204, 0, 0.05); } 
+.match-card { background: #161b22; border-radius: 12px; padding: 15px; margin: 15px; border-left: 5px solid #ffcc00; border-top: 1px solid #30363d; box-shadow: 0 5px 15px rgba(0,0,0,0.5); } 
+.date-header { color: #ffcc00; font-weight: bold; font-size: 11px; margin-bottom: 10px; display: block; text-transform: uppercase; } 
+.teams-row { display: flex; align-items: center; justify-content: space-between; margin: 10px 0; } 
+.team { text-align: center; width: 42%; } 
+.team img { width: 85px; height: 85px; border-radius: 50%; background: #fff; padding: 6px; border: 3px solid #ffcc00; object-fit: contain; } 
+.team-name { display: block; color: #fff; font-weight: bold; margin-top: 8px; font-size: 16px; } 
+.vs-box { color: #8b949e; font-weight: 900; font-size: 14px; background: #30363d; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; border: 1px solid #ffcc00; } 
+.btn-live { background: #ffcc00; color: #000; text-decoration: none; display: block; width: 100%; text-align: center; padding: 12px; border-radius: 8px; font-weight: bold; margin-top: 12px; font-size: 14px; } 
+.btn-cricbuzz { background: #ff4444; color: white; text-decoration: none; display: block; width: 100%; text-align: center; padding: 12px; border-radius: 8px; font-weight: bold; margin-top: 12px; font-size: 14px; animation: liveBlinkGlow 1.5s infinite alternate; border: 1px solid #fff; } 
+@keyframes liveBlinkGlow { 0% { box-shadow: 0 0 5px #ff4444; transform: scale(1); } 100% { box-shadow: 0 0 15px #ff4444; transform: scale(1.02); } } 
+.btn-highlight { background: #4285F4; color: white; text-decoration: none; display: block; width: 100%; text-align: center; padding: 10px; border-radius: 8px; font-weight: bold; margin-top: 10px; font-size: 13px; border: 1px solid #fff; } 
+.btn-details { background: #30363d; color: white; text-decoration: none; display: block; width: 100%; text-align: center; padding: 10px; border-radius: 8px; font-weight: bold; margin-top: 8px; font-size: 13px; border: 1px solid #8b949e; }
+.win-text { color: #00ff00; font-weight: bold; font-size: 13px; text-transform: uppercase; margin-top: 10px; display: block; text-align: center; border-top: 1px solid #333; padding-top: 8px; } 
+.footer { background: #161b22; padding: 30px 20px; text-align: center; border-top: 2px solid #ffcc00; margin-top: 20px; } 
+.live-dot { height: 8px; width: 8px; background: #ff4444; border-radius: 50%; display: inline-block; margin-right: 5px; animation: blink 1s infinite; } 
+@keyframes blink { 0% {opacity: 1;} 50% {opacity: 0.3;} 100% {opacity: 1;} } 
+.shayari { margin-top: 25px; font-style: italic; color: #ffcc00; font-size: 15px; line-height: 1.5; border-top: 1px solid #30363d; padding-top: 15px; font-weight: bold; } 
 </style> 
 </head> 
 <body> 
+
 <div id="loading-screen"> 
     <img src="splash.png" alt="TrendVishal Banner"> 
 </div> 
+
+<!-- ==========================================
+     [SECTION 2: HEADER ZONE - लोगो और नाम]
+     ========================================== -->
 <header> 
     <div style="display:flex; align-items:center;"> 
         <img src="ipl.jpeg" style="width: 40px; height: 40px; margin-right: 10px; vertical-align: middle;"> 
@@ -255,18 +93,42 @@ header {
     <img src="vishal.jpg" alt="Vishal" style="width:55px; height:55px; border-radius:50%; border:2px solid #ffcc00; object-fit:cover; background:#fff;"> 
 </header> 
 
+<!-- ==========================================
+     [SECTION 3: TABS - ऊपर का मेन्यू बार]
+     ========================================== -->
 <div class="tabs"> 
     <div class="tab-btn active" onclick="showT('live', this)">LIVE</div> 
     <div class="tab-btn" onclick="showT('upcoming', this)">UPCOMING</div> 
     <div class="tab-btn" onclick="showT('results', this)">RESULTS</div> 
     <div class="tab-btn" onclick="showT('points', this)">POINT TABLE</div> 
-    <div class="tab-btn" onclick="showT('youtube', this)">YOUTUBE SEARCH 📺</div> 
+    <div class="tab-btn" onclick="showT('youtube', this)">YOUTUBE 📺</div> 
 </div> 
 
-<div id="live-sec" class="match-section" style="display:block; padding: 15px; text-align: center;">
-    <p style="color:#8b949e; margin-top:20px;">अभी कोई लाइव मैच नहीं चल रहा है। पुराना रिजल्ट या यूट्यूब वीडियो देखें!</p>
+<!-- ==========================================
+     [SECTION 4: FILTERS - सब मैच, IPL, INDIA बटन]
+     ========================================== -->
+<div class="category-container" style="display: flex; justify-content: center; gap: 10px; margin: 15px 0; padding: 0 10px;"> 
+    <button id="btn-all" onclick="filterMatches('all')" class="category-btn active" style="background: #ffcc00; color: #000; font-weight: bold; padding: 10px 20px; border: none; border-radius: 25px; cursor: pointer; font-size: 14px; transition: 0.3s;">सब मैच</button> 
+    <button id="btn-ipl" onclick="filterMatches('ipl')" class="category-btn" style="background: #222; color: #fff; font-weight: bold; padding: 10px 20px; border: none; border-radius: 25px; cursor: pointer; font-size: 14px; transition: 0.3s;">IPL मैच 🏏</button> 
+    <button id="btn-india" onclick="filterMatches('india')" class="category-btn" style="background: #222; color: #fff; font-weight: bold; padding: 10px 20px; border: none; border-radius: 25px; cursor: pointer; font-size: 14px; transition: 0.3s;">India मैच 🇮🇳</button> 
 </div> 
-<div id="upcoming-sec" class="match-section" style="display:none; padding:15px;"></div> 
+
+<!-- ==========================================
+     [SECTION 5: LIVE ZONE - यहाँ लाइव मैच लोड होगा]
+     ========================================== -->
+<div id="live-sec" class="match-section" style="display:block; padding: 15px; text-align: center;">
+    <!-- लाइव होने पर क्रिकबज़ का वेबव्यू यहाँ अपने आप एक्टिव हो जाएगा -->
+    <div class="match-card" style="border-left: 5px solid #ff4444;">
+        <span class="date-header"><span class="live-dot"></span> LIVE MATCH OPTION</span>
+        <p style="color:#ccc; font-size:14px; font-weight:bold;">मैच लाइव होने पर नीचे बटन दबाएं या सीधा स्कोर देखें।</p>
+        <a href="https://m.cricbuzz.com/cricket-match/live-scores" target="_blank" class="btn-cricbuzz">🔴 WATCH LIVE SCORE ON CRICBUZZ</a>
+    </div>
+</div> 
+
+<!-- ==========================================
+     [SECTION 6: CONTENT BLOCKS - डेटा डिस्प्ले ज़ोन]
+     ========================================== -->
+<div id="upcoming-sec" class="match-section" style="display:none;"></div> 
 <div id="results-sec" class="match-section" style="display:none;"></div> 
 
 <div id="points-sec" class="match-section" style="display:none; text-align:center; padding: 40px 15px; width: 100%; margin: 0 auto; box-sizing: border-box;"> 
@@ -276,38 +138,40 @@ header {
     <a href="https://www.google.com/search?q=ipl+2026+point+table" target="_blank" style="background:#ffcc00; color:#000; text-decoration:none; padding:15px 30px; border-radius:30px; font-weight:bold; display:inline-block; font-size:16px; box-shadow: 0 5px 15px rgba(255,204,0,0.4); border: 2px solid #fff;"> VIEW POINT TABLE 📊 </a> 
 </div> 
 
-<div id="youtube-sec" class="match-section" style="display:none;">
-    <div class="search-container">
-        <input type="text" id="yt-search-input" class="search-input" placeholder="क्रिकेट मैच, हाइलाइट्स या शॉर्ट्स सर्च करें...">
-        <button onclick="searchYouTube()" class="search-btn">सर्च</button>
-    </div>
-    <div id="youtube-results">
-        <p style="text-align:center; color:#8b949e; padding:20px;">ऊपर सर्च बार में कुछ लिखकर सर्च बटन दबाएं।</p>
-    </div>
+<!-- 📺 यूट्यूब WebView सेक्शन (बिना किसी API एरर के लाइफटाइम फ्री तरीका) -->
+<div id="youtube-sec" class="match-section" style="display:none; padding: 0;">
+    <iframe src="https://m.youtube.com/" style="width: 100%; height: 75vh; border: none; background: #000;" allowfullscreen></iframe>
 </div>
 
+<!-- ==========================================
+     [SECTION 7: FOOTER ZONE - सब्सक्राइब और शायरी]
+     ========================================== -->
 <div class="footer"> 
     <div style="text-align: center; margin: 25px 0;"> 
-        <a href="Https://youtube.com/@trend_vishal?si=thZwHeODvI6Yd7X7" target="_blank" style="background: #ff0000; color: #fff; padding: 12px 35px; text-decoration: none; font-weight: 900; border-radius: 50px; display: inline-block; font-size: 16px; text-transform: uppercase; box-shadow: 0 4px 15px rgba(255, 0, 0, 0.4); border: 2px solid #fff; animation: vishalPulse 2s infinite;"> 🔴 SUBSCRIBE NOW </a> 
+        <a href="Https://youtube.com/@trend_vishal?si=thZwHeODvI6Yd7X7" target="_blank" style="background: #ff0000; color: #fff; padding: 12px 35px; text-decoration: none; font-weight: 900; border-radius: 50px; display: inline-block; font-size: 16px; text-transform: uppercase; box-shadow: 0 4px 15px rgba(255, 0, 0, 0.4); border: 2px solid #fff; animation: vishalPulse 2s infinite; font-family: 'Arial', sans-serif;"> 🔴 SUBSCRIBE NOW </a> 
         <p style="color: #ffcc00; font-size: 11px; margin-top: 10px; font-weight: bold;"> 🚀 क्लिक करके ट्रेंड विशाल चैनल सब्सक्राइब करें 🚀 </p> 
     </div> 
     <div style="text-align: center; margin: 20px 0; padding: 10px;"> 
         <p style="color: #ffcc00; font-size: 13px; margin-bottom: 10px; font-weight: 900; text-transform: uppercase;">⚡ Download Our OFFICIAL APP for Fastest IPL Score ⚡</p> 
         <a href="#" id="download-btn" target="_self" style="background: linear-gradient(45deg, #ffcc00, #ff8800); color: #000; padding: 10px 35px; text-decoration: none; font-weight: 900; border-radius: 50px; display: inline-block; font-size: 15px; text-transform: uppercase; box-shadow: 0 4px 15px rgba(255, 204, 0, 0.4); border: 2px solid #fff;"> 📥 DOWNLOAD OFFICIAL APP </a> 
     </div> 
+    <style> @keyframes vishalPulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } } </style> 
     <div class="shayari"> "मैदान की धूल हो या हार-जीत का शोर,<br> क्रिकेट के हर पल में दिखेगा, विशाल का ज़ोर।" </div> 
     <p style="margin-top:15px; font-size:11px; color:#8b949e;">Official Platform by Vishal Shukla<br>© 2026 All Rights Reserved</p> 
 </div> 
 
+<!-- ==========================================
+     [SECTION 8: JAVASCRIPT & DATA - पूरा मैच डेटा]
+     ========================================== -->
 <script> 
-// स्प्लैश स्क्रीन लोडर
-window.addEventListener('load', () => {
-    setTimeout(() => {
-        const loader = document.getElementById('loading-screen');
-        if(loader) loader.style.opacity = '0';
-        setTimeout(() => { if(loader) loader.style.display = 'none'; }, 500);
-    }, 1000);
-});
+// स्प्लैश स्क्रीन हैंडलर
+window.addEventListener('load', () => { 
+    setTimeout(() => { 
+        const loader = document.getElementById('loading-screen'); 
+        if(loader) loader.style.opacity = '0'; 
+        setTimeout(() => { if(loader) loader.style.display = 'none'; }, 500); 
+    }, 1000); 
+}); 
 
 const logos = { 
     GT: `gt.jpeg`, CSK: `csk.png`, PBKS: `pbks.png`, KKR: `kkr.png`, MI: `mi.jpeg`, 
@@ -317,9 +181,9 @@ const logos = {
     IRE: "ipl.jpeg", AFG: "ipl.jpeg", ZIM: "ipl.jpeg" 
 }; 
 
-// 🏏 आपका पूरा पुराना रिजल्ट डेटा
+// 🏏 आपका पूरा पुराना IPL डेटा (Results के लिए)
 const iplMatches = [ 
-    { t1: "GT", t2: "RCB", date: "2026-05-31T19:30:00", win: "ROYAL CHALLENGERS BENGALURU WON BY 5 WICKETS (GT: 155/8, RCB: 161/5)", venue: "Narendra Modi Stadium, Ahmedabad", isIpl: true }, 
+    { t1: "GT", t2: "RCB", date: "2026-05-31T19:30:00", win: "ROYAL CHALLENGERS BENGALURU WON BY 5 WICKETS (GT: 155/8, RCB: 161/5)", isIpl: true }, 
     { t1: "GT", t2: "RR", date: "2026-05-29T19:30:00", win: "GUJARAT TITANS WON BY 4 WICKETS (RR: 214/6, GT: 215/2)", isIpl: true }, 
     { t1: "SRH", t2: "RR", date: "2026-05-27T19:30:00", win: "RAJASTHAN ROYALS WON BY 47 RUNS (RR: 243/8, SRH: 196/10)", isIpl: true }, 
     { t1: "RCB", t2: "GT", date: "2026-05-26T19:30:00", win: "ROYAL CHALLENGERS BENGALURU WON BY 92 RUNS (RCB: 254/5, GT: 162/10)", isIpl: true }, 
@@ -379,15 +243,18 @@ const iplMatches = [
     { t1: "RCB", t2: "SRH", date: "2026-03-28T19:30:00", win: "RCB WON BY 5 WICKETS", isIpl: true } 
 ]; 
 
-// 🇮🇳 टीम इंडिया के अपकमिंग मैच
+// 🇮🇳 टीम इंडिया के अपकमिंग और पुराने मैच
 const manualIndiaMatches = [ 
     { t1: "IRE", t2: "IND", date: "2026-06-26T19:30:00", stage: "1st T20I Match 🏆", venue: "Stormont, Belfast", isIndia: true }, 
     { t1: "IRE", t2: "IND", date: "2026-06-28T19:30:00", stage: "2nd T20I Match 🏆", venue: "Stormont, Belfast", isIndia: true }, 
     { t1: "ENG", t2: "IND", date: "2026-07-01T22:00:00", stage: "1st T20I Match 🏆", venue: "Riverside, Chester-le-Street", isIndia: true }
 ]; 
 
-// टैब स्विच करने और पुराना डेटा रेंडर करने का लॉजिक
+let currentFilter = 'all';
+let currentSection = 'live';
+
 function showT(secName, btn) {
+    currentSection = secName;
     const sections = document.querySelectorAll('.match-section');
     sections.forEach(sec => sec.style.display = 'none');
     
@@ -398,22 +265,70 @@ function showT(secName, btn) {
     tabs.forEach(t => t.classList.remove('active'));
     btn.classList.add('active');
 
-    if(secName === 'results') {
-        renderMatches('results-sec', iplMatches);
-    } else if(secName === 'upcoming') {
-        renderMatches('upcoming-sec', manualIndiaMatches);
+    // फ़िल्टर कंटेनर को केवल मैच सेक्शन्स में दिखाएं, यूट्यूब टैब में छुपाएं
+    const filterContainer = document.getElementById('filter-container');
+    if(secName === 'youtube' || secName === 'points') {
+        filterContainer.style.display = 'none';
+    } else {
+        filterContainer.style.display = 'flex';
+    }
+
+    refreshSectionData();
+}
+
+function filterMatches(type) {
+    currentFilter = type;
+    document.querySelectorAll('.category-btn').forEach(btn => {
+        btn.style.background = '#222';
+        btn.style.color = '#fff';
+    });
+    const activeBtn = document.getElementById('btn-' + type);
+    if(activeBtn) {
+        activeBtn.style.background = '#ffcc00';
+        activeBtn.style.color = '#000';
+    }
+    refreshSectionData();
+}
+
+function refreshSectionData() {
+    if(currentSection === 'results') {
+        let filtered = iplMatches;
+        if(currentFilter === 'india') filtered = iplMatches.filter(m => m.isIndia);
+        if(currentFilter === 'ipl') filtered = iplMatches.filter(m => m.isIpl);
+        renderMatches('results-sec', filtered, true);
+    } else if(currentSection === 'upcoming') {
+        let filtered = manualIndiaMatches;
+        if(currentFilter === 'ipl') filtered = manualIndiaMatches.filter(m => m.isIpl);
+        if(currentFilter === 'india') filtered = manualIndiaMatches.filter(m => m.isIndia);
+        renderMatches('upcoming-sec', filtered, false);
     }
 }
 
-function renderMatches(secId, matchesList) {
+function renderMatches(secId, matchesList, showButtons) {
     const container = document.getElementById(secId);
     container.innerHTML = "";
+    
+    if(matchesList.length === 0) {
+        container.innerHTML = `<p style="text-align:center; color:#8b949e; padding:20px;">कोई मैच नहीं मिला।</p>`;
+        return;
+    }
+
     matchesList.forEach(m => {
         const card = document.createElement('div');
         card.className = 'match-card';
         const t1Logo = logos[m.t1] || 'ipl.jpeg';
         const t2Logo = logos[m.t2] || 'ipl.jpeg';
         
+        let buttonHTML = "";
+        if(showButtons) {
+            buttonHTML = `
+                <div class="btn-row">
+                    <a href="https://youtube.com/@trend_vishal" target="_blank" class="btn-highlight">📺 WATCH HIGHLIGHTS</a>
+                    <a href="https://m.cricbuzz.com/cricket-match/live-scores" target="_blank" class="btn-details">📊 VIEW DETAILS</a>
+                </div>
+            `;
+        }
+
         card.innerHTML = `
             <span class="date-header">${new Date(m.date).toLocaleDateString('hi-IN')}</span>
             <div class="teams-row">
@@ -421,62 +336,15 @@ function renderMatches(secId, matchesList) {
                 <div class="vs-box">VS</div>
                 <div class="team"><img src="${t2Logo}"><span class="team-name">${m.t2}</span></div>
             </div>
-            ${m.win ? `<span class="win-text">${m.win}</span>` : `<span style="display:block; text-align:center; color:#ffcc00;">${m.stage || 'मैच जल्द शुरू होगा'}</span>`}
+            ${m.win ? `<span class="win-text">${m.win}</span>` : `<span style="display:block; text-align:center; color:#ffcc00; font-weight:bold; margin-top:10px;">${m.stage || 'UPCOMING MATCH'}</span>`}
+            ${buttonHTML}
         `;
         container.appendChild(card);
     });
 }
 
-// 📺 असली यूट्यूब सर्च लॉजिक (आपकी API Key के साथ)
-function searchYouTube() {
-    const query = document.getElementById('yt-search-input').value.trim();
-    const resultsContainer = document.getElementById('youtube-results');
-    const apiKey = "AIzaSyBFHcRPkfWH9A"; 
-    
-    if(!query) {
-        alert("कृपया कुछ टाइप करें!");
-        return;
-    }
-    
-    resultsContainer.innerHTML = `<p style="text-align:center; color:#ffcc00; padding:20px;">लोड हो रहा है...</p>`;
-    const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${encodeURIComponent(query)}&type=video&key=${apiKey}`;
-    
-    fetch(url)
-    .then(response => response.json())
-    .then(data => {
-        if(!data.items || data.items.length === 0) {
-            resultsContainer.innerHTML = `<p style="text-align:center; color:#ff4444; padding:20px;">कोई वीडियो नहीं मिला!</p>`;
-            return;
-        }
-        resultsContainer.innerHTML = ""; 
-        data.items.forEach(item => {
-            const videoId = item.id.videoId;
-            const title = item.snippet.title;
-            const thumbnail = item.snippet.thumbnails.high.url;
-            
-            const videoCard = document.createElement('div');
-            videoCard.className = 'video-card';
-            videoCard.innerHTML = `
-                <div id="player-${videoId}">
-                    <img src="${thumbnail}" class="video-thumbnail" onclick="playVideo('${videoId}')" style="cursor:pointer; width:100%;">
-                </div>
-                <div style="padding:12px; font-size:14px; font-weight:bold; color:white; cursor:pointer;" onclick="playVideo('${videoId}')">${title}</div>
-            `;
-            resultsContainer.appendChild(videoCard);
-        });
-    })
-    .catch(error => {
-        resultsContainer.innerHTML = `<p style="text-align:center; color:#ff4444; padding:20px;">लिमिट पूरी हो चुकी है या कोई एरर आया है।</p>`;
-    });
-}
-
-function playVideo(videoId) {
-    document.getElementById(`player-${videoId}`).innerHTML = `
-        <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-            <iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-    `;
-}
+// डिफ़ॉल्ट रूप से पहली बार डेटा लोड करना
+renderMatches('upcoming-sec', manualIndiaMatches, false);
 </script> 
 </body> 
 </html>

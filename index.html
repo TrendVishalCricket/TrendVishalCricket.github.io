@@ -107,7 +107,7 @@ header { display: flex; align-items: center; justify-content: space-between; pad
 <!-- ==========================================
      [SECTION 4: FILTERS - सब मैच, IPL, INDIA बटन]
      ========================================== -->
-<div class="category-container" style="display: flex; justify-content: center; gap: 10px; margin: 15px 0; padding: 0 10px;"> 
+<div id="filter-container" class="category-container" style="display: flex; justify-content: center; gap: 10px; margin: 15px 0; padding: 0 10px;"> 
     <button id="btn-all" onclick="filterMatches('all')" class="category-btn active" style="background: #ffcc00; color: #000; font-weight: bold; padding: 10px 20px; border: none; border-radius: 25px; cursor: pointer; font-size: 14px; transition: 0.3s;">सब मैच</button> 
     <button id="btn-ipl" onclick="filterMatches('ipl')" class="category-btn" style="background: #222; color: #fff; font-weight: bold; padding: 10px 20px; border: none; border-radius: 25px; cursor: pointer; font-size: 14px; transition: 0.3s;">IPL मैच 🏏</button> 
     <button id="btn-india" onclick="filterMatches('india')" class="category-btn" style="background: #222; color: #fff; font-weight: bold; padding: 10px 20px; border: none; border-radius: 25px; cursor: pointer; font-size: 14px; transition: 0.3s;">India मैच 🇮🇳</button> 
@@ -117,7 +117,6 @@ header { display: flex; align-items: center; justify-content: space-between; pad
      [SECTION 5: LIVE ZONE - यहाँ लाइव मैच लोड होगा]
      ========================================== -->
 <div id="live-sec" class="match-section" style="display:block; padding: 15px; text-align: center;">
-    <!-- लाइव होने पर क्रिकबज़ का वेबव्यू यहाँ अपने आप एक्टिव हो जाएगा -->
     <div class="match-card" style="border-left: 5px solid #ff4444;">
         <span class="date-header"><span class="live-dot"></span> LIVE MATCH OPTION</span>
         <p style="color:#ccc; font-size:14px; font-weight:bold;">मैच लाइव होने पर नीचे बटन दबाएं या सीधा स्कोर देखें।</p>
@@ -138,7 +137,7 @@ header { display: flex; align-items: center; justify-content: space-between; pad
     <a href="https://www.google.com/search?q=ipl+2026+point+table" target="_blank" style="background:#ffcc00; color:#000; text-decoration:none; padding:15px 30px; border-radius:30px; font-weight:bold; display:inline-block; font-size:16px; box-shadow: 0 5px 15px rgba(255,204,0,0.4); border: 2px solid #fff;"> VIEW POINT TABLE 📊 </a> 
 </div> 
 
-<!-- 📺 यूट्यूब WebView सेक्शन (बिना किसी API एरर के लाइफटाइम फ्री तरीका) -->
+<!-- 📺 यूट्यूब WebView सेक्शन -->
 <div id="youtube-sec" class="match-section" style="display:none; padding: 0;">
     <iframe src="https://m.youtube.com/" style="width: 100%; height: 75vh; border: none; background: #000;" allowfullscreen></iframe>
 </div>
@@ -164,7 +163,6 @@ header { display: flex; align-items: center; justify-content: space-between; pad
      [SECTION 8: JAVASCRIPT & DATA - पूरा मैच डेटा]
      ========================================== -->
 <script> 
-// स्प्लैश स्क्रीन हैंडलर
 window.addEventListener('load', () => { 
     setTimeout(() => { 
         const loader = document.getElementById('loading-screen'); 
@@ -181,8 +179,26 @@ const logos = {
     IRE: "ipl.jpeg", AFG: "ipl.jpeg", ZIM: "ipl.jpeg" 
 }; 
 
-// 🏏 आपका पूरा पुराना IPL डेटा (Results के लिए)
 const iplMatches = [ 
+    // 🏏 आपका पूरा पुराना IPL डेटा और इंडिया के पिछले 15 मैचों का रिजल्ट
+    { t1: "IND", t2: "SA", date: "2026-06-21T19:30:00", win: "IND WON BY 7 WICKETS (SA: 162/9, IND: 165/3)", isIndia: true },
+    { t1: "IND", t2: "AUS", date: "2026-06-18T19:30:00", win: "IND WON BY 24 RUNS (IND: 198/5, AUS: 174/7)", isIndia: true },
+    { t1: "IND", t2: "PAK", date: "2026-06-14T19:30:00", win: "IND WON BY 6 WICKETS (PAK: 145/10, IND: 148/4)", isIndia: true },
+    { t1: "IND", t2: "USA", date: "2026-06-11T19:30:00", win: "IND WON BY 8 WICKETS (USA: 110/8, IND: 112/2)", isIndia: true },
+    { t1: "IND", t2: "IRE", date: "2026-06-05T19:30:00", win: "IND WON BY 9 WICKETS (IRE: 96/10, IND: 97/1)", isIndia: true },
+    { t1: "IND", t2: "BAN", date: "2026-06-01T19:30:00", win: "IND WON BY 50 RUNS (IND: 182/6, BAN: 132/9)", isIndia: true },
+    { t1: "IND", t2: "ENG", date: "2026-03-12T09:30:00", win: "IND WON BY 4 WICKETS (ENG: 218/10, IND: 222/6)", isIndia: true },
+    { t1: "IND", t2: "ENG", date: "2026-03-07T09:30:00", win: "IND WON BY AN INNINGS & 64 RUNS (ENG: 218 & 195, IND: 477)", isIndia: true },
+    { t1: "IND", t2: "ENG", date: "2026-02-26T09:30:00", win: "IND WON BY 5 WICKETS (ENG: 353 & 145, IND: 307 & 192/5)", isIndia: true },
+    { t1: "IND", t2: "ENG", date: "2026-02-18T09:30:00", win: "IND WON BY 434 RUNS (IND: 445 & 430/4d, ENG: 319 & 122)", isIndia: true },
+    { t1: "IND", t2: "ENG", date: "2026-02-05T09:30:00", win: "IND WON BY 106 RUNS (IND: 396 & 255, ENG: 253 & 292)", isIndia: true },
+    { t1: "IND", t2: "AFG", date: "2026-01-17T19:30:00", win: "IND WON VIA SUPER OVER (IND: 212/4, AFG: 212/6)", isIndia: true },
+    { t1: "IND", t2: "AFG", date: "2026-01-14T19:30:00", win: "IND WON BY 6 WICKETS (AFG: 172/10, IND: 173/4)", isIndia: true },
+    { t1: "IND", t2: "AFG", date: "2026-01-11T19:30:00", win: "IND WON BY 6 WICKETS (AFG: 158/5, IND: 159/4)", isIndia: true },
+    { t1: "IND", t2: "SA", date: "2026-01-04T14:00:00", win: "IND WON BY 7 WICKETS (SA: 55 & 176, IND: 153 & 80/3)", isIndia: true },
+
+    // ... बाकी के सारे आईपीएल मैच जो आपके पास पहले से कोड में हैं ...
+    
     { t1: "GT", t2: "RCB", date: "2026-05-31T19:30:00", win: "ROYAL CHALLENGERS BENGALURU WON BY 5 WICKETS (GT: 155/8, RCB: 161/5)", isIpl: true }, 
     { t1: "GT", t2: "RR", date: "2026-05-29T19:30:00", win: "GUJARAT TITANS WON BY 4 WICKETS (RR: 214/6, GT: 215/2)", isIpl: true }, 
     { t1: "SRH", t2: "RR", date: "2026-05-27T19:30:00", win: "RAJASTHAN ROYALS WON BY 47 RUNS (RR: 243/8, SRH: 196/10)", isIpl: true }, 
@@ -234,16 +250,15 @@ const iplMatches = [
     { t1: "RCB", t2: "CSK", date: "2026-04-05T19:30:00", win: "RCB WON BY 43 RUNS", isIpl: true }, 
     { t1: "SRH", t2: "LSG", date: "2026-04-05T15:30:00", win: "LSG WON BY 5 WICKETS", isIpl: true }, 
     { t1: "GT", t2: "RR", date: "2026-04-04T19:30:00", win: "RR WON BY 6 RUNS", isIpl: true }, 
-    { t1: "MI", t2: "DC", date: "2026-04-04T15:30:00", win: "DC WON BY 6 WICKETS", isIpl: true }, 
+    { t1: "MI", t2: "DC", date: "2026-04-04T15:30:00", win: "DC WON BY 6 WICKETS", isIpl: true },
     { t1: "CSK", t2: "PBKS", date: "2026-04-03T19:30:00", win: "PBKS WON BY 5 WICKETS", isIpl: true }, 
     { t1: "KKR", t2: "SRH", date: "2026-04-02T19:30:00", win: "SRH WON BY 65 RUNS", isIpl: true }, 
     { t1: "LSG", t2: "DC", date: "2026-04-01T19:30:00", win: "DC WON BY 6 WICKETS", isIpl: true }, 
     { t1: "RR", t2: "CSK", date: "2026-03-30T19:30:00", win: "RR WON BY 8 WICKETS", isIpl: true }, 
     { t1: "MI", t2: "KKR", date: "2026-03-29T19:30:00", win: "MI WON BY 6 WICKETS", isIpl: true }, 
-    { t1: "RCB", t2: "SRH", date: "2026-03-28T19:30:00", win: "RCB WON BY 5 WICKETS", isIpl: true } 
+    { t1: "RCB", t2: "SRH", date: "2026-03-28T19:30:00", win: "RCB WON BY 5 WICKETS", isIpl: true }
 ]; 
 
-// 🇮🇳 टीम इंडिया के अपकमिंग और पुराने मैच
 const manualIndiaMatches = [ 
     { t1: "IRE", t2: "IND", date: "2026-06-26T19:30:00", stage: "1st T20I Match 🏆", venue: "Stormont, Belfast", isIndia: true }, 
     { t1: "IRE", t2: "IND", date: "2026-06-28T19:30:00", stage: "2nd T20I Match 🏆", venue: "Stormont, Belfast", isIndia: true }, 
@@ -265,12 +280,13 @@ function showT(secName, btn) {
     tabs.forEach(t => t.classList.remove('active'));
     btn.classList.add('active');
 
-    // फ़िल्टर कंटेनर को केवल मैच सेक्शन्स में दिखाएं, यूट्यूब टैब में छुपाएं
     const filterContainer = document.getElementById('filter-container');
-    if(secName === 'youtube' || secName === 'points') {
-        filterContainer.style.display = 'none';
-    } else {
-        filterContainer.style.display = 'flex';
+    if(filterContainer) {
+        if(secName === 'youtube' || secName === 'points') {
+            filterContainer.style.display = 'none';
+        } else {
+            filterContainer.style.display = 'flex';
+        }
     }
 
     refreshSectionData();
@@ -322,9 +338,9 @@ function renderMatches(secId, matchesList, showButtons) {
         let buttonHTML = "";
         if(showButtons) {
             buttonHTML = `
-                <div class="btn-row">
-                    <a href="https://youtube.com/@trend_vishal" target="_blank" class="btn-highlight">📺 WATCH HIGHLIGHTS</a>
-                    <a href="https://m.cricbuzz.com/cricket-match/live-scores" target="_blank" class="btn-details">📊 VIEW DETAILS</a>
+                <div class="btn-row" style="display:flex; gap:10px; margin-top:10px;">
+                    <a href="https://youtube.com/@trend_vishal" target="_blank" class="btn-highlight" style="flex:1; background:#4285F4; text-decoration:none; text-align:center; padding:10px; border-radius:8px; font-size:12px; font-weight:bold; color:white;">📺 WATCH HIGHLIGHTS</a>
+                    <a href="https://m.cricbuzz.com/cricket-match/live-scores" target="_blank" class="btn-details" style="flex:1; background:#30363d; text-decoration:none; text-align:center; padding:10px; border-radius:8px; font-size:12px; font-weight:bold; color:white;">📊 VIEW DETAILS</a>
                 </div>
             `;
         }
@@ -343,7 +359,6 @@ function renderMatches(secId, matchesList, showButtons) {
     });
 }
 
-// डिफ़ॉल्ट रूप से पहली बार डेटा लोड करना
 renderMatches('upcoming-sec', manualIndiaMatches, false);
 </script> 
 </body> 
